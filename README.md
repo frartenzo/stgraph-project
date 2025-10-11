@@ -8,5 +8,5 @@ lo ha detto a lezione il 10 ottobre.
 
 ⚠️ This project is licensed under CC BY-NC-ND 4.0.  
 Use is permitted **only for research or educational purposes**.  
-All other rights are reserved by the author.
+All other rights are reserved by the authors.
 
