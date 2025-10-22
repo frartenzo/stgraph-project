@@ -1,0 +1,158 @@
+<stgraph class="STGraph.decoder" version="STGraph build 22.12">
+    <head systemName="" description="" timeUnitDescription="" timeFrame="0" time0="0.0" time1="10.0" timeD="1.0" maxSteps="10" batchSteps="1" width="1440" height="789" scale="1.0" simulationDelay="100" stepsBeforePause="1" integrationMethod="0" exceptionHandling="1" withInterrupts="false" isDataSaved="false" forNet="false" serverAddress="" forWeb="false" webModelLanguages="" webModelDescription="" webTimeUnit="" webExplTitle="" webExplURL="" webModelGroups="" indexOrigin="0" isGraphVisible="true" areWidgetsVisible="true"/>
+    <nodes>
+        <node name="amount_of_daily_customers" type="ValueNode" pos-x="350" pos-y="180" width="225" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>true</isOut>
+            <fStateInit>100</fStateInit>
+            <format>0.0##</format>
+            <fExpression>sensibilita_ambientale_della_clientela*emissioni_nette</fExpression>
+            <fStateTrans>this+nodo_per_leggere</fStateTrans>
+            <expression>sensibilita_ambientale_della_clientela*emissioni_nette</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit>100</stateInit>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans>this+nodo_per_leggere</stateTrans>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=voli</customprops>
+            <valueType>1</valueType>
+        </node>
+        <node name="clilentela_max" type="ValueNode" pos-x="1100" pos-y="60" width="151" height="51">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>3000</fExpression>
+            <fStateTrans/>
+            <expression>3000</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=clilentela_max</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="net_emissions" type="ValueNode" pos-x="580" pos-y="360" width="195" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit>0</fStateInit>
+            <format>0.0##</format>
+            <fExpression>3</fExpression>
+            <fStateTrans>this</fStateTrans>
+            <expression>3</expression>
+            <isGlobal>true</isGlobal>
+            <isIn>true</isIn>
+            <stateInit>0</stateInit>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans>this</stateTrans>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=net_emissions</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="new_daily_customers" type="ValueNode" pos-x="1060" pos-y="210" width="181" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>-sensibilita_ambientale_della_clientela*prospetti*amount_of_daily_customers*net_emissions</fExpression>
+            <fStateTrans/>
+            <expression>-sensibilita_ambientale_della_clientela*prospetti*amount_of_daily_customers*net_emissions</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=nuovi_clienti</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="nodo_per_leggere" type="ValueNode" pos-x="700" pos-y="270" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>new_daily_customers</fExpression>
+            <fStateTrans/>
+            <expression>new_daily_customers</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=nodo_per_leggere</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="prospetti" type="ValueNode" pos-x="950" pos-y="130" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>max((clilentela_max-amount_of_daily_customers),0)</fExpression>
+            <fStateTrans/>
+            <expression>max((clilentela_max-amount_of_daily_customers),0)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=prospetti</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="sensibilita_ambientale_della_clientela" type="ValueNode" pos-x="860" pos-y="320" width="411" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>rand(0.0000000001,0.0001)</fExpression>
+            <fStateTrans/>
+            <expression>rand(0.0000000001,0.0001)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=sensibilita_ambientale_della_clientela</customprops>
+            <valueType>0</valueType>
+        </node>
+    </nodes>
+    <texts/>
+    <edges>
+        <edge source="nodo_per_leggere" target="amount_of_daily_customers" label="(...)"/>
+        <edge source="new_daily_customers" target="nodo_per_leggere" label="(...)"/>
+        <edge source="net_emissions" target="new_daily_customers" label="(...)"/>
+        <edge source="amount_of_daily_customers" target="new_daily_customers" label="(...)" p0x="907.5" p0y="242.5" p1x="1122.5" p1y="232.5" numpoints="2"/>
+        <edge source="prospetti" target="new_daily_customers" label="(...)" p0x="1107.5" p0y="152.5" p1x="1122.5" p1y="232.5" numpoints="2"/>
+        <edge source="clilentela_max" target="prospetti" label="(...)" p0x="1247.5" p0y="142.5" p1x="1107.5" p1y="152.5" numpoints="2"/>
+        <edge source="amount_of_daily_customers" target="prospetti" label="(...)" p0x="907.5" p0y="242.5" p1x="1107.5" p1y="152.5" numpoints="2"/>
+        <edge source="sensibilita_ambientale_della_clientela" target="new_daily_customers" label="(...)"/>
+    </edges>
+    <widgets/>
+    <groups/>
+    <reports/>
+</stgraph>
