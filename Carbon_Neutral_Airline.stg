@@ -23,7 +23,7 @@
         <node name="Passengers" type="ModelNode" pos-x="1240" pos-y="250" width="161" height="45">
             <subvisible>true</subvisible>
             <superExpression1>emissioni_nette</superExpression1>
-            <superExpression0>10^7</superExpression0>
+            <superExpression0>3000</superExpression0>
             <format>0.0##</format>
             <fontcol>0,0,255</fontcol>
             <systemName>Passengers_Submodel.stg</systemName>
@@ -32,6 +32,7 @@
             <backcol>255,255,255</backcol>
             <font>SansSerif,12</font>
             <subVarNames>clilentela_max,net_emissions</subVarNames>
+            <documentation/>
         </node>
         <node name="Target_emissioni" type="ValueNode" pos-x="1170" pos-y="440" width="241" height="45">
             <font>SansSerif,12</font>
@@ -41,7 +42,7 @@
             <format>0.0##</format>
             <fExpression>0</fExpression>
             <fStateTrans/>
-            <expression>69274.0</expression>
+            <expression>287.0</expression>
             <isGlobal>false</isGlobal>
             <isIn>true</isIn>
             <stateInit/>
@@ -97,9 +98,9 @@
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>max(min(maximum_flights_per_day,(Passengers.amount_of_daily_customers/200)),0)</fExpression>
+            <fExpression>max(min(maximum_flights_per_day,(round(Passengers.amount_of_daily_customers/200,0))),0)</fExpression>
             <fStateTrans/>
-            <expression>max(min(maximum_flights_per_day,(Passengers.amount_of_daily_customers/200)),0)</expression>
+            <expression>max(min(maximum_flights_per_day,(round(Passengers.amount_of_daily_customers/200,0))),0)</expression>
             <isGlobal>false</isGlobal>
             <isIn>false</isIn>
             <stateInit/>
@@ -189,26 +190,28 @@
         <node name="max_CO2_available_on_the_market_this_day" type="ValueNode" pos-x="360" pos-y="530" width="201" height="51">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
+            <documentation/>
             <isOut>false</isOut>
-            <fStateInit>10^4</fStateInit>
+            <fStateInit>10</fStateInit>
             <format>0.0##</format>
-            <fExpression>rand(10^4,10^8)</fExpression>
-            <fStateTrans>this+rand(-100,100)</fStateTrans>
-            <expression>rand(10^4,10^8)</expression>
+            <fExpression>rand(10,11)</fExpression>
+            <fStateTrans>this+rand(-1,1)</fStateTrans>
+            <expression>rand(10,11)</expression>
             <isGlobal>false</isGlobal>
-            <isIn>false</isIn>
-            <stateInit>10^4</stateInit>
+            <isIn>true</isIn>
+            <stateInit>10</stateInit>
             <isVectorOut>false</isVectorOut>
             <fontcol>0,0,255</fontcol>
-            <stateTrans>this+rand(-100,100)</stateTrans>
+            <stateTrans>this+rand(-1,1)</stateTrans>
             <backcol>255,255,255</backcol>
             <customprops>Name=max_CO2_available_on_the_market_this_day</customprops>
-            <valueType>1</valueType>
+            <valueType>0</valueType>
         </node>
         <node name="max_CO2_expense_today" type="ValueNode" pos-x="310" pos-y="470" width="211" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <isOut>false</isOut>
+            <documentation/>
+            <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
             <fExpression>max_CO2_available_on_the_market_this_day*prezzo_CO2</fExpression>
@@ -246,7 +249,6 @@
         <node name="percentuale_di_savings_per_emissioni" type="ValueNode" pos-x="60" pos-y="260" width="355" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -266,6 +268,7 @@
         <node name="prezzo_CO2" type="ValueNode" pos-x="590" pos-y="510" width="111" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
+            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -285,6 +288,7 @@
         <node name="spesa_crediti_CO2_acquistati" type="ValueNode" pos-x="540" pos-y="420" width="261" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
+            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -300,25 +304,6 @@
             <backcol>255,255,255</backcol>
             <customprops>Name=costo_emissioni</customprops>
             <valueType>0</valueType>
-        </node>
-        <node name="spesa_cumulata_CO2" type="ValueNode" pos-x="730" pos-y="550" width="241" height="45">
-            <font>SansSerif,12</font>
-            <forecol>0,0,0</forecol>
-            <isOut>true</isOut>
-            <fStateInit>0</fStateInit>
-            <format>0.0##</format>
-            <fExpression/>
-            <fStateTrans>this+spesa_crediti_CO2_acquistati</fStateTrans>
-            <expression/>
-            <isGlobal>false</isGlobal>
-            <isIn>false</isIn>
-            <stateInit>0</stateInit>
-            <isVectorOut>false</isVectorOut>
-            <fontcol>0,0,255</fontcol>
-            <stateTrans>this+spesa_crediti_CO2_acquistati</stateTrans>
-            <backcol>255,255,255</backcol>
-            <customprops>Name=spesa_CO2</customprops>
-            <valueType>1</valueType>
         </node>
         <node name="tons_of_CO2_per_flight" type="ValueNode" pos-x="780" pos-y="260" width="245" height="45">
             <font>SansSerif,12</font>
@@ -339,6 +324,26 @@
             <customprops>Name=tons_of_CO2_per_flight</customprops>
             <valueType>0</valueType>
         </node>
+        <node name="utile_green" type="ValueNode" pos-x="730" pos-y="550" width="241" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>true</isOut>
+            <fStateInit>0</fStateInit>
+            <format>0.0##</format>
+            <fExpression/>
+            <fStateTrans>this+guadagni-spesa_crediti_CO2_acquistati</fStateTrans>
+            <expression/>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit>0</stateInit>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans>this+guadagni-spesa_crediti_CO2_acquistati</stateTrans>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=spesa_CO2</customprops>
+            <valueType>1</valueType>
+        </node>
     </nodes>
     <texts>
         <text name="*text1" pos-x="620" pos-y="290" width="101" height="51" content="&lt;html&gt;   &lt;head&gt;        &lt;/head&gt;   &lt;body&gt;     &lt;p style=&quot;margin-top: 0&quot;&gt;       emissione pro capite?     &lt;/p&gt;   &lt;/body&gt; &lt;/html&gt; "/>
@@ -346,40 +351,41 @@
         <text name="*text3" pos-x="70" pos-y="350" width="131" height="71" content="&lt;html&gt;   &lt;head&gt;    &lt;/head&gt;   &lt;body&gt;     &lt;p style=&quot;margin-top: 0&quot;&gt;       Zona mercato della CO2     &lt;/p&gt;   &lt;/body&gt; &lt;/html&gt; "/>
     </texts>
     <edges>
-        <edge source="prezzo_CO2" target="max_CO2_expense_today" label="(...)"/>
-        <edge source="max_CO2_expense_today" target="spesa_crediti_CO2_acquistati" label="(...)"/>
-        <edge source="max_CO2_available_on_the_market_this_day" target="max_CO2_expense_today" label="(...)"/>
-        <edge source="tons_of_CO2_per_flight" target="emissioni_nette" label="(...)"/>
-        <edge source="Green_budget" target="spesa_crediti_CO2_acquistati" label="(...)"/>
-        <edge source="daily_flights" target="Passengers" label="(...)"/>
-        <edge source="maximum_flights_per_day" target="daily_flights" label="(...)"/>
-        <edge source="spesa_crediti_CO2_acquistati" target="spesa_cumulata_CO2" label="(...)"/>
-        <edge source="daily_flights" target="guadagni" label="(...)" p0x="777.5" p0y="202.5" p1x="582.5" p1y="232.5" numpoints="2"/>
-        <edge source="daily_flights" target="emissioni_nette" label="(...)" p0x="777.5" p0y="202.5" p1x="860.5" p1y="362.5" numpoints="2"/>
-        <edge source="prezzo_CO2" target="spesa_crediti_CO2_acquistati" label="(...)" p0x="545.5" p0y="562.5" p1x="520.5" p1y="462.5" numpoints="2"/>
-        <edge source="guadagni" target="Green_budget" label="(...)" p0x="582.5" p0y="232.5" p1x="587.5" p1y="362.5" numpoints="2"/>
-        <edge source="Target_emissioni" target="distanza_dal_target" label="(...)" p0x="1190.5" p0y="462.5" p1x="860.5" p1y="462.5" numpoints="2"/>
-        <edge source="distanza_dal_target" target="spesa_crediti_CO2_acquistati" label="(...)" p0x="860.5" p0y="462.5" p1x="520.5" p1y="462.5" numpoints="2"/>
-        <edge source="spesa_crediti_CO2_acquistati" target="emissioni_nette" label="(...)" p0x="520.5" p0y="462.5" p1x="860.5" p1y="362.5" numpoints="2"/>
-        <edge source="emissioni_nette" target="distanza_dal_target" label="(...)" p0x="860.5" p0y="362.5" p1x="860.5" p1y="462.5" numpoints="2"/>
-        <edge source="percentuale_di_savings_per_emissioni" target="Green_budget" label="(...)" p0x="277.5" p0y="362.5" p1x="587.5" p1y="362.5" numpoints="2"/>
-        <edge source="emissioni_nette" target="Passengers" label="(...)"/>
-        <edge source="Passengers" target="daily_flights" label="(...)"/>
-        <edge source="spesa_crediti_CO2_acquistati" target="daily_CO2_costs" label="(...)"/>
-        <edge source="daily_CO2_costs" target="Green_budget" label="(...)"/>
         <edge source="Passengers" target="daily_demand" label="(...)"/>
+        <edge source="daily_CO2_costs" target="Green_budget" label="(...)"/>
+        <edge source="spesa_crediti_CO2_acquistati" target="daily_CO2_costs" label="(...)"/>
+        <edge source="Passengers" target="daily_flights" label="(...)"/>
+        <edge source="emissioni_nette" target="Passengers" label="(...)"/>
+        <edge source="percentuale_di_savings_per_emissioni" target="Green_budget" label="(...)" p0x="277.5" p0y="362.5" p1x="587.5" p1y="362.5" numpoints="2"/>
+        <edge source="emissioni_nette" target="distanza_dal_target" label="(...)" p0x="860.5" p0y="362.5" p1x="860.5" p1y="462.5" numpoints="2"/>
+        <edge source="spesa_crediti_CO2_acquistati" target="emissioni_nette" label="(...)" p0x="520.5" p0y="462.5" p1x="860.5" p1y="362.5" numpoints="2"/>
+        <edge source="distanza_dal_target" target="spesa_crediti_CO2_acquistati" label="(...)" p0x="860.5" p0y="462.5" p1x="520.5" p1y="462.5" numpoints="2"/>
+        <edge source="Target_emissioni" target="distanza_dal_target" label="(...)" p0x="1190.5" p0y="462.5" p1x="860.5" p1y="462.5" numpoints="2"/>
+        <edge source="guadagni" target="Green_budget" label="(...)" p0x="582.5" p0y="232.5" p1x="587.5" p1y="362.5" numpoints="2"/>
+        <edge source="prezzo_CO2" target="spesa_crediti_CO2_acquistati" label="(...)" p0x="545.5" p0y="562.5" p1x="520.5" p1y="462.5" numpoints="2"/>
+        <edge source="daily_flights" target="emissioni_nette" label="(...)" p0x="777.5" p0y="202.5" p1x="860.5" p1y="362.5" numpoints="2"/>
+        <edge source="daily_flights" target="guadagni" label="(...)" p0x="777.5" p0y="202.5" p1x="582.5" p1y="232.5" numpoints="2"/>
+        <edge source="spesa_crediti_CO2_acquistati" target="utile_green" label="(...)"/>
+        <edge source="maximum_flights_per_day" target="daily_flights" label="(...)"/>
+        <edge source="daily_flights" target="Passengers" label="(...)"/>
+        <edge source="Green_budget" target="spesa_crediti_CO2_acquistati" label="(...)"/>
+        <edge source="tons_of_CO2_per_flight" target="emissioni_nette" label="(...)"/>
+        <edge source="max_CO2_available_on_the_market_this_day" target="max_CO2_expense_today" label="(...)"/>
+        <edge source="max_CO2_expense_today" target="spesa_crediti_CO2_acquistati" label="(...)"/>
+        <edge source="prezzo_CO2" target="max_CO2_expense_today" label="(...)"/>
+        <edge source="guadagni" target="utile_green" label="(...)"/>
     </edges>
     <widgets>
         <widget type="SliderWidget" pos-x="1080" pos-y="520" width="310" height="100">
             <0>0</0>
-            <widgetvalue>69274.0</widgetvalue>
-            <max>100000</max>
+            <widgetvalue>287.0</widgetvalue>
+            <max>1000</max>
             <min>0.0</min>
             <showtitlebar>true</showtitlebar>
             <source>Target_emissioni</source>
             <delta>1.0</delta>
             <iconized>false</iconized>
-            <title>Target_emissioni: 69274.0</title>
+            <title>Target_emissioni: 287.0</title>
         </widget>
         <widget type="ChartWidget" pos-x="60" pos-y="40" width="300" height="200">
             <title/>
@@ -387,7 +393,7 @@
             <linewidths>#1</linewidths>
             <showline>true</showline>
             <showtitlebar>true</showtitlebar>
-            <linecolors>__RED</linecolors>
+            <linecolors>__BLACK</linecolors>
             <barscolors>__RED</barscolors>
             <dotsstyles>__style1</dotsstyles>
             <logscaley>false</logscaley>
@@ -395,7 +401,7 @@
             <dotsxscales>#1</dotsxscales>
             <showbars>false</showbars>
             <autolegendy>true</autolegendy>
-            <ysourcena>guadagni</ysourcena>
+            <ysourcena>utile_green</ysourcena>
             <autolegendx>true</autolegendx>
             <typey>2</typey>
             <typex>2</typex>
@@ -482,36 +488,36 @@
         </widget>
         <widget type="ChartWidget" pos-x="30" pos-y="430" width="300" height="200">
             <title/>
-            <dotscolors>__RED</dotscolors>
-            <linewidths>#1</linewidths>
-            <showline>true</showline>
+            <dotscolors>__RED,__GREEN</dotscolors>
+            <linewidths>#1,#1</linewidths>
+            <showline>true,true</showline>
             <showtitlebar>true</showtitlebar>
-            <linecolors>__RED</linecolors>
-            <barscolors>__RED</barscolors>
-            <dotsstyles>__style1</dotsstyles>
+            <linecolors>__RED,__GRAY</linecolors>
+            <barscolors>__RED,__GREEN</barscolors>
+            <dotsstyles>__style1,__style1</dotsstyles>
             <logscaley>false</logscaley>
             <logscalex>false</logscalex>
-            <dotsxscales>#1</dotsxscales>
-            <showbars>false</showbars>
+            <dotsxscales>#1,#1</dotsxscales>
+            <showbars>false,false</showbars>
             <autolegendy>true</autolegendy>
-            <ysourcena>Green_budget</ysourcena>
+            <ysourcena>Green_budget,max_CO2_expense_today</ysourcena>
             <autolegendx>true</autolegendx>
             <typey>2</typey>
             <typex>2</typex>
-            <linestyles>__style1</linestyles>
-            <dotstype>dot</dotstype>
-            <dotsyscales>#1</dotsyscales>
-            <dotsangles>#0</dotsangles>
-            <dotssizes>#1</dotssizes>
+            <linestyles>__style1,__style1</linestyles>
+            <dotstype>dot,dot</dotstype>
+            <dotsyscales>#1,#1</dotsyscales>
+            <dotsangles>#0,#0</dotsangles>
+            <dotssizes>#1,#1</dotssizes>
             <autoaxisy>true</autoaxisy>
             <autoaxisx>true</autoaxisx>
-            <barswidths>#1</barswidths>
-            <dotshilast>false</dotshilast>
+            <barswidths>#1,#1</barswidths>
+            <dotshilast>false,false</dotshilast>
             <iconized>false</iconized>
-            <showdots>false</showdots>
-            <xsourcena>vTime</xsourcena>
+            <showdots>false,false</showdots>
+            <xsourcena>vTime,vTime</xsourcena>
             <isometric>false</isometric>
-            <dotslastonly>false</dotslastonly>
+            <dotslastonly>false,false</dotslastonly>
         </widget>
     </widgets>
     <groups/>
