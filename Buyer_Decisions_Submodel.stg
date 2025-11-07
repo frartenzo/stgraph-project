@@ -94,7 +94,6 @@ High in a market where nobody cares, low or zero in a Green Market.</documentati
         <node name="CO2e" type="ValueNode" pos-x="340" pos-y="520" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -115,7 +114,7 @@ High in a market where nobody cares, low or zero in a Green Market.</documentati
             <subvisible>false</subvisible>
             <format>0.0##</format>
             <fontcol>0,0,255</fontcol>
-            <systemName>flights_demand.stg</systemName>
+            <systemName>Historical_Flights_Demand_Data_Submodel.stg</systemName>
             <forecol>0,0,0</forecol>
             <customprops>Name=Historical Data</customprops>
             <backcol>255,255,255</backcol>
@@ -169,7 +168,6 @@ Average calculated on the year</documentation>
         <node name="M_t" type="ValueNode" pos-x="50" pos-y="520" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>64,64,64</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -211,7 +209,6 @@ Usually an input from the supermodel</documentation>
         <node name="R_CO2" type="ValueNode" pos-x="210" pos-y="520" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit>1</fStateInit>
             <format>0.0##</format>
@@ -380,7 +377,6 @@ The steepness of the curve around the point where the utility curve changes betw
         <node name="uCO2e_t" type="ValueNode" pos-x="340" pos-y="410" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
