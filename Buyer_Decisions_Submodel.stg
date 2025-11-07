@@ -1,0 +1,542 @@
+<stgraph class="STGraph.decoder" version="STGraph build 22.12">
+    <head systemName="" description="" timeUnitDescription="" timeFrame="0" time0="1.0" time1="365.0" timeD="1.0" maxSteps="10" batchSteps="1" width="1440" height="789" scale="1.0" simulationDelay="1" stepsBeforePause="1" integrationMethod="0" exceptionHandling="1" withInterrupts="false" isDataSaved="false" forNet="false" serverAddress="" forWeb="false" webModelLanguages="" webModelDescription="" webTimeUnit="" webExplTitle="" webExplURL="" webModelGroups="" indexOrigin="0" isGraphVisible="true" areWidgetsVisible="true"/>
+    <nodes>
+        <node name="ABP_t" type="ValueNode" pos-x="650" pos-y="310" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>How much is probable that a person in the market for a ticket on this date will buy that ticket
+
+Will they buy or not?
+
+1: yes
+0: no
+0-1: maybe, a % will buy</documentation>
+            <isOut>true</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>1/(1+exp(-s*U_t))</fExpression>
+            <fStateTrans/>
+            <expression>1/(1+exp(-s*U_t))</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Unit=0-1;Name=Average Booking Probability</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="B_CO2e_0" type="ValueNode" pos-x="50" pos-y="410" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>How much a flight should pollute, in the mind of the customer, at the start of the simulation
+
+Baseline value that the market finds &quot;right&quot; for flight pollution
+
+High in a market where nobody cares, low or zero in a Green Market.</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>100</fExpression>
+            <fStateTrans/>
+            <expression>100</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=Initial Baseline Emissions</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="B_CO2e_t" type="ValueNode" pos-x="210" pos-y="410" width="75" height="51">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>Baseline reference of how much should a flight pollute, in the mind of the customer</documentation>
+            <isOut>false</isOut>
+            <fStateInit>B_CO2e_0</fStateInit>
+            <format>0.0##</format>
+            <fExpression>20</fExpression>
+            <fStateTrans>this-this*M_t</fStateTrans>
+            <expression>20</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit>B_CO2e_0</stateInit>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans>this-this*M_t</stateTrans>
+            <backcol>255,255,255</backcol>
+            <customprops>Unit=tCO2e/km*passenger;Name=Baseline Emissions</customprops>
+            <valueType>1</valueType>
+        </node>
+        <node name="B_t" type="ValueNode" pos-x="340" pos-y="130" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>Budget of the customer, who is quite smart and is considering the season too.</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>bB*SL_t</fExpression>
+            <fStateTrans/>
+            <expression>bB*SL_t</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Unit=&#x20ac;;Name=Budget</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="CO2e" type="ValueNode" pos-x="340" pos-y="520" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>1000</fExpression>
+            <fStateTrans/>
+            <expression>1000</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>255,255,255</fontcol>
+            <stateTrans/>
+            <backcol>64,64,64</backcol>
+            <customprops>Name=emissioni</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="Hist_d" type="ModelNode" pos-x="470" pos-y="40" width="75" height="45">
+            <subvisible>false</subvisible>
+            <format>0.0##</format>
+            <fontcol>0,0,255</fontcol>
+            <systemName>flights_demand.stg</systemName>
+            <forecol>0,0,0</forecol>
+            <customprops>Name=Historical Data</customprops>
+            <backcol>255,255,255</backcol>
+            <font>SansSerif,12</font>
+            <documentation>Flight Demand from Historical Data
+
+Peaks in december and june-august</documentation>
+        </node>
+        <node name="MS" type="ValueNode" pos-x="650" pos-y="40" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>Market Size, espressed in average daily number of people scrolling booking services in search for a ticket
+
+Average calculated on the year</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>2000</fExpression>
+            <fStateTrans/>
+            <expression>2000</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Unit=people;Name=Base Prospects</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="MS_t" type="ValueNode" pos-x="650" pos-y="130" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>Number of people who actually search for a ticket on this date, given seasonability.</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>MS*SL_t</fExpression>
+            <fStateTrans/>
+            <expression>MS*SL_t</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Unit=people;Name=Current Prospects</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="M_t" type="ValueNode" pos-x="50" pos-y="520" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>64,64,64</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>0.05</fExpression>
+            <fStateTrans/>
+            <expression>0.05</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,0</fontcol>
+            <stateTrans/>
+            <backcol>0,255,0</backcol>
+            <customprops>Name=Marketing Rate</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="P_t" type="ValueNode" pos-x="210" pos-y="130" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>The current Ticket Price
+
+Usually an input from the supermodel</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>300</fExpression>
+            <fStateTrans/>
+            <expression>300</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,0</backcol>
+            <customprops>Unit=&#x20ac;;Name=Ticket Price</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="R_CO2" type="ValueNode" pos-x="210" pos-y="520" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit>1</fStateInit>
+            <format>0.0##</format>
+            <fExpression>1</fExpression>
+            <fStateTrans>this+this*M_t</fStateTrans>
+            <expression>1</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit>1</stateInit>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans>this+this*M_t</stateTrans>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=Reactivity at CO2 Emissions</customprops>
+            <valueType>1</valueType>
+        </node>
+        <node name="R_P" type="ValueNode" pos-x="210" pos-y="220" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>How much demand is reactive to price offset from the consumer budget</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>10</fExpression>
+            <fStateTrans/>
+            <expression>10</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=Reactivity at Price</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="SL_t" type="ValueNode" pos-x="470" pos-y="130" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>255,255,255</forecol>
+            <documentation>Continuous value derived from an interpolation of historical data:
+0-1: Low season
+1: Average
+1-2: High season
+2+: Peak season (holidays)</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>Hist_d.interpolation</fExpression>
+            <fStateTrans/>
+            <expression>Hist_d.interpolation</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>255,255,255</fontcol>
+            <stateTrans/>
+            <backcol>0,0,255</backcol>
+            <customprops>Name=Season Level</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="TD_t" type="ValueNode" pos-x="830" pos-y="310" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>Current demand of tickets for this date
+Given people looking for this date and average booking probability for this date</documentation>
+            <isOut>true</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>int(ABP_t*MS_t)</fExpression>
+            <fStateTrans/>
+            <expression>int(ABP_t*MS_t)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Unit=tickets;Name=Tickets Demand</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="U_t" type="ValueNode" pos-x="480" pos-y="310" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>Sum of all ticket utility functions, plus a baseline wich is the base value of a ticker for the customer</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>u0+uCO2e_t+uP_t</fExpression>
+            <fStateTrans/>
+            <expression>u0+uCO2e_t+uP_t</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=Ticket Utility combined</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="bB" type="ValueNode" pos-x="340" pos-y="40" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>How much the ticket should cost &quot;normally&quot;
+
+For example, a market average over the entire year.</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>300</fExpression>
+            <fStateTrans/>
+            <expression>300</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Unit=&#x20ac;;Name=Base Budget</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="s" type="ValueNode" pos-x="650" pos-y="390" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>How strong the market rejects higher prices or higher emissions.
+
+The steepness of the curve around the point where the utility curve changes between &gt;0 and &lt;0</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>0.2</fExpression>
+            <fStateTrans/>
+            <expression>0.2</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=Steepness</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="u0" type="ValueNode" pos-x="340" pos-y="310" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>The baseline of value for a ticket</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>1</fExpression>
+            <fStateTrans/>
+            <expression>1</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=Baseline Utility</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="uCO2e_t" type="ValueNode" pos-x="340" pos-y="410" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>true</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>R_CO2*(1-(CO2e/B_CO2e_t))~</fExpression>
+            <fStateTrans/>
+            <expression>R_CO2*(1-(CO2e/B_CO2e_t))</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=Utility of Emissions</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="uP_t" type="ValueNode" pos-x="340" pos-y="220" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>Utility function of the ticket based on the price
+
+From a Microeconomics perspective
+
+uP_t = R_P*(1-(TP_t/B_t))
+
+example: 1, -1</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>R_P*(1-(P_t/B_t))</fExpression>
+            <fStateTrans/>
+            <expression>R_P*(1-(P_t/B_t))</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=Ticket Utility based on Price</customprops>
+            <valueType>0</valueType>
+        </node>
+    </nodes>
+    <texts/>
+    <edges>
+        <edge source="Hist_d" target="SL_t" label="(...)" p0x="507.5" p0y="62.5" p1x="507.5" p1y="152.5" numpoints="2"/>
+        <edge source="MS" target="MS_t" label="(...)" p0x="687.5" p0y="62.5" p1x="687.5" p1y="152.5" numpoints="2"/>
+        <edge source="R_CO2" target="uCO2e_t" label="(...)" p0x="247.5" p0y="542.5" p1x="377.5" p1y="432.5" numpoints="2"/>
+        <edge source="B_CO2e_t" target="uCO2e_t" label="(...)" p0x="247.5" p0y="435.5" p1x="377.5" p1y="432.5" numpoints="2"/>
+        <edge source="CO2e" target="uCO2e_t" label="(...)" p0x="377.5" p0y="542.5" p1x="377.5" p1y="432.5" numpoints="2"/>
+        <edge source="P_t" target="uP_t" label="(...)" p0x="247.5" p0y="152.5" p1x="377.5" p1y="242.5" numpoints="2"/>
+        <edge source="B_t" target="uP_t" label="(...)" p0x="377.5" p0y="152.5" p1x="377.5" p1y="242.5" numpoints="2"/>
+        <edge source="R_P" target="uP_t" label="(...)" p0x="247.5" p0y="242.5" p1x="377.5" p1y="242.5" numpoints="2"/>
+        <edge source="u0" target="U_t" label="(...)" p0x="377.5" p0y="332.5" p1x="517.5" p1y="332.5" numpoints="2"/>
+        <edge source="uCO2e_t" target="U_t" label="(...)" p0x="377.5" p0y="432.5" p1x="517.5" p1y="332.5" numpoints="2"/>
+        <edge source="uP_t" target="U_t" label="(...)" p0x="377.5" p0y="242.5" p1x="517.5" p1y="332.5" numpoints="2"/>
+        <edge source="U_t" target="ABP_t" label="(...)" p0x="517.5" p0y="332.5" p1x="687.5" p1y="332.5" numpoints="2"/>
+        <edge source="s" target="ABP_t" label="(...)" p0x="687.5" p0y="412.5" p1x="687.5" p1y="332.5" numpoints="2"/>
+        <edge source="M_t" target="R_CO2" label="(...)" p0x="87.5" p0y="542.5" p1x="247.5" p1y="542.5" numpoints="2"/>
+        <edge source="M_t" target="B_CO2e_t" label="(...)" p0x="87.5" p0y="542.5" p1x="247.5" p1y="435.5" numpoints="2"/>
+        <edge source="B_CO2e_0" target="B_CO2e_t" label="(...)" p0x="87.5" p0y="432.5" p1x="247.5" p1y="435.5" numpoints="2"/>
+        <edge source="ABP_t" target="TD_t" label="(...)" p0x="687.5" p0y="332.5" p1x="867.5" p1y="332.5" numpoints="2"/>
+        <edge source="MS_t" target="TD_t" label="(...)" p0x="687.5" p0y="152.5" p1x="867.5" p1y="332.5" numpoints="2"/>
+        <edge source="SL_t" target="B_t" label="(...)" p0x="507.5" p0y="152.5" p1x="377.5" p1y="152.5" numpoints="2"/>
+        <edge source="SL_t" target="MS_t" label="(...)" p0x="507.5" p0y="152.5" p1x="687.5" p1y="152.5" numpoints="2"/>
+        <edge source="bB" target="B_t" label="(...)" p0x="377.5" p0y="62.5" p1x="377.5" p1y="152.5" numpoints="2"/>
+    </edges>
+    <widgets>
+        <widget type="ChartWidget" pos-x="930" pos-y="30" width="470" height="290">
+            <title>Demand of Tickets during the Year</title>
+            <dotscolors>__RED</dotscolors>
+            <linewidths>#1</linewidths>
+            <showline>true</showline>
+            <showtitlebar>true</showtitlebar>
+            <linecolors>__RED</linecolors>
+            <barscolors>__RED</barscolors>
+            <dotsstyles>__style1</dotsstyles>
+            <logscaley>false</logscaley>
+            <logscalex>false</logscalex>
+            <dotsxscales>#1</dotsxscales>
+            <showbars>false</showbars>
+            <autolegendy>false</autolegendy>
+            <ysourcena>TD_t</ysourcena>
+            <autolegendx>true</autolegendx>
+            <typey>2</typey>
+            <legendy>Tickets Demand</legendy>
+            <typex>2</typex>
+            <linestyles>__style1</linestyles>
+            <maxy>5000.0</maxy>
+            <maxx>365.0</maxx>
+            <dotstype>dot</dotstype>
+            <dotsyscales>#1</dotsyscales>
+            <miny>0.0</miny>
+            <minx>1.0</minx>
+            <dotsangles>#0</dotsangles>
+            <dotssizes>#1</dotssizes>
+            <autoaxisy>false</autoaxisy>
+            <autoaxisx>false</autoaxisx>
+            <barswidths>#1</barswidths>
+            <dotshilast>false</dotshilast>
+            <iconized>false</iconized>
+            <stepy>500.0</stepy>
+            <stepx>30.0</stepx>
+            <showdots>false</showdots>
+            <xsourcena>vTime</xsourcena>
+            <isometric>false</isometric>
+            <dotslastonly>false</dotslastonly>
+        </widget>
+        <widget type="GaugeWidget" pos-x="750" pos-y="370" width="110" height="120">
+            <sourcena>ABP_t</sourcena>
+            <max>1</max>
+            <min>0.0</min>
+            <iconized>false</iconized>
+            <showtitlebar>true</showtitlebar>
+            <title>ABP_t: 0.1949467753884635</title>
+        </widget>
+        <widget type="ChartWidget" pos-x="930" pos-y="340" width="470" height="290">
+            <title>Impact of CO2e on buyers decision</title>
+            <dotscolors>__RED</dotscolors>
+            <linewidths>#1</linewidths>
+            <showline>true</showline>
+            <showtitlebar>true</showtitlebar>
+            <linecolors>__MAGENTA</linecolors>
+            <barscolors>__RED</barscolors>
+            <dotsstyles>__style1</dotsstyles>
+            <logscaley>false</logscaley>
+            <logscalex>false</logscalex>
+            <dotsxscales>#1</dotsxscales>
+            <showbars>true</showbars>
+            <autolegendy>true</autolegendy>
+            <ysourcena>uCO2e_t</ysourcena>
+            <autolegendx>true</autolegendx>
+            <typey>2</typey>
+            <typex>2</typex>
+            <linestyles>__style1</linestyles>
+            <maxy>100.0</maxy>
+            <maxx>365.0</maxx>
+            <dotstype>dot</dotstype>
+            <dotsyscales>#1</dotsyscales>
+            <miny>-100.0</miny>
+            <minx>1.0</minx>
+            <dotsangles>#0</dotsangles>
+            <dotssizes>#1</dotssizes>
+            <autoaxisy>false</autoaxisy>
+            <autoaxisx>false</autoaxisx>
+            <barswidths>#2</barswidths>
+            <dotshilast>false</dotshilast>
+            <iconized>false</iconized>
+            <stepy>20.0</stepy>
+            <stepx>30.0</stepx>
+            <showdots>false</showdots>
+            <xsourcena>vTime</xsourcena>
+            <isometric>false</isometric>
+            <dotslastonly>false</dotslastonly>
+        </widget>
+    </widgets>
+    <groups/>
+    <reports/>
+</stgraph>
