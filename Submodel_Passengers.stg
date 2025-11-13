@@ -784,49 +784,49 @@ example: 1, -1</documentation>
     </nodes>
     <texts/>
     <edges>
-        <edge source="n_return_tickets_sold" target="tickets_sold" label="(...)"/>
-        <edge source="avail_seats" target="n_return_tickets_sold" label="(...)"/>
-        <edge source="return_demand" target="n_return_tickets_sold" label="(...)"/>
-        <edge source="TD_t" target="MXP_CDG_1" label="(...)"/>
-        <edge source="TD_t" target="MXP_FRA_2" label="(...)"/>
-        <edge source="TD_t" target="MXP_LHR_0" label="(...)"/>
-        <edge source="TD_t" target="CDG_FRA_3" label="(...)"/>
-        <edge source="Hist_d" target="SL_t" label="(...)" p0x="507.5" p0y="62.5" p1x="507.5" p1y="152.5" numpoints="2"/>
-        <edge source="MS" target="MS_t" label="(...)" p0x="687.5" p0y="62.5" p1x="687.5" p1y="152.5" numpoints="2"/>
-        <edge source="R_CO2" target="uCO2e_t" label="(...)" p0x="247.5" p0y="542.5" p1x="377.5" p1y="432.5" numpoints="2"/>
-        <edge source="B_CO2e_t" target="uCO2e_t" label="(...)" p0x="247.5" p0y="435.5" p1x="377.5" p1y="432.5" numpoints="2"/>
-        <edge source="CO2e" target="uCO2e_t" label="(...)" p0x="377.5" p0y="542.5" p1x="377.5" p1y="432.5" numpoints="2"/>
-        <edge source="P_t" target="uP_t" label="(...)" p0x="247.5" p0y="152.5" p1x="377.5" p1y="242.5" numpoints="2"/>
-        <edge source="B_t" target="uP_t" label="(...)" p0x="377.5" p0y="152.5" p1x="377.5" p1y="242.5" numpoints="2"/>
-        <edge source="R_P" target="uP_t" label="(...)" p0x="247.5" p0y="242.5" p1x="377.5" p1y="242.5" numpoints="2"/>
-        <edge source="u0" target="U_t" label="(...)" p0x="377.5" p0y="332.5" p1x="517.5" p1y="332.5" numpoints="2"/>
-        <edge source="uCO2e_t" target="U_t" label="(...)" p0x="377.5" p0y="432.5" p1x="517.5" p1y="332.5" numpoints="2"/>
-        <edge source="uP_t" target="U_t" label="(...)" p0x="377.5" p0y="242.5" p1x="517.5" p1y="332.5" numpoints="2"/>
-        <edge source="U_t" target="ABP_t" label="(...)" p0x="517.5" p0y="332.5" p1x="687.5" p1y="332.5" numpoints="2"/>
-        <edge source="s" target="ABP_t" label="(...)" p0x="687.5" p0y="412.5" p1x="687.5" p1y="332.5" numpoints="2"/>
-        <edge source="M_t" target="R_CO2" label="(...)" p0x="87.5" p0y="542.5" p1x="247.5" p1y="542.5" numpoints="2"/>
-        <edge source="M_t" target="B_CO2e_t" label="(...)" p0x="87.5" p0y="542.5" p1x="247.5" p1y="435.5" numpoints="2"/>
-        <edge source="B_CO2e_0" target="B_CO2e_t" label="(...)" p0x="87.5" p0y="432.5" p1x="247.5" p1y="435.5" numpoints="2"/>
-        <edge source="ABP_t" target="TD_t" label="(...)" p0x="687.5" p0y="332.5" p1x="867.5" p1y="332.5" numpoints="2"/>
-        <edge source="MS_t" target="TD_t" label="(...)" p0x="687.5" p0y="152.5" p1x="867.5" p1y="332.5" numpoints="2"/>
-        <edge source="SL_t" target="B_t" label="(...)" p0x="507.5" p0y="152.5" p1x="377.5" p1y="152.5" numpoints="2"/>
-        <edge source="SL_t" target="MS_t" label="(...)" p0x="507.5" p0y="152.5" p1x="687.5" p1y="152.5" numpoints="2"/>
-        <edge source="bB" target="B_t" label="(...)" p0x="377.5" p0y="62.5" p1x="377.5" p1y="152.5" numpoints="2"/>
-        <edge source="uCO2e_t" target="impCDG_FRA_3_2" label="(...)"/>
-        <edge source="uCO2e_t" target="impMXP_FRA_2_2" label="(...)"/>
-        <edge source="uCO2e_t" target="impMXP_CDG_1_2" label="(...)"/>
-        <edge source="uCO2e_t" target="impMXP_LHR_0_2" label="(...)"/>
-        <edge source="tickets_sold" target="occupancy_rates" label="(...)"/>
-        <edge source="avail_seats" target="occupancy_rates" label="(...)"/>
-        <edge source="TD_t" target="outbound_demand" label="(...)"/>
-        <edge source="TD_t" target="return_demand" label="(...)"/>
-        <edge source="outbound_return_demand_ratio" target="outbound_demand" label="(...)"/>
-        <edge source="outbound_return_demand_ratio" target="return_demand" label="(...)"/>
-        <edge source="outbound_demand" target="n_outbound_tickets_sold" label="(...)"/>
-        <edge source="avail_seats" target="n_outbound_tickets_sold" label="(...)"/>
-        <edge source="n_outbound_tickets_sold" target="tickets_sold" label="(...)"/>
-        <edge source="occupancy_rates" target="occupancy_rate_cumulator" label="(...)"/>
         <edge source="occupancy_rate_cumulator" target="avg_occupancy_rate" label="(...)"/>
+        <edge source="occupancy_rates" target="occupancy_rate_cumulator" label="(...)"/>
+        <edge source="n_outbound_tickets_sold" target="tickets_sold" label="(...)"/>
+        <edge source="avail_seats" target="n_outbound_tickets_sold" label="(...)"/>
+        <edge source="outbound_demand" target="n_outbound_tickets_sold" label="(...)"/>
+        <edge source="outbound_return_demand_ratio" target="return_demand" label="(...)"/>
+        <edge source="outbound_return_demand_ratio" target="outbound_demand" label="(...)"/>
+        <edge source="TD_t" target="return_demand" label="(...)"/>
+        <edge source="TD_t" target="outbound_demand" label="(...)"/>
+        <edge source="avail_seats" target="occupancy_rates" label="(...)"/>
+        <edge source="tickets_sold" target="occupancy_rates" label="(...)"/>
+        <edge source="uCO2e_t" target="impMXP_LHR_0_2" label="(...)"/>
+        <edge source="uCO2e_t" target="impMXP_CDG_1_2" label="(...)"/>
+        <edge source="uCO2e_t" target="impMXP_FRA_2_2" label="(...)"/>
+        <edge source="uCO2e_t" target="impCDG_FRA_3_2" label="(...)"/>
+        <edge source="bB" target="B_t" label="(...)" p0x="377.5" p0y="62.5" p1x="377.5" p1y="152.5" numpoints="2"/>
+        <edge source="SL_t" target="MS_t" label="(...)" p0x="507.5" p0y="152.5" p1x="687.5" p1y="152.5" numpoints="2"/>
+        <edge source="SL_t" target="B_t" label="(...)" p0x="507.5" p0y="152.5" p1x="377.5" p1y="152.5" numpoints="2"/>
+        <edge source="MS_t" target="TD_t" label="(...)" p0x="687.5" p0y="152.5" p1x="867.5" p1y="332.5" numpoints="2"/>
+        <edge source="ABP_t" target="TD_t" label="(...)" p0x="687.5" p0y="332.5" p1x="867.5" p1y="332.5" numpoints="2"/>
+        <edge source="B_CO2e_0" target="B_CO2e_t" label="(...)" p0x="87.5" p0y="432.5" p1x="247.5" p1y="435.5" numpoints="2"/>
+        <edge source="M_t" target="B_CO2e_t" label="(...)" p0x="87.5" p0y="542.5" p1x="247.5" p1y="435.5" numpoints="2"/>
+        <edge source="M_t" target="R_CO2" label="(...)" p0x="87.5" p0y="542.5" p1x="247.5" p1y="542.5" numpoints="2"/>
+        <edge source="s" target="ABP_t" label="(...)" p0x="687.5" p0y="412.5" p1x="687.5" p1y="332.5" numpoints="2"/>
+        <edge source="U_t" target="ABP_t" label="(...)" p0x="517.5" p0y="332.5" p1x="687.5" p1y="332.5" numpoints="2"/>
+        <edge source="uP_t" target="U_t" label="(...)" p0x="377.5" p0y="242.5" p1x="517.5" p1y="332.5" numpoints="2"/>
+        <edge source="uCO2e_t" target="U_t" label="(...)" p0x="377.5" p0y="432.5" p1x="517.5" p1y="332.5" numpoints="2"/>
+        <edge source="u0" target="U_t" label="(...)" p0x="377.5" p0y="332.5" p1x="517.5" p1y="332.5" numpoints="2"/>
+        <edge source="R_P" target="uP_t" label="(...)" p0x="247.5" p0y="242.5" p1x="377.5" p1y="242.5" numpoints="2"/>
+        <edge source="B_t" target="uP_t" label="(...)" p0x="377.5" p0y="152.5" p1x="377.5" p1y="242.5" numpoints="2"/>
+        <edge source="P_t" target="uP_t" label="(...)" p0x="247.5" p0y="152.5" p1x="377.5" p1y="242.5" numpoints="2"/>
+        <edge source="CO2e" target="uCO2e_t" label="(...)" p0x="377.5" p0y="542.5" p1x="377.5" p1y="432.5" numpoints="2"/>
+        <edge source="B_CO2e_t" target="uCO2e_t" label="(...)" p0x="247.5" p0y="435.5" p1x="377.5" p1y="432.5" numpoints="2"/>
+        <edge source="R_CO2" target="uCO2e_t" label="(...)" p0x="247.5" p0y="542.5" p1x="377.5" p1y="432.5" numpoints="2"/>
+        <edge source="MS" target="MS_t" label="(...)" p0x="687.5" p0y="62.5" p1x="687.5" p1y="152.5" numpoints="2"/>
+        <edge source="Hist_d" target="SL_t" label="(...)" p0x="507.5" p0y="62.5" p1x="507.5" p1y="152.5" numpoints="2"/>
+        <edge source="TD_t" target="CDG_FRA_3" label="(...)"/>
+        <edge source="TD_t" target="MXP_LHR_0" label="(...)"/>
+        <edge source="TD_t" target="MXP_FRA_2" label="(...)"/>
+        <edge source="TD_t" target="MXP_CDG_1" label="(...)"/>
+        <edge source="return_demand" target="n_return_tickets_sold" label="(...)"/>
+        <edge source="avail_seats" target="n_return_tickets_sold" label="(...)"/>
+        <edge source="n_return_tickets_sold" target="tickets_sold" label="(...)"/>
     </edges>
     <widgets>
         <widget type="ChartWidget" pos-x="950" pos-y="420" width="470" height="290">
@@ -875,7 +875,7 @@ example: 1, -1</documentation>
             <min>0.0</min>
             <iconized>false</iconized>
             <showtitlebar>true</showtitlebar>
-            <title>ABP_t: 0.22160050706817372</title>
+            <title>ABP_t: 0.22160050706825815</title>
         </widget>
         <widget type="ChartWidget" pos-x="610" pos-y="420" width="350" height="290">
             <title>Impact of CO2e on buyers decision</title>

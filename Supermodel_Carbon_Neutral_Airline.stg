@@ -29,33 +29,16 @@
             <customprops>Name=CO2_price</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="CO2e_per_flight" type="ValueNode" pos-x="450" pos-y="200" width="191" height="45">
-            <font>SansSerif,12</font>
-            <forecol>0,0,0</forecol>
-            <isOut>false</isOut>
-            <fStateInit/>
-            <format>0.0##</format>
-            <fExpression>250</fExpression>
-            <fStateTrans/>
-            <expression>250</expression>
-            <isGlobal>false</isGlobal>
-            <isIn>true</isIn>
-            <stateInit/>
-            <isVectorOut>false</isVectorOut>
-            <fontcol>0,0,255</fontcol>
-            <stateTrans/>
-            <backcol>255,255,255</backcol>
-            <customprops>Name=tons_of_CO2_per_flight</customprops>
-            <valueType>0</valueType>
-        </node>
         <node name="Fleet" type="ModelNode" pos-x="510" pos-y="110" width="75" height="45">
             <subvisible>false</subvisible>
             <format>0.0##</format>
             <fontcol>0,0,255</fontcol>
+            <systemName>Submodel_Fleet.stg</systemName>
             <forecol>0,0,0</forecol>
             <customprops>Name=Fleet</customprops>
             <backcol>255,255,255</backcol>
             <font>SansSerif,12</font>
+            <documentation/>
         </node>
         <node name="Management" type="ModelNode" pos-x="850" pos-y="390" width="131" height="45">
             <subvisible>false</subvisible>
@@ -75,7 +58,6 @@
             <customprops>Name=Customer_Base</customprops>
             <backcol>255,255,255</backcol>
             <font>SansSerif,12</font>
-            <documentation/>
         </node>
         <node name="TP_t" type="ValueNode" pos-x="1050" pos-y="300" width="75" height="45">
             <font>SansSerif,12</font>
@@ -141,19 +123,19 @@
             <fStateInit>0</fStateInit>
             <format>0.0##</format>
             <fExpression/>
-            <fStateTrans>this+12*CO2e_per_flight-spesa_crediti_CO2_acquistati</fStateTrans>
+            <fStateTrans>this+12*kg_CO2e-spesa_crediti_CO2_acquistati</fStateTrans>
             <expression/>
             <isGlobal>false</isGlobal>
             <isIn>false</isIn>
             <stateInit>0</stateInit>
             <isVectorOut>false</isVectorOut>
             <fontcol>0,0,255</fontcol>
-            <stateTrans>this+12*CO2e_per_flight-spesa_crediti_CO2_acquistati</stateTrans>
+            <stateTrans>this+12*kg_CO2e-spesa_crediti_CO2_acquistati</stateTrans>
             <backcol>255,255,255</backcol>
             <customprops>Name=emissioni_nette</customprops>
             <valueType>1</valueType>
         </node>
-        <node name="aircraft_consumption_data" type="ValueNode" pos-x="570" pos-y="30" width="245" height="45">
+        <node name="aircraft_hourly_fuel_consumption" type="ValueNode" pos-x="570" pos-y="30" width="245" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <documentation>An array containing data about how much fuel does any aircraft consume per hour of flight</documentation>
@@ -171,26 +153,6 @@
             <stateTrans/>
             <backcol>255,255,255</backcol>
             <customprops>Name=Aircraft Fuel Consumption Data</customprops>
-            <valueType>0</valueType>
-        </node>
-        <node name="daily_flytime" type="ValueNode" pos-x="420" pos-y="30" width="101" height="45">
-            <font>SansSerif,12</font>
-            <forecol>0,0,0</forecol>
-            <documentation>an array containg the lenght in hours of the flights covered by the company</documentation>
-            <isOut>false</isOut>
-            <fStateInit/>
-            <format>0.0##</format>
-            <fExpression>[4,5,3,8]</fExpression>
-            <fStateTrans/>
-            <expression>0.0</expression>
-            <isGlobal>false</isGlobal>
-            <isIn>true</isIn>
-            <stateInit/>
-            <isVectorOut>false</isVectorOut>
-            <fontcol>0,0,255</fontcol>
-            <stateTrans/>
-            <backcol>255,255,255</backcol>
-            <customprops>Name=trip_data</customprops>
             <valueType>0</valueType>
         </node>
         <node name="emission_target_reached" type="ValueNode" pos-x="700" pos-y="310" width="75" height="45">
@@ -250,6 +212,26 @@
             <customprops>Name=fuel_mix</customprops>
             <valueType>0</valueType>
         </node>
+        <node name="kg_CO2e" type="ValueNode" pos-x="450" pos-y="210" width="191" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>Fleet.kg_CO2e</fExpression>
+            <fStateTrans/>
+            <expression>Fleet.kg_CO2e</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=tons_of_CO2_per_flight</customprops>
+            <valueType>0</valueType>
+        </node>
         <node name="n_tickets_array" type="ValueNode" pos-x="850" pos-y="110" width="121" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
@@ -269,9 +251,30 @@
             <customprops>Name=voli</customprops>
             <valueType>0</valueType>
         </node>
+        <node name="one_way_flight_duration" type="ValueNode" pos-x="420" pos-y="30" width="101" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>an array containg the lenght in hours of the flights covered by the company</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>[4,5,3,8]</fExpression>
+            <fStateTrans/>
+            <expression>0.0</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=trip_data</customprops>
+            <valueType>0</valueType>
+        </node>
         <node name="operating_costs" type="ValueNode" pos-x="650" pos-y="170" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
+            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -279,7 +282,7 @@
             <fStateTrans/>
             <expression/>
             <isGlobal>false</isGlobal>
-            <isIn>true</isIn>
+            <isIn>false</isIn>
             <stateInit/>
             <isVectorOut>false</isVectorOut>
             <fontcol>0,0,255</fontcol>
@@ -347,84 +350,40 @@
         </node>
     </nodes>
     <texts>
-        <text name="*text1" pos-x="30" pos-y="20" width="81" height="91" content="&lt;html&gt;
-  &lt;head&gt;
-    
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;p align=&quot;center&quot; style=&quot;margin-top: 0&quot;&gt;
-      &lt;small&gt;&lt;big&gt;&lt;font size=&quot;4&quot;&gt;A320&lt;/font&gt;&lt;/big&gt;&lt;/small&gt;&lt;font size=&quot;4&quot;&gt;&lt;br&gt;&lt;small&gt;&lt;big&gt;MXP&lt;/big&gt;&lt;/small&gt;&lt;br&gt;&lt;small&gt;&lt;big&gt;LHR&lt;/big&gt;&lt;/small&gt;&lt;br&gt;5 
-      &lt;small&gt;&lt;big&gt;Round Trips/day&lt;/big&gt;&lt;/small&gt;&lt;/font&gt;
-    &lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-"/>
-        <text name="*text2" pos-x="110" pos-y="20" width="81" height="91" content="&lt;html&gt;
-  &lt;head&gt;
-    
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;p align=&quot;center&quot; style=&quot;margin-top: 0&quot;&gt;
-      &lt;small&gt;&lt;big&gt;&lt;font size=&quot;4&quot;&gt;A319&lt;/font&gt;&lt;/big&gt;&lt;/small&gt;&lt;font size=&quot;4&quot;&gt;&lt;br&gt;&lt;small&gt;&lt;big&gt;MXP&lt;/big&gt;&lt;/small&gt;&lt;br&gt;CDG&lt;br&gt;5 
-      &lt;small&gt;&lt;big&gt;Round Trip&lt;/big&gt;&lt;/small&gt;s/day&lt;/font&gt;
-    &lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-"/>
-        <text name="*text3" pos-x="210" pos-y="20" width="81" height="91" content="&lt;html&gt;
-  &lt;head&gt;
-    
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;p align=&quot;center&quot; style=&quot;margin-top: 0&quot;&gt;
-      &lt;small&gt;&lt;big&gt;&lt;font size=&quot;4&quot;&gt;Boeing 737&lt;/font&gt;&lt;/big&gt;&lt;/small&gt;&lt;font size=&quot;4&quot;&gt;&lt;br&gt;&lt;small&gt;&lt;big&gt;MXP&lt;/big&gt;&lt;/small&gt;&lt;br&gt;FRA&lt;br&gt;5 
-      &lt;small&gt;&lt;big&gt;Round Trips/day&lt;/big&gt;&lt;/small&gt;&lt;/font&gt;
-    &lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-"/>
-        <text name="*text4" pos-x="300" pos-y="20" width="81" height="91" content="&lt;html&gt;
-  &lt;head&gt;
-    
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;p align=&quot;center&quot; style=&quot;margin-top: 0&quot;&gt;
-      &lt;small&gt;&lt;big&gt;&lt;font size=&quot;4&quot;&gt;A321 Neo&lt;/font&gt;&lt;/big&gt;&lt;/small&gt;&lt;font size=&quot;4&quot;&gt;&lt;br&gt;CDG&lt;br&gt;FRA&lt;br&gt;5 
-      &lt;small&gt;&lt;big&gt;Round Trips/day&lt;/big&gt;&lt;/small&gt;&lt;/font&gt;
-    &lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-"/>
+        <text name="*text1" pos-x="30" pos-y="20" width="81" height="91" content="&lt;html&gt;   &lt;head&gt;        &lt;/head&gt;   &lt;body&gt;     &lt;p align=&quot;center&quot; style=&quot;margin-top: 0&quot;&gt;       &lt;small&gt;&lt;big&gt;&lt;font size=&quot;4&quot;&gt;A320&lt;/font&gt;&lt;/big&gt;&lt;/small&gt;&lt;font size=&quot;4&quot;&gt;&lt;br&gt;&lt;small&gt;&lt;big&gt;MXP&lt;/big&gt;&lt;/small&gt;&lt;br&gt;&lt;small&gt;&lt;big&gt;LHR&lt;/big&gt;&lt;/small&gt;&lt;br&gt;5        &lt;small&gt;&lt;big&gt;Round Trips/day&lt;/big&gt;&lt;/small&gt;&lt;/font&gt;     &lt;/p&gt;   &lt;/body&gt; &lt;/html&gt; "/>
+        <text name="*text2" pos-x="110" pos-y="20" width="81" height="91" content="&lt;html&gt;   &lt;head&gt;        &lt;/head&gt;   &lt;body&gt;     &lt;p align=&quot;center&quot; style=&quot;margin-top: 0&quot;&gt;       &lt;small&gt;&lt;big&gt;&lt;font size=&quot;4&quot;&gt;A319&lt;/font&gt;&lt;/big&gt;&lt;/small&gt;&lt;font size=&quot;4&quot;&gt;&lt;br&gt;&lt;small&gt;&lt;big&gt;MXP&lt;/big&gt;&lt;/small&gt;&lt;br&gt;CDG&lt;br&gt;5        &lt;small&gt;&lt;big&gt;Round Trip&lt;/big&gt;&lt;/small&gt;s/day&lt;/font&gt;     &lt;/p&gt;   &lt;/body&gt; &lt;/html&gt; "/>
+        <text name="*text3" pos-x="210" pos-y="20" width="81" height="91" content="&lt;html&gt;   &lt;head&gt;        &lt;/head&gt;   &lt;body&gt;     &lt;p align=&quot;center&quot; style=&quot;margin-top: 0&quot;&gt;       &lt;small&gt;&lt;big&gt;&lt;font size=&quot;4&quot;&gt;Boeing 737&lt;/font&gt;&lt;/big&gt;&lt;/small&gt;&lt;font size=&quot;4&quot;&gt;&lt;br&gt;&lt;small&gt;&lt;big&gt;MXP&lt;/big&gt;&lt;/small&gt;&lt;br&gt;FRA&lt;br&gt;5        &lt;small&gt;&lt;big&gt;Round Trips/day&lt;/big&gt;&lt;/small&gt;&lt;/font&gt;     &lt;/p&gt;   &lt;/body&gt; &lt;/html&gt; "/>
+        <text name="*text4" pos-x="300" pos-y="20" width="81" height="91" content="&lt;html&gt;   &lt;head&gt;        &lt;/head&gt;   &lt;body&gt;     &lt;p align=&quot;center&quot; style=&quot;margin-top: 0&quot;&gt;       &lt;small&gt;&lt;big&gt;&lt;font size=&quot;4&quot;&gt;A321 Neo&lt;/font&gt;&lt;/big&gt;&lt;/small&gt;&lt;font size=&quot;4&quot;&gt;&lt;br&gt;CDG&lt;br&gt;FRA&lt;br&gt;5        &lt;small&gt;&lt;big&gt;Round Trips/day&lt;/big&gt;&lt;/small&gt;&lt;/font&gt;     &lt;/p&gt;   &lt;/body&gt; &lt;/html&gt; "/>
     </texts>
     <edges>
-        <edge source="emission_target_reached" target="emissions_target_not_reached" label="(...)"/>
-        <edge source="Y_Tot_nCO2e" target="emission_target_reached" label="(...)"/>
-        <edge source="Target_emissioni" target="emission_target_reached" label="(...)"/>
-        <edge source="Target_emissioni" target="emissions_target_not_reached" label="(...)"/>
-        <edge source="daily_flytime" target="Fleet" label="(...)" p0x="427.5" p0y="132.5" p1x="547.5" p1y="132.5" numpoints="2"/>
-        <edge source="Management" target="profit_margin" label="(...)" p0x="915.5" p0y="412.5" p1x="917.5" p1y="592.5" numpoints="2"/>
-        <edge source="Management" target="spesa_crediti_CO2_acquistati" label="(...)" p0x="915.5" p0y="412.5" p1x="550.5" p1y="472.5" numpoints="2"/>
-        <edge source="TicketEmissions_array" target="Passengers" label="(...)" p0x="987.5" p0y="322.5" p1x="910.5" p1y="222.5" numpoints="2"/>
-        <edge source="Management" target="TicketEmissions_array" label="(...)" p0x="915.5" p0y="412.5" p1x="987.5" p1y="322.5" numpoints="2"/>
-        <edge source="CO2e_per_flight" target="Y_Tot_nCO2e" label="(...)" p0x="552.5" p0y="222.5" p1x="550.5" p1y="352.5" numpoints="2"/>
-        <edge source="spesa_crediti_CO2_acquistati" target="Y_Tot_nCO2e" label="(...)" p0x="550.5" p0y="472.5" p1x="550.5" p1y="352.5" numpoints="2"/>
-        <edge source="Y_Tot_nCO2e" target="Passengers" label="(...)" p0x="550.5" p0y="352.5" p1x="910.5" p1y="222.5" numpoints="2"/>
-        <edge source="Passengers" target="n_tickets_array" label="(...)" p0x="910.5" p0y="222.5" p1x="910.5" p1y="132.5" numpoints="2"/>
-        <edge source="TP_t" target="Passengers" label="(...)" p0x="827.5" p0y="322.5" p1x="910.5" p1y="222.5" numpoints="2"/>
-        <edge source="n_tickets_array" target="Fleet" label="(...)" p0x="910.5" p0y="132.5" p1x="547.5" p1y="132.5" numpoints="2"/>
-        <edge source="aircraft_consumption_data" target="Fleet" label="(...)" p0x="552.5" p0y="52.5" p1x="547.5" p1y="132.5" numpoints="2"/>
-        <edge source="n_tickets_array" target="Management" label="(...)"/>
-        <edge source="Management" target="TP_t" label="(...)" p0x="915.5" p0y="412.5" p1x="827.5" p1y="322.5" numpoints="2"/>
-        <edge source="Target_emissioni" target="Management" label="(...)" p0x="1140.5" p0y="582.5" p1x="915.5" p1y="412.5" numpoints="2"/>
-        <edge source="Y_Tot_nCO2e" target="Management" label="(...)" p0x="550.5" p0y="352.5" p1x="915.5" p1y="412.5" numpoints="2"/>
-        <edge source="Fleet" target="CO2e_per_flight" label="(...)" p0x="547.5" p0y="132.5" p1x="552.5" p1y="222.5" numpoints="2"/>
-        <edge source="CO2_Market" target="CO2_price" label="(...)" p0x="545.5" p0y="582.5" p1x="727.5" p1y="582.5" numpoints="2"/>
-        <edge source="CO2_price" target="Management" label="(...)" p0x="727.5" p0y="582.5" p1x="915.5" p1y="412.5" numpoints="2"/>
-        <edge source="spesa_crediti_CO2_acquistati" target="CO2_Market" label="(...)" p0x="550.5" p0y="472.5" p1x="545.5" p1y="582.5" numpoints="2"/>
-        <edge source="profit_margin_target" target="Management" label="(...)" p0x="1145.5" p0y="412.5" p1x="915.5" p1y="412.5" numpoints="2"/>
-        <edge source="Fleet" target="operating_costs" label="(...)"/>
-        <edge source="operating_costs" target="Management" label="(...)"/>
         <edge source="Management" target="fuel_mix" label="(...)"/>
+        <edge source="operating_costs" target="Management" label="(...)"/>
+        <edge source="Fleet" target="operating_costs" label="(...)"/>
+        <edge source="profit_margin_target" target="Management" label="(...)" p0x="1145.5" p0y="412.5" p1x="915.5" p1y="412.5" numpoints="2"/>
+        <edge source="spesa_crediti_CO2_acquistati" target="CO2_Market" label="(...)" p0x="550.5" p0y="472.5" p1x="545.5" p1y="582.5" numpoints="2"/>
+        <edge source="CO2_price" target="Management" label="(...)" p0x="727.5" p0y="582.5" p1x="915.5" p1y="412.5" numpoints="2"/>
+        <edge source="CO2_Market" target="CO2_price" label="(...)" p0x="545.5" p0y="582.5" p1x="727.5" p1y="582.5" numpoints="2"/>
+        <edge source="Fleet" target="kg_CO2e" label="(...)" p0x="547.5" p0y="132.5" p1x="552.5" p1y="222.5" numpoints="2"/>
+        <edge source="Y_Tot_nCO2e" target="Management" label="(...)" p0x="550.5" p0y="352.5" p1x="915.5" p1y="412.5" numpoints="2"/>
+        <edge source="Target_emissioni" target="Management" label="(...)" p0x="1140.5" p0y="582.5" p1x="915.5" p1y="412.5" numpoints="2"/>
+        <edge source="Management" target="TP_t" label="(...)" p0x="915.5" p0y="412.5" p1x="827.5" p1y="322.5" numpoints="2"/>
+        <edge source="n_tickets_array" target="Management" label="(...)"/>
+        <edge source="aircraft_hourly_fuel_consumption" target="Fleet" label="(...)" p0x="552.5" p0y="52.5" p1x="547.5" p1y="132.5" numpoints="2"/>
+        <edge source="n_tickets_array" target="Fleet" label="(...)" p0x="910.5" p0y="132.5" p1x="547.5" p1y="132.5" numpoints="2"/>
+        <edge source="TP_t" target="Passengers" label="(...)" p0x="827.5" p0y="322.5" p1x="910.5" p1y="222.5" numpoints="2"/>
+        <edge source="Passengers" target="n_tickets_array" label="(...)" p0x="910.5" p0y="222.5" p1x="910.5" p1y="132.5" numpoints="2"/>
+        <edge source="Y_Tot_nCO2e" target="Passengers" label="(...)" p0x="550.5" p0y="352.5" p1x="910.5" p1y="222.5" numpoints="2"/>
+        <edge source="spesa_crediti_CO2_acquistati" target="Y_Tot_nCO2e" label="(...)" p0x="550.5" p0y="472.5" p1x="550.5" p1y="352.5" numpoints="2"/>
+        <edge source="kg_CO2e" target="Y_Tot_nCO2e" label="(...)" p0x="552.5" p0y="222.5" p1x="550.5" p1y="352.5" numpoints="2"/>
+        <edge source="Management" target="TicketEmissions_array" label="(...)" p0x="915.5" p0y="412.5" p1x="987.5" p1y="322.5" numpoints="2"/>
+        <edge source="TicketEmissions_array" target="Passengers" label="(...)" p0x="987.5" p0y="322.5" p1x="910.5" p1y="222.5" numpoints="2"/>
+        <edge source="Management" target="spesa_crediti_CO2_acquistati" label="(...)" p0x="915.5" p0y="412.5" p1x="550.5" p1y="472.5" numpoints="2"/>
+        <edge source="Management" target="profit_margin" label="(...)" p0x="915.5" p0y="412.5" p1x="917.5" p1y="592.5" numpoints="2"/>
+        <edge source="one_way_flight_duration" target="Fleet" label="(...)" p0x="427.5" p0y="132.5" p1x="547.5" p1y="132.5" numpoints="2"/>
+        <edge source="Target_emissioni" target="emissions_target_not_reached" label="(...)"/>
+        <edge source="Target_emissioni" target="emission_target_reached" label="(...)"/>
+        <edge source="Y_Tot_nCO2e" target="emission_target_reached" label="(...)"/>
+        <edge source="emission_target_reached" target="emissions_target_not_reached" label="(...)"/>
     </edges>
     <widgets>
         <widget type="SliderWidget" pos-x="20" pos-y="460" width="360" height="100">
@@ -440,27 +399,27 @@
         </widget>
         <widget type="InputTableWidget" pos-x="20" pos-y="110" width="360" height="60">
             <fontsize>20</fontsize>
-            <widgetvalue>[[0.0,0.0,0.0,0.0]]</widgetvalue>
+            <widgetvalue>[[2900.02,2600.0,2750.0,2400.0]]</widgetvalue>
             <showtitlebar>true</showtitlebar>
-            <source>aircraft_consumption_data</source>
+            <source>aircraft_hourly_fuel_consumption</source>
             <iconized>false</iconized>
             <rows>1</rows>
             <colalignment>1</colalignment>
-            <colformat>###0.0###</colformat>
+            <colformat>###0</colformat>
             <cols>4</cols>
-            <title>aircraft_consumption_data</title>
+            <title>aircraft_hourly_fuel_consumption</title>
         </widget>
         <widget type="InputTableWidget" pos-x="20" pos-y="170" width="360" height="60">
             <fontsize>20</fontsize>
-            <widgetvalue>[[0.0,0.0,0.0,0.0]]</widgetvalue>
+            <widgetvalue>[[1.75,1.4,1.25,1.15]]</widgetvalue>
             <showtitlebar>true</showtitlebar>
-            <source>daily_flytime</source>
+            <source>one_way_flight_duration</source>
             <iconized>false</iconized>
             <rows>1</rows>
             <colalignment>1</colalignment>
             <colformat>###0.0###</colformat>
             <cols>4</cols>
-            <title>daily_flytime</title>
+            <title>one_way_flight_duration</title>
         </widget>
         <widget type="SliderWidget" pos-x="20" pos-y="230" width="360" height="100">
             <0>0</0>
