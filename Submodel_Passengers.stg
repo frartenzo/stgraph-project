@@ -118,9 +118,9 @@ High in a market where nobody cares, low or zero in a Green Market.</documentati
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>[10,9999,30,120]</fExpression>
+            <fExpression>[10,9,30,10]</fExpression>
             <fStateTrans/>
-            <expression>[10,9999,30,120]</expression>
+            <expression>[10,9,30,10]</expression>
             <isGlobal>false</isGlobal>
             <isIn>true</isIn>
             <stateInit/>
@@ -275,9 +275,9 @@ Usually an input from the supermodel</documentation>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>[300,300,300,999999]</fExpression>
+            <fExpression>[300,300,300,99]</fExpression>
             <fStateTrans/>
-            <expression>[300,300,300,999999]</expression>
+            <expression>[300,300,300,99]</expression>
             <isGlobal>false</isGlobal>
             <isIn>true</isIn>
             <stateInit/>
@@ -392,6 +392,46 @@ Given people looking for this date and average booking probability for this date
             <customprops>Name=Ticket Utility combined</customprops>
             <valueType>0</valueType>
         </node>
+        <node name="avail_seats" type="ValueNode" pos-x="1090" pos-y="30" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>[1000,1000,1000,1000]</fExpression>
+            <fStateTrans/>
+            <expression>[1000,1000,1000,1000]</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=avail_seats</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="avg_occupancy_rate" type="ValueNode" pos-x="1290" pos-y="150" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>true</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>occupancy_rate_cumulator/index</fExpression>
+            <fStateTrans/>
+            <expression>occupancy_rate_cumulator/index</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=avg_occupancy_rate</customprops>
+            <valueType>0</valueType>
+        </node>
         <node name="bB" type="ValueNode" pos-x="340" pos-y="40" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
@@ -494,6 +534,146 @@ For example, a market average over the entire year.</documentation>
             <customprops>Name=MXP_LHR</customprops>
             <valueType>0</valueType>
         </node>
+        <node name="n_outbound_tickets_sold" type="ValueNode" pos-x="1090" pos-y="210" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>min(outbound_demand,(avail_seats/2))</fExpression>
+            <fStateTrans/>
+            <expression>min(outbound_demand,(avail_seats/2))</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=n_outbound_tickets_sold</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="n_return_tickets_sold" type="ValueNode" pos-x="1000" pos-y="120" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>min(return_demand,(avail_seats/2))</fExpression>
+            <fStateTrans/>
+            <expression>min(return_demand,(avail_seats/2))</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=n_outbound_tickets_sold</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="occupancy_rate_cumulator" type="ValueNode" pos-x="1280" pos-y="30" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit>0</fStateInit>
+            <format>0.0##</format>
+            <fExpression/>
+            <fStateTrans>this+occupancy_rates</fStateTrans>
+            <expression/>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit>0</stateInit>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans>this+occupancy_rates</stateTrans>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=average_occupancy_rate</customprops>
+            <valueType>1</valueType>
+        </node>
+        <node name="occupancy_rates" type="ValueNode" pos-x="1210" pos-y="100" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>tickets_sold/avail_seats</fExpression>
+            <fStateTrans/>
+            <expression>tickets_sold/avail_seats</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=occupancy_rates</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="outbound_demand" type="ValueNode" pos-x="1020" pos-y="300" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>TD_t*outbound_return_demand_ratio</fExpression>
+            <fStateTrans/>
+            <expression>TD_t*outbound_return_demand_ratio</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=outbound_demand</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="outbound_return_demand_ratio" type="ValueNode" pos-x="870" pos-y="300" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>rand(0.4,0.6)</fExpression>
+            <fStateTrans/>
+            <expression>rand(0.4,0.6)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=outbound_return_ratio</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="return_demand" type="ValueNode" pos-x="960" pos-y="190" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>TD_t*(1-outbound_return_demand_ratio)</fExpression>
+            <fStateTrans/>
+            <expression>TD_t*(1-outbound_return_demand_ratio)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=return_demand</customprops>
+            <valueType>0</valueType>
+        </node>
         <node name="s" type="ValueNode" pos-x="760" pos-y="310" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
@@ -514,6 +694,26 @@ The steepness of the curve around the point where the utility curve changes betw
             <stateTrans/>
             <backcol>255,255,255</backcol>
             <customprops>Name=Steepness</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="tickets_sold" type="ValueNode" pos-x="1210" pos-y="230" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>n_outbound_tickets_sold+n_return_tickets_sold</fExpression>
+            <fStateTrans/>
+            <expression>n_outbound_tickets_sold+n_return_tickets_sold</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=tickets_sold</customprops>
             <valueType>0</valueType>
         </node>
         <node name="u0" type="ValueNode" pos-x="340" pos-y="310" width="75" height="45">
@@ -584,6 +784,9 @@ example: 1, -1</documentation>
     </nodes>
     <texts/>
     <edges>
+        <edge source="n_return_tickets_sold" target="tickets_sold" label="(...)"/>
+        <edge source="avail_seats" target="n_return_tickets_sold" label="(...)"/>
+        <edge source="return_demand" target="n_return_tickets_sold" label="(...)"/>
         <edge source="TD_t" target="MXP_CDG_1" label="(...)"/>
         <edge source="TD_t" target="MXP_FRA_2" label="(...)"/>
         <edge source="TD_t" target="MXP_LHR_0" label="(...)"/>
@@ -613,6 +816,17 @@ example: 1, -1</documentation>
         <edge source="uCO2e_t" target="impMXP_FRA_2_2" label="(...)"/>
         <edge source="uCO2e_t" target="impMXP_CDG_1_2" label="(...)"/>
         <edge source="uCO2e_t" target="impMXP_LHR_0_2" label="(...)"/>
+        <edge source="tickets_sold" target="occupancy_rates" label="(...)"/>
+        <edge source="avail_seats" target="occupancy_rates" label="(...)"/>
+        <edge source="TD_t" target="outbound_demand" label="(...)"/>
+        <edge source="TD_t" target="return_demand" label="(...)"/>
+        <edge source="outbound_return_demand_ratio" target="outbound_demand" label="(...)"/>
+        <edge source="outbound_return_demand_ratio" target="return_demand" label="(...)"/>
+        <edge source="outbound_demand" target="n_outbound_tickets_sold" label="(...)"/>
+        <edge source="avail_seats" target="n_outbound_tickets_sold" label="(...)"/>
+        <edge source="n_outbound_tickets_sold" target="tickets_sold" label="(...)"/>
+        <edge source="occupancy_rates" target="occupancy_rate_cumulator" label="(...)"/>
+        <edge source="occupancy_rate_cumulator" target="avg_occupancy_rate" label="(...)"/>
     </edges>
     <widgets>
         <widget type="ChartWidget" pos-x="950" pos-y="420" width="470" height="290">
@@ -661,7 +875,7 @@ example: 1, -1</documentation>
             <min>0.0</min>
             <iconized>false</iconized>
             <showtitlebar>true</showtitlebar>
-            <title>ABP_t: 0.22160050706825815</title>
+            <title>ABP_t: 0.22160050706817372</title>
         </widget>
         <widget type="ChartWidget" pos-x="610" pos-y="420" width="350" height="290">
             <title>Impact of CO2e on buyers decision</title>
@@ -699,7 +913,7 @@ example: 1, -1</documentation>
             <isometric>false</isometric>
             <dotslastonly>false,false,false,false</dotslastonly>
         </widget>
-        <widget type="DataTableWidget" pos-x="850" pos-y="310" width="150" height="80">
+        <widget type="DataTableWidget" pos-x="20" pos-y="190" width="150" height="80">
             <fontsize>10</fontsize>
             <colwidth>140</colwidth>
             <autowidth>true</autowidth>
@@ -707,9 +921,9 @@ example: 1, -1</documentation>
             <iconized>false</iconized>
             <colalignment>0</colalignment>
             <colformat>###0.0###</colformat>
-            <title>TD_t </title>
-            <lastonly>false</lastonly>
-            <sourcena>TD_t</sourcena>
+            <title>avg_occupancy_rate </title>
+            <lastonly>true</lastonly>
+            <sourcena>avg_occupancy_rate</sourcena>
         </widget>
     </widgets>
     <groups/>
