@@ -1,0 +1,206 @@
+<stgraph class="STGraph.decoder" version="STGraph build 22.12">
+    <head systemName="" description="" timeUnitDescription="" timeFrame="0" time0="0.0" time1="10.0" timeD="1.0" maxSteps="10" batchSteps="1" width="1440" height="876" scale="1.0" simulationDelay="100" stepsBeforePause="1" integrationMethod="0" exceptionHandling="1" withInterrupts="false" isDataSaved="false" forNet="false" serverAddress="" forWeb="false" webModelLanguages="" webModelDescription="" webTimeUnit="" webExplTitle="" webExplURL="" webModelGroups="" indexOrigin="0" isGraphVisible="true" areWidgetsVisible="true"/>
+    <nodes>
+        <node name="CO2e" type="ValueNode" pos-x="610" pos-y="230" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression/>
+            <fStateTrans/>
+            <expression/>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=CO2e</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="aircraft_consumption_data" type="ValueNode" pos-x="200" pos-y="230" width="291" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression/>
+            <fStateTrans/>
+            <expression/>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=aircraft_consumption_data</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="daily_flytime" type="ValueNode" pos-x="280" pos-y="150" width="131" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression/>
+            <fStateTrans/>
+            <expression/>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=trip_lenghts</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="ecofuel" type="ValueNode" pos-x="530" pos-y="80" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression/>
+            <fStateTrans/>
+            <expression/>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=ecofuel</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="fuel_consumption" type="ValueNode" pos-x="610" pos-y="140" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression/>
+            <fStateTrans/>
+            <expression/>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=operating_costs</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="fuel_cost" type="ValueNode" pos-x="750" pos-y="160" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression/>
+            <fStateTrans/>
+            <expression/>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=fuel_cost</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="fuel_mix" type="ValueNode" pos-x="610" pos-y="20" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression/>
+            <fStateTrans/>
+            <expression/>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=fuel_mix</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="kerosene" type="ValueNode" pos-x="720" pos-y="60" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression/>
+            <fStateTrans/>
+            <expression/>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=kerosene</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="n_tickets" type="ValueNode" pos-x="290" pos-y="310" width="131" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression/>
+            <fStateTrans/>
+            <expression/>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=n_tickets</customprops>
+            <valueType>0</valueType>
+        </node>
+    </nodes>
+    <texts/>
+    <edges>
+        <edge source="ecofuel" target="fuel_cost" label="(...)"/>
+        <edge source="kerosene" target="fuel_cost" label="(...)"/>
+        <edge source="aircraft_consumption_data" target="fuel_consumption" label="(...)"/>
+        <edge source="daily_flytime" target="CO2e" label="(...)"/>
+        <edge source="aircraft_consumption_data" target="CO2e" label="(...)"/>
+        <edge source="n_tickets" target="CO2e" label="(...)"/>
+        <edge source="daily_flytime" target="fuel_consumption" label="(...)"/>
+        <edge source="fuel_mix" target="ecofuel" label="(...)"/>
+        <edge source="fuel_mix" target="kerosene" label="(...)"/>
+        <edge source="daily_flytime" target="ecofuel" label="(...)"/>
+        <edge source="daily_flytime" target="kerosene" label="(...)"/>
+        <edge source="kerosene" target="fuel_consumption" label="(...)"/>
+        <edge source="ecofuel" target="fuel_consumption" label="(...)"/>
+        <edge source="ecofuel" target="CO2e" label="(...)"/>
+        <edge source="kerosene" target="CO2e" label="(...)"/>
+    </edges>
+    <widgets/>
+    <groups/>
+    <reports/>
+</stgraph>
