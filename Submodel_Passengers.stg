@@ -1,5 +1,5 @@
 <stgraph class="STGraph.decoder" version="STGraph build 22.12">
-    <head systemName="" description="" timeUnitDescription="" timeFrame="0" time0="1.0" time1="365.0" timeD="1.0" maxSteps="10" batchSteps="1" width="1440" height="876" scale="1.0" simulationDelay="1" stepsBeforePause="1" integrationMethod="0" exceptionHandling="1" withInterrupts="false" isDataSaved="false" forNet="false" serverAddress="" forWeb="false" webModelLanguages="" webModelDescription="" webTimeUnit="" webExplTitle="" webExplURL="" webModelGroups="" indexOrigin="0" isGraphVisible="true" areWidgetsVisible="true"/>
+    <head systemName="" description="" timeUnitDescription="" timeFrame="0" time0="1.0" time1="1095.0" timeD="1.0" maxSteps="10" batchSteps="1" width="1440" height="789" scale="1.0" simulationDelay="1" stepsBeforePause="1" integrationMethod="0" exceptionHandling="1" withInterrupts="false" isDataSaved="false" forNet="false" serverAddress="" forWeb="false" webModelLanguages="" webModelDescription="" webTimeUnit="" webExplTitle="" webExplURL="" webModelGroups="" indexOrigin="0" isGraphVisible="true" areWidgetsVisible="true"/>
     <nodes>
         <node name="ABP_t" type="ValueNode" pos-x="650" pos-y="310" width="75" height="45">
             <font>SansSerif,12</font>
@@ -94,7 +94,6 @@ High in a market where nobody cares, low or zero in a Green Market.</documentati
         <node name="CDG_FRA_3" type="ValueNode" pos-x="810" pos-y="50" width="101" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -114,7 +113,6 @@ High in a market where nobody cares, low or zero in a Green Market.</documentati
         <node name="CO2e" type="ValueNode" pos-x="340" pos-y="520" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -189,7 +187,6 @@ Average calculated on the year</documentation>
         <node name="MXP_CDG_1" type="ValueNode" pos-x="810" pos-y="170" width="101" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -209,7 +206,6 @@ Average calculated on the year</documentation>
         <node name="MXP_FRA_2" type="ValueNode" pos-x="810" pos-y="110" width="95" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -229,7 +225,6 @@ Average calculated on the year</documentation>
         <node name="MXP_LHR_0" type="ValueNode" pos-x="810" pos-y="230" width="101" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -249,7 +244,6 @@ Average calculated on the year</documentation>
         <node name="M_t" type="ValueNode" pos-x="50" pos-y="520" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>64,64,64</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -292,14 +286,14 @@ Usually an input from the supermodel</documentation>
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>false</isOut>
-            <fStateInit>1</fStateInit>
+            <fStateInit>0.01</fStateInit>
             <format>0.0##</format>
             <fExpression>1</fExpression>
             <fStateTrans>this+this*M_t</fStateTrans>
             <expression>1</expression>
             <isGlobal>false</isGlobal>
             <isIn>false</isIn>
-            <stateInit>1</stateInit>
+            <stateInit>0.01</stateInit>
             <isVectorOut>false</isVectorOut>
             <fontcol>0,0,255</fontcol>
             <stateTrans>this+this*M_t</stateTrans>
@@ -392,10 +386,9 @@ Given people looking for this date and average booking probability for this date
             <customprops>Name=Ticket Utility combined</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="avail_seats" type="ValueNode" pos-x="1090" pos-y="30" width="75" height="45">
+        <node name="avail_seats" type="ValueNode" pos-x="1060" pos-y="230" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -415,7 +408,6 @@ Given people looking for this date and average booking probability for this date
         <node name="avg_occupancy_rate" type="ValueNode" pos-x="1290" pos-y="150" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -457,7 +449,6 @@ For example, a market average over the entire year.</documentation>
         <node name="impCDG_FRA_3_2" type="ValueNode" pos-x="480" pos-y="440" width="101" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -477,7 +468,6 @@ For example, a market average over the entire year.</documentation>
         <node name="impMXP_CDG_1_2" type="ValueNode" pos-x="480" pos-y="560" width="101" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -497,7 +487,6 @@ For example, a market average over the entire year.</documentation>
         <node name="impMXP_FRA_2_2" type="ValueNode" pos-x="480" pos-y="500" width="95" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -517,7 +506,6 @@ For example, a market average over the entire year.</documentation>
         <node name="impMXP_LHR_0_2" type="ValueNode" pos-x="480" pos-y="620" width="101" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -534,10 +522,9 @@ For example, a market average over the entire year.</documentation>
             <customprops>Name=MXP_LHR</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="n_outbound_tickets_sold" type="ValueNode" pos-x="1090" pos-y="210" width="75" height="45">
+        <node name="n_outbound_tickets_sold" type="ValueNode" pos-x="1110" pos-y="320" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -554,10 +541,9 @@ For example, a market average over the entire year.</documentation>
             <customprops>Name=n_outbound_tickets_sold</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="n_return_tickets_sold" type="ValueNode" pos-x="1000" pos-y="120" width="75" height="45">
+        <node name="n_return_tickets_sold" type="ValueNode" pos-x="1050" pos-y="120" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -577,7 +563,6 @@ For example, a market average over the entire year.</documentation>
         <node name="occupancy_rate_cumulator" type="ValueNode" pos-x="1280" pos-y="30" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit>0</fStateInit>
             <format>0.0##</format>
@@ -594,10 +579,9 @@ For example, a market average over the entire year.</documentation>
             <customprops>Name=average_occupancy_rate</customprops>
             <valueType>1</valueType>
         </node>
-        <node name="occupancy_rates" type="ValueNode" pos-x="1210" pos-y="100" width="75" height="45">
+        <node name="occupancy_rates" type="ValueNode" pos-x="1180" pos-y="20" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -614,10 +598,9 @@ For example, a market average over the entire year.</documentation>
             <customprops>Name=occupancy_rates</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="outbound_demand" type="ValueNode" pos-x="1020" pos-y="300" width="75" height="45">
+        <node name="outbound_demand" type="ValueNode" pos-x="940" pos-y="330" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -634,10 +617,9 @@ For example, a market average over the entire year.</documentation>
             <customprops>Name=outbound_demand</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="outbound_return_demand_ratio" type="ValueNode" pos-x="870" pos-y="300" width="75" height="45">
+        <node name="outbound_return_demand_ratio" type="ValueNode" pos-x="950" pos-y="250" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -654,10 +636,9 @@ For example, a market average over the entire year.</documentation>
             <customprops>Name=outbound_return_ratio</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="return_demand" type="ValueNode" pos-x="960" pos-y="190" width="75" height="45">
+        <node name="return_demand" type="ValueNode" pos-x="950" pos-y="170" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -696,11 +677,10 @@ The steepness of the curve around the point where the utility curve changes betw
             <customprops>Name=Steepness</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="tickets_sold" type="ValueNode" pos-x="1210" pos-y="230" width="75" height="45">
+        <node name="tickets_sold" type="ValueNode" pos-x="1200" pos-y="220" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
-            <isOut>false</isOut>
+            <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
             <fExpression>n_outbound_tickets_sold+n_return_tickets_sold</fExpression>
@@ -784,53 +764,53 @@ example: 1, -1</documentation>
     </nodes>
     <texts/>
     <edges>
-        <edge source="occupancy_rate_cumulator" target="avg_occupancy_rate" label="(...)"/>
-        <edge source="occupancy_rates" target="occupancy_rate_cumulator" label="(...)"/>
-        <edge source="n_outbound_tickets_sold" target="tickets_sold" label="(...)"/>
-        <edge source="avail_seats" target="n_outbound_tickets_sold" label="(...)"/>
-        <edge source="outbound_demand" target="n_outbound_tickets_sold" label="(...)"/>
-        <edge source="outbound_return_demand_ratio" target="return_demand" label="(...)"/>
-        <edge source="outbound_return_demand_ratio" target="outbound_demand" label="(...)"/>
-        <edge source="TD_t" target="return_demand" label="(...)"/>
-        <edge source="TD_t" target="outbound_demand" label="(...)"/>
-        <edge source="avail_seats" target="occupancy_rates" label="(...)"/>
-        <edge source="tickets_sold" target="occupancy_rates" label="(...)"/>
-        <edge source="uCO2e_t" target="impMXP_LHR_0_2" label="(...)"/>
-        <edge source="uCO2e_t" target="impMXP_CDG_1_2" label="(...)"/>
-        <edge source="uCO2e_t" target="impMXP_FRA_2_2" label="(...)"/>
-        <edge source="uCO2e_t" target="impCDG_FRA_3_2" label="(...)"/>
-        <edge source="bB" target="B_t" label="(...)" p0x="377.5" p0y="62.5" p1x="377.5" p1y="152.5" numpoints="2"/>
-        <edge source="SL_t" target="MS_t" label="(...)" p0x="507.5" p0y="152.5" p1x="687.5" p1y="152.5" numpoints="2"/>
-        <edge source="SL_t" target="B_t" label="(...)" p0x="507.5" p0y="152.5" p1x="377.5" p1y="152.5" numpoints="2"/>
-        <edge source="MS_t" target="TD_t" label="(...)" p0x="687.5" p0y="152.5" p1x="867.5" p1y="332.5" numpoints="2"/>
-        <edge source="ABP_t" target="TD_t" label="(...)" p0x="687.5" p0y="332.5" p1x="867.5" p1y="332.5" numpoints="2"/>
-        <edge source="B_CO2e_0" target="B_CO2e_t" label="(...)" p0x="87.5" p0y="432.5" p1x="247.5" p1y="435.5" numpoints="2"/>
-        <edge source="M_t" target="B_CO2e_t" label="(...)" p0x="87.5" p0y="542.5" p1x="247.5" p1y="435.5" numpoints="2"/>
-        <edge source="M_t" target="R_CO2" label="(...)" p0x="87.5" p0y="542.5" p1x="247.5" p1y="542.5" numpoints="2"/>
-        <edge source="s" target="ABP_t" label="(...)" p0x="687.5" p0y="412.5" p1x="687.5" p1y="332.5" numpoints="2"/>
-        <edge source="U_t" target="ABP_t" label="(...)" p0x="517.5" p0y="332.5" p1x="687.5" p1y="332.5" numpoints="2"/>
-        <edge source="uP_t" target="U_t" label="(...)" p0x="377.5" p0y="242.5" p1x="517.5" p1y="332.5" numpoints="2"/>
-        <edge source="uCO2e_t" target="U_t" label="(...)" p0x="377.5" p0y="432.5" p1x="517.5" p1y="332.5" numpoints="2"/>
-        <edge source="u0" target="U_t" label="(...)" p0x="377.5" p0y="332.5" p1x="517.5" p1y="332.5" numpoints="2"/>
-        <edge source="R_P" target="uP_t" label="(...)" p0x="247.5" p0y="242.5" p1x="377.5" p1y="242.5" numpoints="2"/>
-        <edge source="B_t" target="uP_t" label="(...)" p0x="377.5" p0y="152.5" p1x="377.5" p1y="242.5" numpoints="2"/>
-        <edge source="P_t" target="uP_t" label="(...)" p0x="247.5" p0y="152.5" p1x="377.5" p1y="242.5" numpoints="2"/>
-        <edge source="CO2e" target="uCO2e_t" label="(...)" p0x="377.5" p0y="542.5" p1x="377.5" p1y="432.5" numpoints="2"/>
-        <edge source="B_CO2e_t" target="uCO2e_t" label="(...)" p0x="247.5" p0y="435.5" p1x="377.5" p1y="432.5" numpoints="2"/>
-        <edge source="R_CO2" target="uCO2e_t" label="(...)" p0x="247.5" p0y="542.5" p1x="377.5" p1y="432.5" numpoints="2"/>
-        <edge source="MS" target="MS_t" label="(...)" p0x="687.5" p0y="62.5" p1x="687.5" p1y="152.5" numpoints="2"/>
-        <edge source="Hist_d" target="SL_t" label="(...)" p0x="507.5" p0y="62.5" p1x="507.5" p1y="152.5" numpoints="2"/>
-        <edge source="TD_t" target="CDG_FRA_3" label="(...)"/>
-        <edge source="TD_t" target="MXP_LHR_0" label="(...)"/>
-        <edge source="TD_t" target="MXP_FRA_2" label="(...)"/>
-        <edge source="TD_t" target="MXP_CDG_1" label="(...)"/>
-        <edge source="return_demand" target="n_return_tickets_sold" label="(...)"/>
-        <edge source="avail_seats" target="n_return_tickets_sold" label="(...)"/>
         <edge source="n_return_tickets_sold" target="tickets_sold" label="(...)"/>
+        <edge source="avail_seats" target="n_return_tickets_sold" label="(...)"/>
+        <edge source="return_demand" target="n_return_tickets_sold" label="(...)"/>
+        <edge source="TD_t" target="MXP_CDG_1" label="(...)"/>
+        <edge source="TD_t" target="MXP_FRA_2" label="(...)"/>
+        <edge source="TD_t" target="MXP_LHR_0" label="(...)"/>
+        <edge source="TD_t" target="CDG_FRA_3" label="(...)"/>
+        <edge source="Hist_d" target="SL_t" label="(...)" p0x="507.5" p0y="62.5" p1x="507.5" p1y="152.5" numpoints="2"/>
+        <edge source="MS" target="MS_t" label="(...)" p0x="687.5" p0y="62.5" p1x="687.5" p1y="152.5" numpoints="2"/>
+        <edge source="R_CO2" target="uCO2e_t" label="(...)" p0x="247.5" p0y="542.5" p1x="377.5" p1y="432.5" numpoints="2"/>
+        <edge source="B_CO2e_t" target="uCO2e_t" label="(...)" p0x="247.5" p0y="435.5" p1x="377.5" p1y="432.5" numpoints="2"/>
+        <edge source="CO2e" target="uCO2e_t" label="(...)" p0x="377.5" p0y="542.5" p1x="377.5" p1y="432.5" numpoints="2"/>
+        <edge source="P_t" target="uP_t" label="(...)" p0x="247.5" p0y="152.5" p1x="377.5" p1y="242.5" numpoints="2"/>
+        <edge source="B_t" target="uP_t" label="(...)" p0x="377.5" p0y="152.5" p1x="377.5" p1y="242.5" numpoints="2"/>
+        <edge source="R_P" target="uP_t" label="(...)" p0x="247.5" p0y="242.5" p1x="377.5" p1y="242.5" numpoints="2"/>
+        <edge source="u0" target="U_t" label="(...)" p0x="377.5" p0y="332.5" p1x="517.5" p1y="332.5" numpoints="2"/>
+        <edge source="uCO2e_t" target="U_t" label="(...)" p0x="377.5" p0y="432.5" p1x="517.5" p1y="332.5" numpoints="2"/>
+        <edge source="uP_t" target="U_t" label="(...)" p0x="377.5" p0y="242.5" p1x="517.5" p1y="332.5" numpoints="2"/>
+        <edge source="U_t" target="ABP_t" label="(...)" p0x="517.5" p0y="332.5" p1x="687.5" p1y="332.5" numpoints="2"/>
+        <edge source="s" target="ABP_t" label="(...)" p0x="687.5" p0y="412.5" p1x="687.5" p1y="332.5" numpoints="2"/>
+        <edge source="M_t" target="R_CO2" label="(...)" p0x="87.5" p0y="542.5" p1x="247.5" p1y="542.5" numpoints="2"/>
+        <edge source="M_t" target="B_CO2e_t" label="(...)" p0x="87.5" p0y="542.5" p1x="247.5" p1y="435.5" numpoints="2"/>
+        <edge source="B_CO2e_0" target="B_CO2e_t" label="(...)" p0x="87.5" p0y="432.5" p1x="247.5" p1y="435.5" numpoints="2"/>
+        <edge source="ABP_t" target="TD_t" label="(...)" p0x="687.5" p0y="332.5" p1x="867.5" p1y="332.5" numpoints="2"/>
+        <edge source="MS_t" target="TD_t" label="(...)" p0x="687.5" p0y="152.5" p1x="867.5" p1y="332.5" numpoints="2"/>
+        <edge source="SL_t" target="B_t" label="(...)" p0x="507.5" p0y="152.5" p1x="377.5" p1y="152.5" numpoints="2"/>
+        <edge source="SL_t" target="MS_t" label="(...)" p0x="507.5" p0y="152.5" p1x="687.5" p1y="152.5" numpoints="2"/>
+        <edge source="bB" target="B_t" label="(...)" p0x="377.5" p0y="62.5" p1x="377.5" p1y="152.5" numpoints="2"/>
+        <edge source="uCO2e_t" target="impCDG_FRA_3_2" label="(...)"/>
+        <edge source="uCO2e_t" target="impMXP_FRA_2_2" label="(...)"/>
+        <edge source="uCO2e_t" target="impMXP_CDG_1_2" label="(...)"/>
+        <edge source="uCO2e_t" target="impMXP_LHR_0_2" label="(...)"/>
+        <edge source="tickets_sold" target="occupancy_rates" label="(...)"/>
+        <edge source="avail_seats" target="occupancy_rates" label="(...)"/>
+        <edge source="TD_t" target="outbound_demand" label="(...)"/>
+        <edge source="TD_t" target="return_demand" label="(...)"/>
+        <edge source="outbound_return_demand_ratio" target="outbound_demand" label="(...)"/>
+        <edge source="outbound_return_demand_ratio" target="return_demand" label="(...)"/>
+        <edge source="outbound_demand" target="n_outbound_tickets_sold" label="(...)"/>
+        <edge source="avail_seats" target="n_outbound_tickets_sold" label="(...)"/>
+        <edge source="n_outbound_tickets_sold" target="tickets_sold" label="(...)"/>
+        <edge source="occupancy_rates" target="occupancy_rate_cumulator" label="(...)"/>
+        <edge source="occupancy_rate_cumulator" target="avg_occupancy_rate" label="(...)"/>
     </edges>
     <widgets>
         <widget type="ChartWidget" pos-x="950" pos-y="420" width="470" height="290">
-            <title>Demand of Tickets during the Year</title>
+            <title>Demand of Tickets during the Years</title>
             <dotscolors>__GREEN,__GREEN,__BLUE,__BLACK</dotscolors>
             <linewidths>#1,#1,#1,#1</linewidths>
             <showline>true,true,true,true</showline>
@@ -850,7 +830,7 @@ example: 1, -1</documentation>
             <typex>2</typex>
             <linestyles>__style1,__style1,__style1,__style1</linestyles>
             <maxy>20000.0</maxy>
-            <maxx>365.0</maxx>
+            <maxx>1095.0</maxx>
             <dotstype>dot,dot,dot,dot</dotstype>
             <dotsyscales>#1,#1,#1,#1</dotsyscales>
             <miny>0.0</miny>
@@ -875,7 +855,7 @@ example: 1, -1</documentation>
             <min>0.0</min>
             <iconized>false</iconized>
             <showtitlebar>true</showtitlebar>
-            <title>ABP_t: 0.22160050706825815</title>
+            <title>ABP_t: 0.19238861257878478</title>
         </widget>
         <widget type="ChartWidget" pos-x="610" pos-y="420" width="350" height="290">
             <title>Impact of CO2e on buyers decision</title>

@@ -1,7 +1,7 @@
 <stgraph class="STGraph.decoder" version="STGraph build 22.12">
-    <head systemName="" description="" timeUnitDescription="" timeFrame="0" time0="0.0" time1="365.0" timeD="1.0" maxSteps="10" batchSteps="1" width="1440" height="876" scale="1.0" simulationDelay="100" stepsBeforePause="1" integrationMethod="0" exceptionHandling="1" withInterrupts="false" isDataSaved="false" forNet="false" serverAddress="" forWeb="false" webModelLanguages="" webModelDescription="" webTimeUnit="" webExplTitle="" webExplURL="" webModelGroups="" indexOrigin="0" isGraphVisible="true" areWidgetsVisible="true"/>
+    <head systemName="Supermodel Carbon Neutral Airline" description="" timeUnitDescription="days" timeFrame="0" time0="0.0" time1="1095.0" timeD="1.0" maxSteps="10" batchSteps="1" width="1440" height="789" scale="1.0" simulationDelay="100" stepsBeforePause="1" integrationMethod="0" exceptionHandling="1" withInterrupts="true" isDataSaved="false" forNet="false" serverAddress="" forWeb="false" webModelLanguages="" webModelDescription="" webTimeUnit="" webExplTitle="" webExplURL="" webModelGroups="" indexOrigin="0" isGraphVisible="true" areWidgetsVisible="true"/>
     <nodes>
-        <node name="CO2_Market" type="ModelNode" pos-x="480" pos-y="560" width="131" height="45">
+        <node name="CO2_Market" type="ModelNode" pos-x="470" pos-y="560" width="131" height="45">
             <subvisible>false</subvisible>
             <format>0.0##</format>
             <fontcol>0,0,255</fontcol>
@@ -38,16 +38,17 @@
             <customprops>Name=Fleet</customprops>
             <backcol>255,255,255</backcol>
             <font>SansSerif,12</font>
-            <documentation/>
         </node>
         <node name="Management" type="ModelNode" pos-x="850" pos-y="390" width="131" height="45">
             <subvisible>false</subvisible>
             <format>0.0##</format>
             <fontcol>0,0,255</fontcol>
+            <systemName>Submodel_Management.stg</systemName>
             <forecol>0,0,0</forecol>
             <customprops>Name=Management</customprops>
             <backcol>255,255,255</backcol>
             <font>SansSerif,12</font>
+            <documentation/>
         </node>
         <node name="Passengers" type="ModelNode" pos-x="830" pos-y="200" width="161" height="45">
             <subvisible>true</subvisible>
@@ -69,7 +70,7 @@
             <fStateTrans/>
             <expression/>
             <isGlobal>false</isGlobal>
-            <isIn>true</isIn>
+            <isIn>false</isIn>
             <stateInit/>
             <isVectorOut>false</isVectorOut>
             <fontcol>0,0,255</fontcol>
@@ -78,9 +79,10 @@
             <customprops>Name=Ticket Price</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="Target_emissioni" type="ValueNode" pos-x="810" pos-y="300" width="71" height="45">
+        <node name="Target_emissions" type="ValueNode" pos-x="830" pos-y="300" width="71" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
+            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -107,7 +109,7 @@
             <fStateTrans/>
             <expression/>
             <isGlobal>false</isGlobal>
-            <isIn>true</isIn>
+            <isIn>false</isIn>
             <stateInit/>
             <isVectorOut>false</isVectorOut>
             <fontcol>0,0,255</fontcol>
@@ -155,6 +157,26 @@
             <customprops>Name=Aircraft Fuel Consumption Data</customprops>
             <valueType>0</valueType>
         </node>
+        <node name="daily_green_marketing_expense" type="ValueNode" pos-x="730" pos-y="460" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>0</fExpression>
+            <fStateTrans/>
+            <expression>0.0</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=daily_green_marketing_expense</customprops>
+            <valueType>0</valueType>
+        </node>
         <node name="emission_target_reached" type="ValueNode" pos-x="700" pos-y="310" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
@@ -193,29 +215,9 @@
             <customprops>Name=emissions_target_not_reached</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="fuel_mix" type="ValueNode" pos-x="670" pos-y="380" width="75" height="45">
-            <font>SansSerif,12</font>
-            <forecol>0,0,0</forecol>
-            <isOut>false</isOut>
-            <fStateInit/>
-            <format>0.0##</format>
-            <fExpression/>
-            <fStateTrans/>
-            <expression/>
-            <isGlobal>false</isGlobal>
-            <isIn>true</isIn>
-            <stateInit/>
-            <isVectorOut>false</isVectorOut>
-            <fontcol>0,0,255</fontcol>
-            <stateTrans/>
-            <backcol>255,255,255</backcol>
-            <customprops>Name=fuel_mix</customprops>
-            <valueType>0</valueType>
-        </node>
         <node name="kg_CO2e" type="ValueNode" pos-x="450" pos-y="210" width="191" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -274,7 +276,6 @@
         <node name="operating_costs" type="ValueNode" pos-x="650" pos-y="170" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -291,28 +292,10 @@
             <customprops>Name=operating_costs</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="profit_margin" type="ValueNode" pos-x="870" pos-y="550" width="75" height="45">
+        <node name="percentage_of_saf" type="ValueNode" pos-x="410" pos-y="110" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <isOut>false</isOut>
-            <fStateInit/>
-            <format>0.0##</format>
-            <fExpression/>
-            <fStateTrans/>
-            <expression/>
-            <isGlobal>false</isGlobal>
-            <isIn>true</isIn>
-            <stateInit/>
-            <isVectorOut>false</isVectorOut>
-            <fontcol>0,0,255</fontcol>
-            <stateTrans/>
-            <backcol>255,255,255</backcol>
-            <customprops>Name=profit</customprops>
-            <valueType>0</valueType>
-        </node>
-        <node name="profit_margin_target" type="ValueNode" pos-x="870" pos-y="650" width="211" height="45">
-            <font>SansSerif,12</font>
-            <forecol>0,0,0</forecol>
+            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -326,7 +309,27 @@
             <fontcol>0,0,255</fontcol>
             <stateTrans/>
             <backcol>255,255,255</backcol>
-            <customprops>Name=profit_margin_target</customprops>
+            <customprops>Name=fuel_mix</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="profit_margin" type="ValueNode" pos-x="810" pos-y="540" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression/>
+            <fStateTrans/>
+            <expression/>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=profit</customprops>
             <valueType>0</valueType>
         </node>
         <node name="spesa_crediti_CO2_acquistati" type="ValueNode" pos-x="420" pos-y="450" width="261" height="45">
@@ -339,13 +342,33 @@
             <fStateTrans/>
             <expression>min(max_CO2_expense_today,(max(prezzo_CO2*min(distanza_dal_target,Green_budget),0)))</expression>
             <isGlobal>false</isGlobal>
-            <isIn>true</isIn>
+            <isIn>false</isIn>
             <stateInit/>
             <isVectorOut>false</isVectorOut>
             <fontcol>0,0,255</fontcol>
             <stateTrans/>
             <backcol>255,255,255</backcol>
             <customprops>Name=costo_emissioni</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="target_quarterly_dividends" type="ValueNode" pos-x="880" pos-y="500" width="211" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>0</fExpression>
+            <fStateTrans/>
+            <expression>0.0</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=target_quarterly_dividends</customprops>
             <valueType>0</valueType>
         </node>
     </nodes>
@@ -356,16 +379,16 @@
         <text name="*text4" pos-x="300" pos-y="20" width="81" height="91" content="&lt;html&gt;   &lt;head&gt;        &lt;/head&gt;   &lt;body&gt;     &lt;p align=&quot;center&quot; style=&quot;margin-top: 0&quot;&gt;       &lt;small&gt;&lt;big&gt;&lt;font size=&quot;4&quot;&gt;A321 Neo&lt;/font&gt;&lt;/big&gt;&lt;/small&gt;&lt;font size=&quot;4&quot;&gt;&lt;br&gt;CDG&lt;br&gt;FRA&lt;br&gt;5        &lt;small&gt;&lt;big&gt;Round Trips/day&lt;/big&gt;&lt;/small&gt;&lt;/font&gt;     &lt;/p&gt;   &lt;/body&gt; &lt;/html&gt; "/>
     </texts>
     <edges>
-        <edge source="Management" target="fuel_mix" label="(...)"/>
+        <edge source="daily_green_marketing_expense" target="Management" label="(...)"/>
         <edge source="operating_costs" target="Management" label="(...)"/>
         <edge source="Fleet" target="operating_costs" label="(...)"/>
-        <edge source="profit_margin_target" target="Management" label="(...)" p0x="1145.5" p0y="412.5" p1x="915.5" p1y="412.5" numpoints="2"/>
+        <edge source="target_quarterly_dividends" target="Management" label="(...)" p0x="1145.5" p0y="412.5" p1x="915.5" p1y="412.5" numpoints="2"/>
         <edge source="spesa_crediti_CO2_acquistati" target="CO2_Market" label="(...)" p0x="550.5" p0y="472.5" p1x="545.5" p1y="582.5" numpoints="2"/>
         <edge source="CO2_price" target="Management" label="(...)" p0x="727.5" p0y="582.5" p1x="915.5" p1y="412.5" numpoints="2"/>
         <edge source="CO2_Market" target="CO2_price" label="(...)" p0x="545.5" p0y="582.5" p1x="727.5" p1y="582.5" numpoints="2"/>
         <edge source="Fleet" target="kg_CO2e" label="(...)" p0x="547.5" p0y="132.5" p1x="552.5" p1y="222.5" numpoints="2"/>
         <edge source="Y_Tot_nCO2e" target="Management" label="(...)" p0x="550.5" p0y="352.5" p1x="915.5" p1y="412.5" numpoints="2"/>
-        <edge source="Target_emissioni" target="Management" label="(...)" p0x="1140.5" p0y="582.5" p1x="915.5" p1y="412.5" numpoints="2"/>
+        <edge source="Target_emissions" target="Management" label="(...)" p0x="1140.5" p0y="582.5" p1x="915.5" p1y="412.5" numpoints="2"/>
         <edge source="Management" target="TP_t" label="(...)" p0x="915.5" p0y="412.5" p1x="827.5" p1y="322.5" numpoints="2"/>
         <edge source="n_tickets_array" target="Management" label="(...)"/>
         <edge source="aircraft_hourly_fuel_consumption" target="Fleet" label="(...)" p0x="552.5" p0y="52.5" p1x="547.5" p1y="132.5" numpoints="2"/>
@@ -380,22 +403,23 @@
         <edge source="Management" target="spesa_crediti_CO2_acquistati" label="(...)" p0x="915.5" p0y="412.5" p1x="550.5" p1y="472.5" numpoints="2"/>
         <edge source="Management" target="profit_margin" label="(...)" p0x="915.5" p0y="412.5" p1x="917.5" p1y="592.5" numpoints="2"/>
         <edge source="one_way_flight_duration" target="Fleet" label="(...)" p0x="427.5" p0y="132.5" p1x="547.5" p1y="132.5" numpoints="2"/>
-        <edge source="Target_emissioni" target="emissions_target_not_reached" label="(...)"/>
-        <edge source="Target_emissioni" target="emission_target_reached" label="(...)"/>
+        <edge source="Target_emissions" target="emissions_target_not_reached" label="(...)"/>
+        <edge source="Target_emissions" target="emission_target_reached" label="(...)"/>
         <edge source="Y_Tot_nCO2e" target="emission_target_reached" label="(...)"/>
         <edge source="emission_target_reached" target="emissions_target_not_reached" label="(...)"/>
+        <edge source="percentage_of_saf" target="Fleet" label="(...)"/>
     </edges>
     <widgets>
-        <widget type="SliderWidget" pos-x="20" pos-y="460" width="360" height="100">
+        <widget type="SliderWidget" pos-x="20" pos-y="330" width="360" height="100">
             <0>0</0>
             <widgetvalue>287.0</widgetvalue>
             <max>1000</max>
             <min>0.0</min>
             <showtitlebar>true</showtitlebar>
-            <source>Target_emissioni</source>
+            <source>Target_emissions</source>
             <delta>1.0</delta>
             <iconized>false</iconized>
-            <title>Target_emissioni: 287.0</title>
+            <title>Target_emissions: 287.0</title>
         </widget>
         <widget type="InputTableWidget" pos-x="20" pos-y="110" width="360" height="60">
             <fontsize>20</fontsize>
@@ -423,53 +447,14 @@
         </widget>
         <widget type="SliderWidget" pos-x="20" pos-y="230" width="360" height="100">
             <0>0</0>
-            <widgetvalue>0.0</widgetvalue>
-            <max>1</max>
+            <widgetvalue>79258.0</widgetvalue>
+            <max>150000</max>
             <min>0.0</min>
             <showtitlebar>true</showtitlebar>
-            <source>profit_margin_target</source>
-            <delta>0.01</delta>
+            <source>target_quarterly_dividends</source>
+            <delta>1</delta>
             <iconized>false</iconized>
-            <title>profit_margin_target: 0.0</title>
-        </widget>
-        <widget type="ToggleIndicatorWidget" pos-x="140" pos-y="560" width="120" height="140">
-            <color>0</color>
-            <source>emissions_target_not_reached</source>
-            <iconized>false</iconized>
-            <showtitlebar>true</showtitlebar>
-            <title>emissions_target_not_reached</title>
-        </widget>
-        <widget type="ToggleIndicatorWidget" pos-x="260" pos-y="560" width="120" height="140">
-            <color>1</color>
-            <source>emission_target_reached</source>
-            <iconized>false</iconized>
-            <showtitlebar>true</showtitlebar>
-            <title>emission_target_reached</title>
-        </widget>
-        <widget type="GaugeWidget" pos-x="20" pos-y="560" width="120" height="140">
-            <sourcena>Y_Tot_nCO2e</sourcena>
-            <max>10.0</max>
-            <min>0.0</min>
-            <iconized>false</iconized>
-            <showtitlebar>true</showtitlebar>
-            <title>Y_Tot_nCO2e: 0.0</title>
-        </widget>
-        <widget type="GaugeWidget" pos-x="20" pos-y="330" width="120" height="130">
-            <max>10.0</max>
-            <min>0.0</min>
-            <iconized>false</iconized>
-            <showtitlebar>true</showtitlebar>
-        </widget>
-        <widget type="ToggleIndicatorWidget" pos-x="140" pos-y="330" width="120" height="130">
-            <iconized>false</iconized>
-            <showtitlebar>true</showtitlebar>
-        </widget>
-        <widget type="ToggleIndicatorWidget" pos-x="260" pos-y="330" width="120" height="130">
-            <color>1</color>
-            <source>emission_target_reached</source>
-            <iconized>false</iconized>
-            <showtitlebar>true</showtitlebar>
-            <title>emission_target_reached</title>
+            <title>target_quarterly_dividends: 79258.0</title>
         </widget>
         <widget type="ChartWidget" pos-x="1030" pos-y="20" width="390" height="240">
             <iconized>false</iconized>
@@ -478,6 +463,28 @@
         <widget type="ChartWidget" pos-x="1040" pos-y="380" width="370" height="260">
             <iconized>false</iconized>
             <showtitlebar>true</showtitlebar>
+        </widget>
+        <widget type="SliderWidget" pos-x="20" pos-y="430" width="360" height="100">
+            <0>0</0>
+            <widgetvalue>0.5</widgetvalue>
+            <max>1</max>
+            <min>0.0</min>
+            <showtitlebar>true</showtitlebar>
+            <source>percentage_of_saf</source>
+            <delta>0.01</delta>
+            <iconized>false</iconized>
+            <title>percentage_of_saf: 0.5</title>
+        </widget>
+        <widget type="SliderWidget" pos-x="20" pos-y="530" width="360" height="90">
+            <0>0</0>
+            <widgetvalue>0.0</widgetvalue>
+            <max>100000</max>
+            <min>0.0</min>
+            <showtitlebar>true</showtitlebar>
+            <source>daily_green_marketing_expense</source>
+            <delta>1000</delta>
+            <iconized>false</iconized>
+            <title>daily_green_marketing_expense: 0.0</title>
         </widget>
     </widgets>
     <groups/>
