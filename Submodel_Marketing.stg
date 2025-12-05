@@ -1,0 +1,814 @@
+<stgraph class="STGraph.decoder" version="STGraph build 22.12">
+    <head systemName="" description="" timeUnitDescription="" timeFrame="0" time0="0.0" time1="365.0" timeD="1.0" maxSteps="10" batchSteps="1" width="1440" height="789" scale="1.0" simulationDelay="100" stepsBeforePause="1" integrationMethod="0" exceptionHandling="1" withInterrupts="false" isDataSaved="false" forNet="false" serverAddress="" forWeb="false" webModelLanguages="" webModelDescription="" webTimeUnit="" webExplTitle="" webExplURL="" webModelGroups="" indexOrigin="0" isGraphVisible="true" areWidgetsVisible="true"/>
+    <nodes>
+        <node name="C_i" type="ValueNode" pos-x="580" pos-y="160" width="81" height="61">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation> Intensit&#xe0; istantanea della campagna di marketing
+
+ricordando che naturalmente:
+
+ * Se campagna_attiva = 1 -&gt; C_i = C_i_default</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>Campagna_attiva`*`C_i_default</fExpression>
+            <fStateTrans/>
+            <expression>Campagna_attiva*C_i_default</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=C_i</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="C_i_default" type="ValueNode" pos-x="580" pos-y="40" width="91" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation> Intensit&#xe0; standard della campagna quando &#xe8; attiva.
+
+ scegliamo in base alla scala che usiamo per la forza delle campagne.
+
+ Gradi Intensit&#xe0; campagna: (da definire meglio eventualmente in base a comportamento)
+
+ campagna std = 1.1
+
+Campagna forte 1.5  (modelliamo per far si che se si sceglie questa diventa anche pi&#xf9; costosa?...forse non &#xe8; necessario ma sarebbe carino e sensato)
+
+ 
+Logica pi&#xf9; o meno ovvia ma magari no:
+
+ campagne forti = rischi forti (se siamo incoerenti)
+
+ campagne forti = premi forti (se siamo coerenti)
+
+allo stesso tempo: 
+
+Campagna Std/debole = effetti limitati, se facciamo comunicazione leggera e siamo       incoerenti roviniamo meno la nostra reputazione</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>1.1</fExpression>
+            <fStateTrans/>
+            <expression>1.1</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=C_i_default</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="C_r" type="ValueNode" pos-x="30" pos-y="350" width="121" height="81">
+            <font>Serif,12</font>
+            <forecol>255,255,0</forecol>
+            <documentation> 
+STOCK CREDIBILITA, pi&#xf9; precisamente &#xe8; &#xe8; lo stock la cui variazione nel tempo &#xe8; data dalla somma algebrica dei suoi due flussi, C_r_gain e C_r_loss.
+ 
+0.7 = valore iniziale della credibilit&#xe0;/reputazione green dell&#x2019;azienda. (da approfondire come potrebbe essere settato, valutare pi&#xf9; scenari anche per eventuale presentazione)
+  rappresenta quindi il valore iniziale dello stock C_r. </documentation>
+            <isOut>true</isOut>
+            <fStateInit>0.3
+</fStateInit>
+            <format>0.0##</format>
+            <fExpression/>
+            <fStateTrans>this`+`C_r_gain`-`C_r_loss
+</fStateTrans>
+            <expression/>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit>0.3</stateInit>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>255,255,0</fontcol>
+            <stateTrans>this+C_r_gain-C_r_loss</stateTrans>
+            <backcol>0,0,0</backcol>
+            <customprops>Name=C_r</customprops>
+            <valueType>1</valueType>
+        </node>
+        <node name="C_r_eff" type="ValueNode" pos-x="50" pos-y="490" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>limita inferiormente e superiormente lo stock C_r in caso di valori anomali.
+
+ Quindi C_r_eff sar&#xe0; sempre nell&#x2019;intervallo:
+
+ C_r_min &#x2264; C_r_eff &#x2264; C_r_max
+</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>min(`C_r_max`,`max(`C_r_min`,`C_r`)`)</fExpression>
+            <fStateTrans/>
+            <expression>min(C_r_max,max(C_r_min,C_r))</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=C_r_eff</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="C_r_gain" type="ValueNode" pos-x="480" pos-y="510" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation> Flow in ingresso nello stock C_r
+
+Indica quanto la credibilit&#xe0; aumenta grazie a campagne coerenti.
+
+
+ se stiamo facendo campagna (C_i &gt; 0) e se siamo coerenti col target (G_W alto) 
+
+ -&gt; la credibilit&#xe0; cresce verso C_r_max
+
+ </documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>gamma_pos`*`C_i`*`G_W`*`(`C_r_max`-`C_r`)
+</fExpression>
+            <fStateTrans/>
+            <expression>gamma_pos*C_i*G_W*(C_r_max-C_r)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,0</fontcol>
+            <stateTrans/>
+            <backcol>255,255,0</backcol>
+            <customprops>Name=C_r_gain</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="C_r_loss" type="ValueNode" pos-x="640" pos-y="440" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation> Flow in uscita dallo stock C_r
+
+ Indica quanto la credibilit&#xe0; crolla quando facciamo campagne incoerenti (greenwashing).
+
+
+ stiamo facendo campagne (C_i &gt; 0)
+
+ ma siamo distanti dal target (G_W basso  -&gt;  1 - G_W alto)
+ 
+perdiamo reputazione, C_r scende verso C_r_min.</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>gamma_neg`*`C_i`*`(`1`-`G_W`)`*`(`C_r`-`C_r_min`)</fExpression>
+            <fStateTrans/>
+            <expression>gamma_neg*C_i*(1-G_W)*(C_r-C_r_min)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,0</fontcol>
+            <stateTrans/>
+            <backcol>255,255,0</backcol>
+            <customprops>Name=C_r_loss</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="C_r_max" type="ValueNode" pos-x="210" pos-y="530" width="81" height="51">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>credibilit&#xe0; massima (limite superiore)</documentation>
+            <isOut>true</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>1</fExpression>
+            <fStateTrans/>
+            <expression>1</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=C_r_max</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="C_r_min" type="ValueNode" pos-x="210" pos-y="480" width="81" height="51">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>credibilit&#xe0; minima (limite inferiore)</documentation>
+            <isOut>true</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>0.01</fExpression>
+            <fStateTrans/>
+            <expression>0.01</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=C_r_min</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="Campagna_attiva" type="ValueNode" pos-x="450" pos-y="60" width="161" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>binaria (0 = no, 1 = s&#xec;).
+
+Indica se in quel periodo stiamo facendo una campagna marketing/comunicazione.
+
+al settaggio attuale  if(rand(0,1)&#xa0;&lt;&#xa0;0.4&#xa0;,1,0) ci sta a dire che, impostato time step di per     esempio un anno = 365, simuliamo una campagna marketin attiva per 365*0,4 giorni, 
+ ovvero circa 146 giorni/anno.
+
+oppure per altri testing proviamo o solo con campagna mai attiva ( = 0 ) o sempre attiva 
+ ( = 1)</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>if(rand(0,1)`&lt;`0.4`,1,0)</fExpression>
+            <fStateTrans/>
+            <expression>if(rand(0,1)&lt;0.4,1,0)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>255,0,0</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=Campagna_attiva</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="E_target_tot_peppe" type="ValueNode" pos-x="200" pos-y="30" width="151" height="65">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>Target emission modello management (solo da collegare)
+
+Input modello esterno Giuseppe slider Target_emissions in kg CO2 per adesso
+
+Submodel_Management.net_CO2_target</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>1000
+</fExpression>
+            <fStateTrans/>
+            <expression>1000</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=TD_max</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="G_W" type="ValueNode" pos-x="340" pos-y="230" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>coerenza green percepita (fattore anti-greenwashing), tra 0 e 1.
+
+Se siamo a target o sotto (TD_rel = 0) &#x2192; G_W = 1 (messaggio credibile).
+
+Se TD_rel = TD_rel_max -&gt; G_W = 0 (nessuna credibilit&#xe0;).
+
+Tra 0 e TD_rel_max -&gt; G_W decresce linearmente da 1 a 0. 
+
+(es. TD_rel = 0,4 e TD_rel_max = 0,5  -&gt; 1-min(0,4 , 0,5) = 1- 0,4 = 0,6 credibilit&#xe0; a 60%)
+vedere piu scenari su questo e capire bene la logica
+
+se TD_rel = 0,2 -&gt; &quot; -&gt; 1 - 0,2 = 0,8 credibilit&#xe0; a 80%
+
+quindi la logica &#xe8; che pi&#xf9; inquiniamo di meno rispetto al valore soglia sopportato                (TD_rel_max), pi&#xf9; logicamente siamo credibili
+</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>1`-`min(`1`,`TD_rel`/`TD_rel_max`)</fExpression>
+            <fStateTrans/>
+            <expression>1-min(1,TD_rel/TD_rel_max)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,0</fontcol>
+            <stateTrans/>
+            <backcol>0,255,0</backcol>
+            <customprops>Name=G_W</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="G_a" type="ValueNode" pos-x="950" pos-y="340" width="101" height="71">
+            <font>Serif,12</font>
+            <forecol>0,255,255</forecol>
+            <documentation> Stock livello di sensibilit&#xe0; ambientale della societ&#xe0; (mercato) al tema delle emissioni</documentation>
+            <isOut>true</isOut>
+            <fStateInit>0.3
+</fStateInit>
+            <format>0.0##</format>
+            <fExpression/>
+            <fStateTrans>this+campaign_effect`-`forgetting_effect
+</fStateTrans>
+            <expression/>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit>0.3</stateInit>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,255,255</fontcol>
+            <stateTrans>this+campaign_effect-forgetting_effect</stateTrans>
+            <backcol>0,0,0</backcol>
+            <customprops>Name=G_a</customprops>
+            <valueType>1</valueType>
+        </node>
+        <node name="G_a_base" type="ValueNode" pos-x="1180" pos-y="500" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>livello &#x201c;di base&#x201d; di sensibilit&#xe0; ambientale, anche se non fai mai campagne la cultura           ambientale minima della societ&#xe0;.
+
+Diciamo che qua il ragiomento banale che ho fatto (ne possiamo discutere se volete), &#xe8;   stato:
+
+Ovviamente nel mondo esiste un minimo di cultura ambientale di partenza, ma probabilmente per il settore aereo meno: direi di partire con un 0.1</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>0.1</fExpression>
+            <fStateTrans/>
+            <expression>0.1</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=G_a_base</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="G_a_max" type="ValueNode" pos-x="1170" pos-y="210" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>massimo livello possibile di sensibilit&#xe0; ambientale accumulata, serve per saturare l&#x2019;effetto delle campagne
+
+</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>1</fExpression>
+            <fStateTrans/>
+            <expression>1</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=G_a_max</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="M_t" type="ValueNode" pos-x="1170" pos-y="350" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>livello di sensibilit&#xe0; ambientale del mercato (0&#x2013;1) da usare nel modello passengers
+
+Se G_a = 0 --&gt; M_t = 0
+
+Se G_a = G_a_max --&gt; M_t = 1
+
+Se G_a &gt; G_a_max --&gt;comunque M_t resta a 1.</documentation>
+            <isOut>true</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>min(`1`,`G_a`/`G_a_max`)</fExpression>
+            <fStateTrans/>
+            <expression>min(1,G_a/G_a_max)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>255,255,255</fontcol>
+            <stateTrans/>
+            <backcol>0,0,255</backcol>
+            <customprops>Name=M_t</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="TD_pos" type="ValueNode" pos-x="40" pos-y="140" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>Distanza solo positiva dal target emissioni (quanto emettiamo DI PIU rispetto al target
+ in kg CO2 misure modello peppe al momento)
+
+(ignora i valori sotto target) -&gt; se sono sotto target TD_pos = 0</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>max(0,target_distance_peppe)</fExpression>
+            <fStateTrans/>
+            <expression>max(0,target_distance_peppe)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=TD_pos</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="TD_rel" type="ValueNode" pos-x="40" pos-y="230" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>Scostamento relativo di T_pos, quindi percentuale di quanto emettiamo di pi&#xf9; rispetto       al target
+
+es. = 0.1 = +10% sopra il target </documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>TD_pos`/`E_target_tot_peppe</fExpression>
+            <fStateTrans/>
+            <expression>TD_pos/E_target_tot_peppe</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=TD_rel</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="TD_rel_max" type="ValueNode" pos-x="320" pos-y="130" width="101" height="51">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation> Livello di scostamento relativo dal target a cui la credibilit&#xe0; della campagna green         (G_W) scende a zero.
+ 
+Per valori di TD_rel compresi tra 0 e TD_rel_max, G_W diminuisce gradualmente da 1 a 0 in modo lineare. --&gt; quindi all&apos;aumentare di TD_rel  rispetto a  TD_max,                     G_W   diminuisce, fino ad azzerarsi.
+
+ESEMPI: Se TD_rel = 0.05 e TD_real_max = 0.20
+
+G_W = 1 &#x2212; (TD_rel / TD_rel_max)
+G_W = 1 &#x2212; (0.05 / 0.20)
+G_W = 1 &#x2212; 0.25
+G_W = 0.75     --&gt; credibilit&#xe0; al 75%
+
+Se TD_rel = 0.10
+
+G_W = 1 &#x2212; (0.10 / 0.20)
+G_W = 1 &#x2212; 0.50
+G_W = 0.50     --&gt; credibilit&#xe0; 50% e cos&#xec; via
+
+
+ ***update: ho messo 0.25 perch&#xe8; nei valori tra TD_rel e TD_rel_max puniva troppo il 
+ flusso in uscita C_r_loss (discuterne con prof, secondo me ci sta anche pi&#xf9; alto).
+
+
+
+A quanto fissarlo? per farlo ho ragionato con chat gpt che ha dedotto questo:
+Per il tuo modello specifico &#x2014; compagnia aerea che vuole comunicare il proprio impegno green ma che non &#xe8; n&#xe9; perfettamente virtuosa n&#xe9; totalmente incoerente, e soprattutto considerando come funzionano davvero i target di emissioni in aviazione, il valore ragionevole di TD_rel_max &#xe8; questo:
+
+TD_rel_max = 0.20 (cio&#xe8; +20% sopra il target &#x2192; G_W = 0)
+
+E ti spiego perch&#xe9; &#xe8; il valore pi&#xf9; credibile e bilanciato per proprio la tua simulazione 
+
+1. Perch&#xe9; 20% &#xe8; credibile nel tuo caso
+L&#x2019;aviazione non pu&#xf2; essere super-precisa sui target
+
+I target di emissioni delle compagnie aeree spesso hanno oscillazioni fisiologiche legate a:
+
+variazioni di load factor,
+
+condizioni meteo,
+
+tipologia di rotte,
+
+composizione della flotta giornaliera,
+
+congestione negli aeroporti,
+
+ottimizzazione della rotta non sempre stabile.
+
+  -  Una tolleranza fisiologica dell&#x2019;ordine del 5&#x2013;15% &#xe8; normale.
+
+  - Per&#xf2; oltre un certo limite diventa davvero greenwashing
+
+ Se una compagnia:
+
+ &#xe8; 20% sopra il suo target annuale di sostenibilit&#xe0;
+ eppure lancia campagne &#x201c;super green&#x201d;,
+
+ allora per il mercato appare incoerente.
+
+
+
+
+</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>0.20</fExpression>
+            <fStateTrans/>
+            <expression>0.20</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=TD_rel_max</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="alpha_pos" type="ValueNode" pos-x="960" pos-y="150" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>velocit&#xe0; con cui le campagne efficaci aumentano stock G_a</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>0.2</fExpression>
+            <fStateTrans/>
+            <expression>0.2</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=alpha_pos</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="beta_neg" type="ValueNode" pos-x="960" pos-y="570" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>velocit&#xe0; con cui livello stock G_a torna verso G_a_base (forgetting)
+
+Quanto velocemente la societ&#xe0; si dimentica delle campagne se smettiamo di comunicare?</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>0.15
+</fExpression>
+            <fStateTrans/>
+            <expression>0.15</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=beta_neg</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="campaign_effect" type="ValueNode" pos-x="920" pos-y="210" width="161" height="51">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>Flow in ingresso nello stock G_a
+
+indica quanto le campagne, in quel periodo, aumentano la sensibilit&#xe0; ambientale del          mercato.
+
+(&#xa0;1&#xa0;-&#xa0;G_a&#xa0;/&#xa0;G_a_max&#xa0;) = fattore di saturazione: 
+G_a basso -&gt;  pubblico poco sensibile/educato -&gt; forte potenziale di crescita
+G_a si avvicina a G_a_max -&gt; pi&#xf9; si avvicina pi&#xf9; possiamo crescere meno -&gt; la gente &#xe8; gi&#xe0; sensibilizzata</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>alpha_pos`*`C_i`*`G_W`*`C_r_eff`*`(`1`-`G_a`/`G_a_max`)
+</fExpression>
+            <fStateTrans/>
+            <expression>alpha_pos*C_i*G_W*C_r_eff*(1-G_a/G_a_max)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,0</fontcol>
+            <stateTrans/>
+            <backcol>0,255,255</backcol>
+            <customprops>Name=campaign</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="forgetting_effect" type="ValueNode" pos-x="920" pos-y="500" width="161" height="51">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>Flow in uscita dallo stock G_a
+
+Indica la perdita di sensibilit&#xe0; nel tempo per effetto dimenticanza, quindi il  ritorno verso il   livello G_a_base
+
+Ho voluto interpretare l&apos;effetto dimenticanza con questa logica: la formula indica che pi&#xf9;   la sensibilit&#xe0; delle persone &#xe8; alta, quindi interiorizzata, meno lentamente si dimenticher&#xe0; e quindi effetto forgetting minore, al contrario, quando &#xe8; poco sensibilizzato dimenticher&#xe0; in fretta.
+
+* Inizialmente la formula era questa: beta_neg&#xa0;*&#xa0;(&#xa0;G_a&#xa0;-&#xa0;G_a_base&#xa0;)
+
+Se G_a &gt; G_a_base &#x2192; forgetting_effect &gt; 0 --&gt;G_a scende.
+
+Se G_a &lt; G_a_base &#x2192; forgetting_effect &lt; 0 --&gt; G_a risale verso il base.
+Praticamente l&apos;effetto opposto che per me non aveva tanto senso ma se volete ne
+parliamo</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>beta_neg`*`(`G_a`-`G_a_base`)`*`(`1`-`G_a`/`G_a_max`)</fExpression>
+            <fStateTrans/>
+            <expression>beta_neg*(G_a-G_a_base)*(1-G_a/G_a_max)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,0</fontcol>
+            <stateTrans/>
+            <backcol>0,255,255</backcol>
+            <customprops>Name=forgetting_effect</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="gamma_neg" type="ValueNode" pos-x="640" pos-y="500" width="81" height="51">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation> velocit&#xe0; con cui le campagne incoerenti (greenwashing) fanno crollare la credibilit&#xe0;         dello stock C_r.
+
+    Effetto Fiducia: gamma_neg  spesso &gt; gamma_pos 
+ 
+    (la fiducia si perde pi&#xf9; in fretta di quanto si costruisce).</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>0.3
+</fExpression>
+            <fStateTrans/>
+            <expression>0.3</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=gamma_neg</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="gamma_pos" type="ValueNode" pos-x="480" pos-y="570" width="81" height="51">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation> velocit&#xe0; con cui le campagne coerenti fanno crescere la credibilit&#xe0; dello stock C_r </documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>0.15
+</fExpression>
+            <fStateTrans/>
+            <expression>0.15</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=gamma_pos</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="marketing_cost" type="ValueNode" pos-x="840" pos-y="20" width="131" height="61">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>true</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>C_i`*`unit_cost_C_i</fExpression>
+            <fStateTrans/>
+            <expression>C_i*unit_cost_C_i</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>255,0,0</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=costo_campagna</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="target_distance_peppe" type="ValueNode" pos-x="10" pos-y="30" width="131" height="71">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>Submodel_Management.distance_from_target 
+
+Submodel_Fleet
+
+differenza tra emissioni totali reali dell&#x2019;azienda e emissioni totali target nel periodo considerato.
+
+Esempio:
+
+target_distance = Emissioni_tot_reali - Emissioni_tot_target (in kg CO2)
+
+
+target_distance &lt; 0 &#x2192; siamo sotto il target (pi&#xf9; green del target)
+
+target_distance = 0 &#x2192; siamo esattamente a target
+
+target_distance &gt; 0 &#x2192; siamo sopra il target (pi&#xf9; emissioni del previsto)
+
+Non lo tocchiamo: lo prendiamo cos&#xec; com&#x2019;&#xe8; da modello management Giuseppe, oppure per testing: 
+
+ Interpretazione settaggio attuale per testing:
+  rand(-0.2&#xa0;*&#xa0;E_target_tot_peppe&#xa0;,&#xa0;0.5&#xa0;*&#xa0;E_target_tot_peppe)
+
+a volte siamo:
+
+target_distance &lt; 0 &#x2192; siamo fino al 5% sotto il target 
+
+a volte:
+
+target_distance &#xe8; tra 0 e 0.5*E_target_tot &#x2192; fino al 50% sopra il target
+
+
+</documentation>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>rand(0.25`*`E_target_tot_peppe`,`0.5`*`E_target_tot_peppe)</fExpression>
+            <fStateTrans/>
+            <expression>rand(0.25*E_target_tot_peppe,0.5*E_target_tot_peppe)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>255,0,0</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=target_distance</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="unit_cost_C_i" type="ValueNode" pos-x="700" pos-y="20" width="101" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>1000</fExpression>
+            <fStateTrans/>
+            <expression>1000</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=unit_cost_C_i</customprops>
+            <valueType>0</valueType>
+        </node>
+    </nodes>
+    <texts>
+        <text name="*text1" pos-x="250" pos-y="10" width="51" height="31" content="&lt;html&gt;&#xd;   &lt;head&gt;&#xd;     &#xd;   &lt;/head&gt;&#xd;   &lt;body&gt;&#xd;     &lt;p style=&quot;margin-top: 0&quot;&gt;&#xd;       Input&#xd;     &lt;/p&gt;&#xd;   &lt;/body&gt;&#xd; &lt;/html&gt;&#xd; "/>
+        <text name="*text2" pos-x="50" pos-y="10" width="51" height="31" content="&lt;html&gt;&#xd;  &lt;head&gt;&#xd;    &#xd;  &lt;/head&gt;&#xd;  &lt;body&gt;&#xd;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xd;      Input&#xd;    &lt;/p&gt;&#xd;  &lt;/body&gt;&#xd;&lt;/html&gt;&#xd;"/>
+    </texts>
+    <edges>
+        <edge source="G_a_max" target="forgetting_effect" label="(...)"/>
+        <edge source="beta_neg" target="forgetting_effect" label="(...)" p0x="997.5" p0y="612.5" p1x="1000.5" p1y="525.5" numpoints="2"/>
+        <edge source="G_a" target="forgetting_effect" label="(...)" p0x="1000.5" p0y="375.5" p1x="1000.5" p1y="525.5" numpoints="2"/>
+        <edge source="forgetting_effect" target="G_a" label="(...)" p0x="1000.5" p0y="525.5" p1x="1000.5" p1y="375.5" numpoints="2"/>
+        <edge source="C_r_eff" target="campaign_effect" label="(...)"/>
+        <edge source="G_W" target="campaign_effect" label="(...)"/>
+        <edge source="C_i" target="campaign_effect" label="(...)"/>
+        <edge source="alpha_pos" target="campaign_effect" label="(...)" p0x="957.5" p0y="142.5" p1x="1000.5" p1y="235.5" numpoints="2"/>
+        <edge source="C_r_max" target="C_r_eff" label="(...)"/>
+        <edge source="E_target_tot_peppe" target="target_distance_peppe" label="(...)"/>
+        <edge source="TD_rel" target="TD_rel_max" label="(...)"/>
+        <edge source="C_r_loss" target="C_r" label="flusso in uscita"/>
+        <edge source="C_r_min" target="C_r_loss" label="(...)"/>
+        <edge source="G_W" target="C_r_loss" label="(...)"/>
+        <edge source="gamma_neg" target="C_r_loss" label="(...)"/>
+        <edge source="C_r_max" target="C_r_gain" label="(...)"/>
+        <edge source="G_W" target="C_r_gain" label="(...)"/>
+        <edge source="gamma_pos" target="C_r_gain" label="(...)"/>
+        <edge source="C_i" target="C_r_gain" label="(...)"/>
+        <edge source="C_i" target="C_r_loss" label="(...)"/>
+        <edge source="Campagna_attiva" target="C_i" label="(...)"/>
+        <edge source="C_i_default" target="C_i" label="(...)"/>
+        <edge source="TD_rel_max" target="G_W" label="(...)"/>
+        <edge source="TD_rel" target="G_W" label="(...)"/>
+        <edge source="TD_pos" target="TD_rel" label="(...)"/>
+        <edge source="E_target_tot_peppe" target="TD_rel" label="(...)"/>
+        <edge source="target_distance_peppe" target="TD_pos" label="(...)"/>
+        <edge source="C_r_gain" target="C_r" label="(...)"/>
+        <edge source="C_r" target="C_r_loss" label="(...)"/>
+        <edge source="C_r" target="C_r_gain" label="flusso in entrata"/>
+        <edge source="C_r" target="C_r_eff" label="(...)"/>
+        <edge source="C_r_min" target="C_r_eff" label="(...)"/>
+        <edge source="G_a" target="campaign_effect" label="(...)" p0x="1000.5" p0y="375.5" p1x="1000.5" p1y="235.5" numpoints="2"/>
+        <edge source="G_a_max" target="campaign_effect" label="(...)" p0x="1207.5" p0y="232.5" p1x="1000.5" p1y="235.5" numpoints="2"/>
+        <edge source="campaign_effect" target="G_a" label="(...)" p0x="1000.5" p0y="235.5" p1x="1000.5" p1y="375.5" numpoints="2"/>
+        <edge source="G_a_base" target="G_a" label="(...)" p0x="1217.5" p0y="522.5" p1x="1000.5" p1y="375.5" numpoints="2"/>
+        <edge source="G_a_base" target="forgetting_effect" label="(...)" p0x="1217.5" p0y="522.5" p1x="1000.5" p1y="525.5" numpoints="2"/>
+        <edge source="G_a" target="M_t" label="(...)" p0x="1000.5" p0y="375.5" p1x="1207.5" p1y="372.5" numpoints="2"/>
+        <edge source="G_a_max" target="M_t" label="(...)" p0x="1207.5" p0y="232.5" p1x="1207.5" p1y="372.5" numpoints="2"/>
+        <edge source="C_i" target="marketing_cost" label="(...)"/>
+        <edge source="unit_cost_C_i" target="marketing_cost" label="(...)"/>
+    </edges>
+    <widgets/>
+    <groups/>
+    <reports/>
+</stgraph>

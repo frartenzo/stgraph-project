@@ -1,57 +1,53 @@
 <stgraph class="STGraph.decoder" version="STGraph build 22.12">
     <head systemName="Supermodel Carbon Neutral Airline" description="" timeUnitDescription="days" timeFrame="0" time0="0.0" time1="1095.0" timeD="1.0" maxSteps="10" batchSteps="1" width="1440" height="789" scale="1.0" simulationDelay="100" stepsBeforePause="1" integrationMethod="0" exceptionHandling="1" withInterrupts="true" isDataSaved="false" forNet="false" serverAddress="" forWeb="false" webModelLanguages="" webModelDescription="" webTimeUnit="" webExplTitle="" webExplURL="" webModelGroups="" indexOrigin="0" isGraphVisible="true" areWidgetsVisible="true"/>
     <nodes>
-        <node name="CO2_Market" type="ModelNode" pos-x="470" pos-y="560" width="131" height="45">
-            <subvisible>false</subvisible>
-            <format>0.0##</format>
-            <fontcol>0,0,255</fontcol>
-            <forecol>0,0,0</forecol>
-            <customprops>Name=CO2_Market</customprops>
-            <backcol>255,255,255</backcol>
-            <font>SansSerif,12</font>
-        </node>
-        <node name="CO2_price" type="ValueNode" pos-x="690" pos-y="560" width="75" height="45">
-            <font>SansSerif,12</font>
-            <forecol>0,0,0</forecol>
-            <isOut>false</isOut>
-            <fStateInit/>
-            <format>0.0##</format>
-            <fExpression/>
-            <fStateTrans/>
-            <expression/>
-            <isGlobal>false</isGlobal>
-            <isIn>true</isIn>
-            <stateInit/>
-            <isVectorOut>false</isVectorOut>
-            <fontcol>0,0,255</fontcol>
-            <stateTrans/>
-            <backcol>255,255,255</backcol>
-            <customprops>Name=CO2_price</customprops>
-            <valueType>0</valueType>
-        </node>
         <node name="Fleet" type="ModelNode" pos-x="510" pos-y="110" width="75" height="45">
             <subvisible>false</subvisible>
-            <format>0.0##</format>
-            <fontcol>0,0,255</fontcol>
+            <font>SansSerif,12</font>
             <systemName>Submodel_Fleet.stg</systemName>
             <forecol>0,0,0</forecol>
-            <customprops>Name=Fleet</customprops>
-            <backcol>255,255,255</backcol>
-            <font>SansSerif,12</font>
-        </node>
-        <node name="Management" type="ModelNode" pos-x="850" pos-y="390" width="131" height="45">
-            <subvisible>false</subvisible>
+            <superExpression3>percentage_of_saf</superExpression3>
+            <superExpression2>one_way_flight_duration</superExpression2>
+            <superExpression1>n_tickets_array_today</superExpression1>
+            <superExpression0>aircraft_hourly_fuel_consumption</superExpression0>
             <format>0.0##</format>
             <fontcol>0,0,255</fontcol>
+            <subVarNames>aircraft_hourly_fuel_consumption,n_tickets,one_way_flytime,percentage_of_SAF</subVarNames>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=Fleet</customprops>
+        </node>
+        <node name="Management" type="ModelNode" pos-x="480" pos-y="300" width="131" height="45">
+            <subvisible>false</subvisible>
+            <font>SansSerif,12</font>
             <systemName>Submodel_Management.stg</systemName>
             <forecol>0,0,0</forecol>
-            <customprops>Name=Management</customprops>
+            <superExpression3>Target_emissions</superExpression3>
+            <superExpression2>initial_prices</superExpression2>
+            <superExpression1>target_quarterly_dividends</superExpression1>
+            <superExpression0>revenues_today</superExpression0>
+            <format>0.0##</format>
+            <fontcol>0,0,255</fontcol>
+            <subVarNames>current_sales,dividends_target,initial_prices,net_CO2_target</subVarNames>
             <backcol>255,255,255</backcol>
-            <font>SansSerif,12</font>
-            <documentation/>
+            <customprops>Name=Management</customprops>
         </node>
-        <node name="Passengers" type="ModelNode" pos-x="830" pos-y="200" width="161" height="45">
-            <subvisible>true</subvisible>
+        <node name="Marketing" type="ModelNode" pos-x="860" pos-y="300" width="75" height="45">
+            <subvisible>false</subvisible>
+            <superExpression0>Target_emissions</superExpression0>
+            <format>0.0##</format>
+            <fontcol>0,0,255</fontcol>
+            <systemName>Submodel_Marketing.stg</systemName>
+            <forecol>0,0,0</forecol>
+            <customprops>Name=Marketing</customprops>
+            <backcol>255,255,255</backcol>
+            <font>Serif,12</font>
+            <subVarNames>E_target_tot_peppe</subVarNames>
+        </node>
+        <node name="Passengers" type="ModelNode" pos-x="820" pos-y="100" width="161" height="45">
+            <superExpression2>initial_prices</superExpression2>
+            <subvisible>false</subvisible>
+            <superExpression1>prices_array_today</superExpression1>
+            <superExpression0>Marketing.M_t</superExpression0>
             <format>0.0##</format>
             <fontcol>0,0,255</fontcol>
             <systemName>Submodel_Passengers.stg</systemName>
@@ -59,36 +55,17 @@
             <customprops>Name=Customer_Base</customprops>
             <backcol>255,255,255</backcol>
             <font>SansSerif,12</font>
+            <subVarNames>M_t,P_t,bB</subVarNames>
         </node>
-        <node name="TP_t" type="ValueNode" pos-x="1050" pos-y="300" width="75" height="45">
+        <node name="Target_emissions" type="ValueNode" pos-x="710" pos-y="350" width="71" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <isOut>false</isOut>
-            <fStateInit/>
-            <format>0.0##</format>
-            <fExpression/>
-            <fStateTrans/>
-            <expression/>
-            <isGlobal>false</isGlobal>
-            <isIn>false</isIn>
-            <stateInit/>
-            <isVectorOut>false</isVectorOut>
-            <fontcol>0,0,255</fontcol>
-            <stateTrans/>
-            <backcol>255,255,255</backcol>
-            <customprops>Name=Ticket Price</customprops>
-            <valueType>0</valueType>
-        </node>
-        <node name="Target_emissions" type="ValueNode" pos-x="830" pos-y="300" width="71" height="45">
-            <font>SansSerif,12</font>
-            <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
             <fExpression>0</fExpression>
             <fStateTrans/>
-            <expression>0.0</expression>
+            <expression>287.0</expression>
             <isGlobal>false</isGlobal>
             <isIn>true</isIn>
             <stateInit/>
@@ -99,44 +76,6 @@
             <customprops>Name=Target_emissioni</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="TicketEmissions_array" type="ValueNode" pos-x="950" pos-y="300" width="75" height="45">
-            <font>SansSerif,12</font>
-            <forecol>0,0,0</forecol>
-            <isOut>false</isOut>
-            <fStateInit/>
-            <format>0.0##</format>
-            <fExpression/>
-            <fStateTrans/>
-            <expression/>
-            <isGlobal>false</isGlobal>
-            <isIn>false</isIn>
-            <stateInit/>
-            <isVectorOut>false</isVectorOut>
-            <fontcol>0,0,255</fontcol>
-            <stateTrans/>
-            <backcol>255,255,255</backcol>
-            <customprops>Name=TicketEmissions_array</customprops>
-            <valueType>0</valueType>
-        </node>
-        <node name="Y_Tot_nCO2e" type="ValueNode" pos-x="480" pos-y="330" width="151" height="45">
-            <font>SansSerif,12</font>
-            <forecol>0,0,0</forecol>
-            <isOut>true</isOut>
-            <fStateInit>0</fStateInit>
-            <format>0.0##</format>
-            <fExpression/>
-            <fStateTrans>this+12*kg_CO2e-spesa_crediti_CO2_acquistati</fStateTrans>
-            <expression/>
-            <isGlobal>false</isGlobal>
-            <isIn>false</isIn>
-            <stateInit>0</stateInit>
-            <isVectorOut>false</isVectorOut>
-            <fontcol>0,0,255</fontcol>
-            <stateTrans>this+12*kg_CO2e-spesa_crediti_CO2_acquistati</stateTrans>
-            <backcol>255,255,255</backcol>
-            <customprops>Name=emissioni_nette</customprops>
-            <valueType>1</valueType>
-        </node>
         <node name="aircraft_hourly_fuel_consumption" type="ValueNode" pos-x="570" pos-y="30" width="245" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
@@ -146,7 +85,7 @@
             <format>0.0##</format>
             <fExpression>[12,12,12,12]</fExpression>
             <fStateTrans/>
-            <expression>0.0</expression>
+            <expression>[2900.0,2600.0,2750.0,2400.0]</expression>
             <isGlobal>false</isGlobal>
             <isIn>true</isIn>
             <stateInit/>
@@ -157,16 +96,34 @@
             <customprops>Name=Aircraft Fuel Consumption Data</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="daily_green_marketing_expense" type="ValueNode" pos-x="730" pos-y="460" width="75" height="45">
-            <font>SansSerif,12</font>
+        <node name="current_sales" type="ValueNode" pos-x="460" pos-y="530" width="75" height="45">
+            <font>Serif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>0</fExpression>
+            <fExpression>Management.current_sales</fExpression>
             <fStateTrans/>
-            <expression>0.0</expression>
+            <expression>Management.current_sales</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=current_sales</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="initial_prices" type="ValueNode" pos-x="750" pos-y="270" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>[150,120,130,180]</fExpression>
+            <fStateTrans/>
+            <expression>[150,120,130,180]</expression>
             <isGlobal>false</isGlobal>
             <isIn>true</isIn>
             <stateInit/>
@@ -174,48 +131,10 @@
             <fontcol>0,0,255</fontcol>
             <stateTrans/>
             <backcol>255,255,255</backcol>
-            <customprops>Name=daily_green_marketing_expense</customprops>
+            <customprops>Name=initial_prices</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="emission_target_reached" type="ValueNode" pos-x="700" pos-y="310" width="75" height="45">
-            <font>SansSerif,12</font>
-            <forecol>0,0,0</forecol>
-            <isOut>true</isOut>
-            <fStateInit/>
-            <format>0.0##</format>
-            <fExpression/>
-            <fStateTrans/>
-            <expression/>
-            <isGlobal>false</isGlobal>
-            <isIn>false</isIn>
-            <stateInit/>
-            <isVectorOut>false</isVectorOut>
-            <fontcol>0,0,255</fontcol>
-            <stateTrans/>
-            <backcol>255,255,255</backcol>
-            <customprops>Name=emission_target_reached</customprops>
-            <valueType>0</valueType>
-        </node>
-        <node name="emissions_target_not_reached" type="ValueNode" pos-x="700" pos-y="250" width="75" height="45">
-            <font>SansSerif,12</font>
-            <forecol>0,0,0</forecol>
-            <isOut>true</isOut>
-            <fStateInit/>
-            <format>0.0##</format>
-            <fExpression/>
-            <fStateTrans/>
-            <expression/>
-            <isGlobal>false</isGlobal>
-            <isIn>false</isIn>
-            <stateInit/>
-            <isVectorOut>false</isVectorOut>
-            <fontcol>0,0,255</fontcol>
-            <stateTrans/>
-            <backcol>255,255,255</backcol>
-            <customprops>Name=emissions_target_not_reached</customprops>
-            <valueType>0</valueType>
-        </node>
-        <node name="kg_CO2e" type="ValueNode" pos-x="450" pos-y="210" width="191" height="45">
+        <node name="kg_CO2e" type="ValueNode" pos-x="400" pos-y="210" width="91" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>false</isOut>
@@ -234,10 +153,50 @@
             <customprops>Name=tons_of_CO2_per_flight</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="n_tickets_array" type="ValueNode" pos-x="850" pos-y="110" width="121" height="45">
+        <node name="marketing_costs" type="ValueNode" pos-x="710" pos-y="400" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>Marketing.marketing_cost</fExpression>
+            <fStateTrans/>
+            <expression>Marketing.marketing_cost</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=marketing_costs</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="max_marketing_expense_quarterly" type="ValueNode" pos-x="710" pos-y="450" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>0</fExpression>
+            <fStateTrans/>
+            <expression>45000.0</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=max_marketing_expense_quarterly</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="n_tickets_array_today" type="ValueNode" pos-x="640" pos-y="110" width="121" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <isOut>false</isOut>
+            <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
             <fExpression>Passengers.TD_t</fExpression>
@@ -250,7 +209,7 @@
             <fontcol>0,0,255</fontcol>
             <stateTrans/>
             <backcol>255,255,255</backcol>
-            <customprops>Name=voli</customprops>
+            <customprops>Name=n_tickets_array_today</customprops>
             <valueType>0</valueType>
         </node>
         <node name="one_way_flight_duration" type="ValueNode" pos-x="420" pos-y="30" width="101" height="45">
@@ -262,7 +221,7 @@
             <format>0.0##</format>
             <fExpression>[4,5,3,8]</fExpression>
             <fStateTrans/>
-            <expression>0.0</expression>
+            <expression>[1.75,1.4,1.25,1.15]</expression>
             <isGlobal>false</isGlobal>
             <isIn>true</isIn>
             <stateInit/>
@@ -273,35 +232,15 @@
             <customprops>Name=trip_data</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="operating_costs" type="ValueNode" pos-x="650" pos-y="170" width="75" height="45">
-            <font>SansSerif,12</font>
-            <forecol>0,0,0</forecol>
-            <isOut>false</isOut>
-            <fStateInit/>
-            <format>0.0##</format>
-            <fExpression/>
-            <fStateTrans/>
-            <expression/>
-            <isGlobal>false</isGlobal>
-            <isIn>false</isIn>
-            <stateInit/>
-            <isVectorOut>false</isVectorOut>
-            <fontcol>0,0,255</fontcol>
-            <stateTrans/>
-            <backcol>255,255,255</backcol>
-            <customprops>Name=operating_costs</customprops>
-            <valueType>0</valueType>
-        </node>
         <node name="percentage_of_saf" type="ValueNode" pos-x="410" pos-y="110" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
             <fExpression>0</fExpression>
             <fStateTrans/>
-            <expression>0.0</expression>
+            <expression>0.5</expression>
             <isGlobal>false</isGlobal>
             <isIn>true</isIn>
             <stateInit/>
@@ -312,16 +251,34 @@
             <customprops>Name=fuel_mix</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="profit_margin" type="ValueNode" pos-x="810" pos-y="540" width="75" height="45">
-            <font>SansSerif,12</font>
+        <node name="prices_array_today" type="ValueNode" pos-x="730" pos-y="190" width="75" height="45">
+            <font>Serif,12</font>
             <forecol>0,0,0</forecol>
-            <documentation/>
+            <isOut>true</isOut>
+            <fStateInit>initial_prices</fStateInit>
+            <format>0.0##</format>
+            <fExpression>Management.prices</fExpression>
+            <fStateTrans>Management.prices</fStateTrans>
+            <expression>Management.prices</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit>initial_prices</stateInit>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans>Management.prices</stateTrans>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=prices_array</customprops>
+            <valueType>1</valueType>
+        </node>
+        <node name="revenues_today" type="ValueNode" pos-x="610" pos-y="200" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression/>
+            <fExpression>+/(n_tickets_array_today*prices_array_today)</fExpression>
             <fStateTrans/>
-            <expression/>
+            <expression>+/(n_tickets_array_today*prices_array_today)</expression>
             <isGlobal>false</isGlobal>
             <isIn>false</isIn>
             <stateInit/>
@@ -329,38 +286,18 @@
             <fontcol>0,0,255</fontcol>
             <stateTrans/>
             <backcol>255,255,255</backcol>
-            <customprops>Name=profit</customprops>
+            <customprops>Name=cashflow_in</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="spesa_crediti_CO2_acquistati" type="ValueNode" pos-x="420" pos-y="450" width="261" height="45">
+        <node name="target_quarterly_dividends" type="ValueNode" pos-x="440" pos-y="430" width="211" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
-            <isOut>false</isOut>
-            <fStateInit/>
-            <format>0.0##</format>
-            <fExpression>min(max_CO2_expense_today,(max(prezzo_CO2*min(distanza_dal_target,Green_budget),0)))</fExpression>
-            <fStateTrans/>
-            <expression>min(max_CO2_expense_today,(max(prezzo_CO2*min(distanza_dal_target,Green_budget),0)))</expression>
-            <isGlobal>false</isGlobal>
-            <isIn>false</isIn>
-            <stateInit/>
-            <isVectorOut>false</isVectorOut>
-            <fontcol>0,0,255</fontcol>
-            <stateTrans/>
-            <backcol>255,255,255</backcol>
-            <customprops>Name=costo_emissioni</customprops>
-            <valueType>0</valueType>
-        </node>
-        <node name="target_quarterly_dividends" type="ValueNode" pos-x="880" pos-y="500" width="211" height="45">
-            <font>SansSerif,12</font>
-            <forecol>0,0,0</forecol>
-            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
             <fExpression>0</fExpression>
             <fStateTrans/>
-            <expression>0.0</expression>
+            <expression>79258.0</expression>
             <isGlobal>false</isGlobal>
             <isIn>true</isIn>
             <stateInit/>
@@ -379,35 +316,31 @@
         <text name="*text4" pos-x="300" pos-y="20" width="81" height="91" content="&lt;html&gt;   &lt;head&gt;        &lt;/head&gt;   &lt;body&gt;     &lt;p align=&quot;center&quot; style=&quot;margin-top: 0&quot;&gt;       &lt;small&gt;&lt;big&gt;&lt;font size=&quot;4&quot;&gt;A321 Neo&lt;/font&gt;&lt;/big&gt;&lt;/small&gt;&lt;font size=&quot;4&quot;&gt;&lt;br&gt;CDG&lt;br&gt;FRA&lt;br&gt;5        &lt;small&gt;&lt;big&gt;Round Trips/day&lt;/big&gt;&lt;/small&gt;&lt;/font&gt;     &lt;/p&gt;   &lt;/body&gt; &lt;/html&gt; "/>
     </texts>
     <edges>
-        <edge source="daily_green_marketing_expense" target="Management" label="(...)"/>
-        <edge source="operating_costs" target="Management" label="(...)"/>
-        <edge source="Fleet" target="operating_costs" label="(...)"/>
-        <edge source="target_quarterly_dividends" target="Management" label="(...)" p0x="1145.5" p0y="412.5" p1x="915.5" p1y="412.5" numpoints="2"/>
-        <edge source="spesa_crediti_CO2_acquistati" target="CO2_Market" label="(...)" p0x="550.5" p0y="472.5" p1x="545.5" p1y="582.5" numpoints="2"/>
-        <edge source="CO2_price" target="Management" label="(...)" p0x="727.5" p0y="582.5" p1x="915.5" p1y="412.5" numpoints="2"/>
-        <edge source="CO2_Market" target="CO2_price" label="(...)" p0x="545.5" p0y="582.5" p1x="727.5" p1y="582.5" numpoints="2"/>
-        <edge source="Fleet" target="kg_CO2e" label="(...)" p0x="547.5" p0y="132.5" p1x="552.5" p1y="222.5" numpoints="2"/>
-        <edge source="Y_Tot_nCO2e" target="Management" label="(...)" p0x="550.5" p0y="352.5" p1x="915.5" p1y="412.5" numpoints="2"/>
-        <edge source="Target_emissions" target="Management" label="(...)" p0x="1140.5" p0y="582.5" p1x="915.5" p1y="412.5" numpoints="2"/>
-        <edge source="Management" target="TP_t" label="(...)" p0x="915.5" p0y="412.5" p1x="827.5" p1y="322.5" numpoints="2"/>
-        <edge source="n_tickets_array" target="Management" label="(...)"/>
-        <edge source="aircraft_hourly_fuel_consumption" target="Fleet" label="(...)" p0x="552.5" p0y="52.5" p1x="547.5" p1y="132.5" numpoints="2"/>
-        <edge source="n_tickets_array" target="Fleet" label="(...)" p0x="910.5" p0y="132.5" p1x="547.5" p1y="132.5" numpoints="2"/>
-        <edge source="TP_t" target="Passengers" label="(...)" p0x="827.5" p0y="322.5" p1x="910.5" p1y="222.5" numpoints="2"/>
-        <edge source="Passengers" target="n_tickets_array" label="(...)" p0x="910.5" p0y="222.5" p1x="910.5" p1y="132.5" numpoints="2"/>
-        <edge source="Y_Tot_nCO2e" target="Passengers" label="(...)" p0x="550.5" p0y="352.5" p1x="910.5" p1y="222.5" numpoints="2"/>
-        <edge source="spesa_crediti_CO2_acquistati" target="Y_Tot_nCO2e" label="(...)" p0x="550.5" p0y="472.5" p1x="550.5" p1y="352.5" numpoints="2"/>
-        <edge source="kg_CO2e" target="Y_Tot_nCO2e" label="(...)" p0x="552.5" p0y="222.5" p1x="550.5" p1y="352.5" numpoints="2"/>
-        <edge source="Management" target="TicketEmissions_array" label="(...)" p0x="915.5" p0y="412.5" p1x="987.5" p1y="322.5" numpoints="2"/>
-        <edge source="TicketEmissions_array" target="Passengers" label="(...)" p0x="987.5" p0y="322.5" p1x="910.5" p1y="222.5" numpoints="2"/>
-        <edge source="Management" target="spesa_crediti_CO2_acquistati" label="(...)" p0x="915.5" p0y="412.5" p1x="550.5" p1y="472.5" numpoints="2"/>
-        <edge source="Management" target="profit_margin" label="(...)" p0x="915.5" p0y="412.5" p1x="917.5" p1y="592.5" numpoints="2"/>
-        <edge source="one_way_flight_duration" target="Fleet" label="(...)" p0x="427.5" p0y="132.5" p1x="547.5" p1y="132.5" numpoints="2"/>
-        <edge source="Target_emissions" target="emissions_target_not_reached" label="(...)"/>
-        <edge source="Target_emissions" target="emission_target_reached" label="(...)"/>
-        <edge source="Y_Tot_nCO2e" target="emission_target_reached" label="(...)"/>
-        <edge source="emission_target_reached" target="emissions_target_not_reached" label="(...)"/>
+        <edge source="max_marketing_expense_quarterly" target="Management" label="(...)"/>
+        <edge source="max_marketing_expense_quarterly" target="Marketing" label="(...)"/>
+        <edge source="Target_emissions" target="Marketing" label="(...)"/>
+        <edge source="initial_prices" target="Passengers" label="(...)"/>
+        <edge source="initial_prices" target="prices_array_today" label="(...)"/>
+        <edge source="prices_array_today" target="Passengers" label="(...)"/>
+        <edge source="n_tickets_array_today" target="revenues_today" label="(...)"/>
+        <edge source="prices_array_today" target="revenues_today" label="(...)"/>
+        <edge source="revenues_today" target="Management" label="(...)"/>
+        <edge source="Management" target="Marketing" label="(...)"/>
+        <edge source="Marketing" target="Passengers" label="(...)"/>
         <edge source="percentage_of_saf" target="Fleet" label="(...)"/>
+        <edge source="one_way_flight_duration" target="Fleet" label="(...)" p0x="427.5" p0y="132.5" p1x="547.5" p1y="132.5" numpoints="2"/>
+        <edge source="Passengers" target="n_tickets_array_today" label="(...)" p0x="910.5" p0y="222.5" p1x="910.5" p1y="132.5" numpoints="2"/>
+        <edge source="n_tickets_array_today" target="Fleet" label="(...)" p0x="910.5" p0y="132.5" p1x="547.5" p1y="132.5" numpoints="2"/>
+        <edge source="aircraft_hourly_fuel_consumption" target="Fleet" label="(...)" p0x="552.5" p0y="52.5" p1x="547.5" p1y="132.5" numpoints="2"/>
+        <edge source="Target_emissions" target="Management" label="(...)" p0x="1140.5" p0y="582.5" p1x="915.5" p1y="412.5" numpoints="2"/>
+        <edge source="Fleet" target="kg_CO2e" label="(...)" p0x="547.5" p0y="132.5" p1x="552.5" p1y="222.5" numpoints="2"/>
+        <edge source="target_quarterly_dividends" target="Management" label="(...)" p0x="1145.5" p0y="412.5" p1x="915.5" p1y="412.5" numpoints="2"/>
+        <edge source="Fleet" target="Management" label="(...)"/>
+        <edge source="Management" target="prices_array_today" label="(...)"/>
+        <edge source="initial_prices" target="Management" label="(...)"/>
+        <edge source="Management" target="current_sales" label="(...)"/>
+        <edge source="Marketing" target="marketing_costs" label="(...)"/>
+        <edge source="marketing_costs" target="Management" label="(...)"/>
     </edges>
     <widgets>
         <widget type="SliderWidget" pos-x="20" pos-y="330" width="360" height="100">
@@ -421,28 +354,28 @@
             <iconized>false</iconized>
             <title>Target_emissions: 287.0</title>
         </widget>
-        <widget type="InputTableWidget" pos-x="20" pos-y="110" width="360" height="60">
+        <widget type="InputTableWidget" pos-x="120" pos-y="110" width="140" height="120">
             <fontsize>20</fontsize>
-            <widgetvalue>[[2900.02,2600.0,2750.0,2400.0]]</widgetvalue>
+            <widgetvalue>[2900.0,2600.0,2750.0,2400.0]</widgetvalue>
             <showtitlebar>true</showtitlebar>
             <source>aircraft_hourly_fuel_consumption</source>
             <iconized>false</iconized>
-            <rows>1</rows>
+            <rows>4</rows>
             <colalignment>1</colalignment>
             <colformat>###0</colformat>
-            <cols>4</cols>
+            <cols>1</cols>
             <title>aircraft_hourly_fuel_consumption</title>
         </widget>
-        <widget type="InputTableWidget" pos-x="20" pos-y="170" width="360" height="60">
+        <widget type="InputTableWidget" pos-x="260" pos-y="110" width="120" height="120">
             <fontsize>20</fontsize>
-            <widgetvalue>[[1.75,1.4,1.25,1.15]]</widgetvalue>
+            <widgetvalue>[1.75,1.4,1.25,1.15]</widgetvalue>
             <showtitlebar>true</showtitlebar>
             <source>one_way_flight_duration</source>
             <iconized>false</iconized>
-            <rows>1</rows>
+            <rows>4</rows>
             <colalignment>1</colalignment>
             <colformat>###0.0###</colformat>
-            <cols>4</cols>
+            <cols>1</cols>
             <title>one_way_flight_duration</title>
         </widget>
         <widget type="SliderWidget" pos-x="20" pos-y="230" width="360" height="100">
@@ -456,11 +389,11 @@
             <iconized>false</iconized>
             <title>target_quarterly_dividends: 79258.0</title>
         </widget>
-        <widget type="ChartWidget" pos-x="1030" pos-y="20" width="390" height="240">
+        <widget type="ChartWidget" pos-x="1020" pos-y="30" width="390" height="240">
             <iconized>false</iconized>
             <showtitlebar>true</showtitlebar>
         </widget>
-        <widget type="ChartWidget" pos-x="1040" pos-y="380" width="370" height="260">
+        <widget type="ChartWidget" pos-x="1020" pos-y="280" width="370" height="260">
             <iconized>false</iconized>
             <showtitlebar>true</showtitlebar>
         </widget>
@@ -477,14 +410,26 @@
         </widget>
         <widget type="SliderWidget" pos-x="20" pos-y="530" width="360" height="90">
             <0>0</0>
-            <widgetvalue>0.0</widgetvalue>
+            <widgetvalue>45000.0</widgetvalue>
             <max>100000</max>
             <min>0.0</min>
             <showtitlebar>true</showtitlebar>
-            <source>daily_green_marketing_expense</source>
+            <source>max_marketing_expense_quarterly</source>
             <delta>1000</delta>
             <iconized>false</iconized>
-            <title>daily_green_marketing_expense: 0.0</title>
+            <title>max_marketing_expense_quarterly: 45000.0</title>
+        </widget>
+        <widget type="DataTableWidget" pos-x="840" pos-y="420" width="150" height="160">
+            <fontsize>10</fontsize>
+            <colwidth>70,70</colwidth>
+            <autowidth>true</autowidth>
+            <showtitlebar>true</showtitlebar>
+            <iconized>false</iconized>
+            <colalignment>0,0</colalignment>
+            <colformat>###0.0###,###0.0###</colformat>
+            <title>n_tickets_array_today prices_array_today </title>
+            <lastonly>false</lastonly>
+            <sourcena>n_tickets_array_today,prices_array_today</sourcena>
         </widget>
     </widgets>
     <groups/>

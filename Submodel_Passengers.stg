@@ -1,5 +1,5 @@
 <stgraph class="STGraph.decoder" version="STGraph build 22.12">
-    <head systemName="" description="" timeUnitDescription="" timeFrame="0" time0="1.0" time1="1095.0" timeD="1.0" maxSteps="10" batchSteps="1" width="1440" height="789" scale="1.0" simulationDelay="1" stepsBeforePause="1" integrationMethod="0" exceptionHandling="1" withInterrupts="false" isDataSaved="false" forNet="false" serverAddress="" forWeb="false" webModelLanguages="" webModelDescription="" webTimeUnit="" webExplTitle="" webExplURL="" webModelGroups="" indexOrigin="0" isGraphVisible="true" areWidgetsVisible="true"/>
+    <head systemName="" description="" timeUnitDescription="" timeFrame="0" time0="1.0" time1="1095.0" timeD="1.0" maxSteps="10" batchSteps="1" width="1552" height="789" scale="1.0" simulationDelay="100" stepsBeforePause="1" integrationMethod="0" exceptionHandling="1" withInterrupts="false" isDataSaved="false" forNet="false" serverAddress="" forWeb="false" webModelLanguages="" webModelDescription="" webTimeUnit="" webExplTitle="" webExplURL="" webModelGroups="" indexOrigin="0" isGraphVisible="true" areWidgetsVisible="true"/>
     <nodes>
         <node name="ABP_t" type="ValueNode" pos-x="650" pos-y="310" width="75" height="45">
             <font>SansSerif,12</font>
@@ -38,7 +38,8 @@ High in a market where nobody cares, low or zero in a Green Market.</documentati
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>100</fExpression>
+            <fExpression>100
+</fExpression>
             <fStateTrans/>
             <expression>100</expression>
             <isGlobal>false</isGlobal>
@@ -56,10 +57,12 @@ High in a market where nobody cares, low or zero in a Green Market.</documentati
             <forecol>0,0,0</forecol>
             <documentation>Baseline reference of how much should a flight pollute, in the mind of the customer</documentation>
             <isOut>false</isOut>
-            <fStateInit>B_CO2e_0</fStateInit>
+            <fStateInit>B_CO2e_0
+</fStateInit>
             <format>0.0##</format>
             <fExpression>20</fExpression>
-            <fStateTrans>this-this*M_t</fStateTrans>
+            <fStateTrans>this-this*M_t
+</fStateTrans>
             <expression>20</expression>
             <isGlobal>false</isGlobal>
             <isIn>false</isIn>
@@ -116,7 +119,8 @@ High in a market where nobody cares, low or zero in a Green Market.</documentati
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>[10,9,30,10]</fExpression>
+            <fExpression>[10,9,30,10]
+</fExpression>
             <fStateTrans/>
             <expression>[10,9,30,10]</expression>
             <isGlobal>false</isGlobal>
@@ -128,19 +132,6 @@ High in a market where nobody cares, low or zero in a Green Market.</documentati
             <backcol>64,64,64</backcol>
             <customprops>Name=emissioni</customprops>
             <valueType>0</valueType>
-        </node>
-        <node name="Hist_d" type="ModelNode" pos-x="470" pos-y="40" width="75" height="45">
-            <subvisible>false</subvisible>
-            <format>0.0##</format>
-            <fontcol>0,0,255</fontcol>
-            <systemName>Submodel_Historical_Flights_Demand_Data.stg</systemName>
-            <forecol>0,0,0</forecol>
-            <customprops>Name=Historical Data</customprops>
-            <backcol>255,255,255</backcol>
-            <font>SansSerif,12</font>
-            <documentation>Flight Demand from Historical Data
-
-Peaks in december and june-august</documentation>
         </node>
         <node name="MS" type="ValueNode" pos-x="650" pos-y="40" width="75" height="45">
             <font>SansSerif,12</font>
@@ -241,23 +232,24 @@ Average calculated on the year</documentation>
             <customprops>Name=MXP_LHR</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="M_t" type="ValueNode" pos-x="50" pos-y="520" width="75" height="45">
-            <font>SansSerif,12</font>
-            <forecol>64,64,64</forecol>
+        <node name="M_t" type="ValueNode" pos-x="70" pos-y="520" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>0.0</fExpression>
+            <fExpression>0.1</fExpression>
             <fStateTrans/>
-            <expression>0.0</expression>
+            <expression>0.1</expression>
             <isGlobal>false</isGlobal>
             <isIn>true</isIn>
             <stateInit/>
             <isVectorOut>false</isVectorOut>
-            <fontcol>0,0,0</fontcol>
+            <fontcol>0,0,255</fontcol>
             <stateTrans/>
             <backcol>0,255,0</backcol>
-            <customprops>Name=Marketing Rate</customprops>
+            <customprops>Name=M_t</customprops>
             <valueType>0</valueType>
         </node>
         <node name="P_t" type="ValueNode" pos-x="210" pos-y="130" width="75" height="45">
@@ -286,10 +278,12 @@ Usually an input from the supermodel</documentation>
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>false</isOut>
-            <fStateInit>0.01</fStateInit>
+            <fStateInit>0.01
+</fStateInit>
             <format>0.0##</format>
             <fExpression>1</fExpression>
-            <fStateTrans>this+this*M_t</fStateTrans>
+            <fStateTrans>this+this*M_t
+</fStateTrans>
             <expression>1</expression>
             <isGlobal>false</isGlobal>
             <isIn>false</isIn>
@@ -332,9 +326,9 @@ Usually an input from the supermodel</documentation>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>Hist_d.interpolation</fExpression>
+            <fExpression>interpolation</fExpression>
             <fStateTrans/>
-            <expression>Hist_d.interpolation</expression>
+            <expression>interpolation</expression>
             <isGlobal>false</isGlobal>
             <isIn>false</isIn>
             <stateInit/>
@@ -373,7 +367,8 @@ Given people looking for this date and average booking probability for this date
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>u0+uCO2e_t+uP_t</fExpression>
+            <fExpression>u0+uCO2e_t+uP_t
+</fExpression>
             <fStateTrans/>
             <expression>u0+uCO2e_t+uP_t</expression>
             <isGlobal>false</isGlobal>
@@ -452,7 +447,8 @@ For example, a market average over the entire year.</documentation>
             <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>uCO2e_t[3]</fExpression>
+            <fExpression>uCO2e_t[3]
+</fExpression>
             <fStateTrans/>
             <expression>uCO2e_t[3]</expression>
             <isGlobal>false</isGlobal>
@@ -520,6 +516,26 @@ For example, a market average over the entire year.</documentation>
             <stateTrans/>
             <backcol>255,255,255</backcol>
             <customprops>Name=MXP_LHR</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="interpolation" type="ValueNode" pos-x="470" pos-y="60" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation>mi da la stagionalit&#xe0;</documentation>
+            <isOut>true</isOut>
+            <fStateInit>1</fStateInit>
+            <format>0.0##</format>
+            <fExpression>pline(vx,`vy,`time)</fExpression>
+            <fStateTrans/>
+            <expression>pline(vx,vy,time)</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>false</isIn>
+            <stateInit>1</stateInit>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=season_level</customprops>
             <valueType>0</valueType>
         </node>
         <node name="n_outbound_tickets_sold" type="ValueNode" pos-x="1110" pos-y="320" width="75" height="45">
@@ -722,7 +738,8 @@ The steepness of the curve around the point where the utility curve changes betw
             <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>R_CO2*(1-(CO2e/B_CO2e_t))~</fExpression>
+            <fExpression>R_CO2*(1-(CO2e/B_CO2e_t))~
+</fExpression>
             <fStateTrans/>
             <expression>R_CO2*(1-(CO2e/B_CO2e_t))</expression>
             <isGlobal>false</isGlobal>
@@ -748,7 +765,8 @@ example: 1, -1</documentation>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>R_P*(1-(P_t/B_t))</fExpression>
+            <fExpression>R_P*(1-(P_t/B_t))
+</fExpression>
             <fStateTrans/>
             <expression>R_P*(1-(P_t/B_t))</expression>
             <isGlobal>false</isGlobal>
@@ -761,9 +779,48 @@ example: 1, -1</documentation>
             <customprops>Name=Ticket Utility based on Price</customprops>
             <valueType>0</valueType>
         </node>
+        <node name="vx" type="ValueNode" pos-x="410" pos-y="0" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>[1,15,46,60,90,120,151,181,212,243,273,304,334,350,365,366,380,411,425,455,485,516,546,577,608,638,669,699,715,730,731,745,776,790,820,850,881,911,942,973,1003,1034,1064,1080,1095]</fExpression>
+            <fStateTrans/>
+            <expression>[1,15,46,60,90,120,151,181,212,243,273,304,334,350,365,366,380,411,425,455,485,516,546,577,608,638,669,699,715,730,731,745,776,790,820,850,881,911,942,973,1003,1034,1064,1080,1095]</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Unit=days;Name=Months Vector</customprops>
+            <valueType>0</valueType>
+        </node>
+        <node name="vy" type="ValueNode" pos-x="530" pos-y="0" width="75" height="45">
+            <font>SansSerif,12</font>
+            <forecol>0,0,0</forecol>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>[1.5,0.75,0.75,0.85,0.95,1.30,1.25,1.45,1.75,1.65,1.20,1.00,0.80,1,1.1,1.5,0.75,0.75,0.85,0.95,1.30,1.25,1.45,1.75,1.65,1.20,1.00,0.80,1,1.1,1.5,0.75,0.75,0.85,0.95,1.30,1.25,1.45,1.75,1.65,1.20,1.00,0.80,1,1.1]</fExpression>
+            <fStateTrans/>
+            <expression>[1.5,0.75,0.75,0.85,0.95,1.30,1.25,1.45,1.75,1.65,1.20,1.00,0.80,1,1.1,1.5,0.75,0.75,0.85,0.95,1.30,1.25,1.45,1.75,1.65,1.20,1.00,0.80,1,1.1,1.5,0.75,0.75,0.85,0.95,1.30,1.25,1.45,1.75,1.65,1.20,1.00,0.80,1,1.1]</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Unit=0-1;Name=Seasonal data Vector</customprops>
+            <valueType>0</valueType>
+        </node>
     </nodes>
     <texts/>
     <edges>
+        <edge source="interpolation" target="SL_t" label="(...)"/>
         <edge source="occupancy_rate_cumulator" target="avg_occupancy_rate" label="(...)"/>
         <edge source="occupancy_rates" target="occupancy_rate_cumulator" label="(...)"/>
         <edge source="n_outbound_tickets_sold" target="tickets_sold" label="(...)"/>
@@ -785,8 +842,6 @@ example: 1, -1</documentation>
         <edge source="MS_t" target="TD_t" label="(...)" p0x="687.5" p0y="152.5" p1x="867.5" p1y="332.5" numpoints="2"/>
         <edge source="ABP_t" target="TD_t" label="(...)" p0x="687.5" p0y="332.5" p1x="867.5" p1y="332.5" numpoints="2"/>
         <edge source="B_CO2e_0" target="B_CO2e_t" label="(...)" p0x="87.5" p0y="432.5" p1x="247.5" p1y="435.5" numpoints="2"/>
-        <edge source="M_t" target="B_CO2e_t" label="(...)" p0x="87.5" p0y="542.5" p1x="247.5" p1y="435.5" numpoints="2"/>
-        <edge source="M_t" target="R_CO2" label="(...)" p0x="87.5" p0y="542.5" p1x="247.5" p1y="542.5" numpoints="2"/>
         <edge source="s" target="ABP_t" label="(...)" p0x="687.5" p0y="412.5" p1x="687.5" p1y="332.5" numpoints="2"/>
         <edge source="U_t" target="ABP_t" label="(...)" p0x="517.5" p0y="332.5" p1x="687.5" p1y="332.5" numpoints="2"/>
         <edge source="uP_t" target="U_t" label="(...)" p0x="377.5" p0y="242.5" p1x="517.5" p1y="332.5" numpoints="2"/>
@@ -799,7 +854,6 @@ example: 1, -1</documentation>
         <edge source="B_CO2e_t" target="uCO2e_t" label="(...)" p0x="247.5" p0y="435.5" p1x="377.5" p1y="432.5" numpoints="2"/>
         <edge source="R_CO2" target="uCO2e_t" label="(...)" p0x="247.5" p0y="542.5" p1x="377.5" p1y="432.5" numpoints="2"/>
         <edge source="MS" target="MS_t" label="(...)" p0x="687.5" p0y="62.5" p1x="687.5" p1y="152.5" numpoints="2"/>
-        <edge source="Hist_d" target="SL_t" label="(...)" p0x="507.5" p0y="62.5" p1x="507.5" p1y="152.5" numpoints="2"/>
         <edge source="TD_t" target="CDG_FRA_3" label="(...)"/>
         <edge source="TD_t" target="MXP_LHR_0" label="(...)"/>
         <edge source="TD_t" target="MXP_FRA_2" label="(...)"/>
@@ -807,9 +861,13 @@ example: 1, -1</documentation>
         <edge source="return_demand" target="n_return_tickets_sold" label="(...)"/>
         <edge source="avail_seats" target="n_return_tickets_sold" label="(...)"/>
         <edge source="n_return_tickets_sold" target="tickets_sold" label="(...)"/>
+        <edge source="vx" target="interpolation" label="(...)" p0x="247.5" p0y="142.5" p1x="387.5" p1y="242.5" numpoints="2"/>
+        <edge source="vy" target="interpolation" label="(...)" p0x="147.5" p0y="252.5" p1x="387.5" p1y="242.5" numpoints="2"/>
+        <edge source="M_t" target="B_CO2e_t" label="(...)"/>
+        <edge source="M_t" target="R_CO2" label="(...)"/>
     </edges>
     <widgets>
-        <widget type="ChartWidget" pos-x="950" pos-y="420" width="470" height="290">
+        <widget type="ChartWidget" pos-x="1010" pos-y="420" width="500" height="270">
             <title>Demand of Tickets during the Years</title>
             <dotscolors>__GREEN,__GREEN,__BLUE,__BLACK</dotscolors>
             <linewidths>#1,#1,#1,#1</linewidths>
@@ -857,7 +915,7 @@ example: 1, -1</documentation>
             <showtitlebar>true</showtitlebar>
             <title>ABP_t: 0.3858319521630208</title>
         </widget>
-        <widget type="ChartWidget" pos-x="610" pos-y="420" width="350" height="290">
+        <widget type="ChartWidget" pos-x="600" pos-y="420" width="400" height="260">
             <title>Impact of CO2e on buyers decision</title>
             <dotscolors>__RED,__GREEN,__BLUE,__BLACK</dotscolors>
             <linewidths>#1,#1,#1,#1</linewidths>
@@ -904,6 +962,39 @@ example: 1, -1</documentation>
             <title>avg_occupancy_rate </title>
             <lastonly>true</lastonly>
             <sourcena>avg_occupancy_rate</sourcena>
+        </widget>
+        <widget type="ChartWidget" pos-x="0" pos-y="10" width="300" height="140">
+            <title/>
+            <dotscolors>__RED</dotscolors>
+            <linewidths>#1</linewidths>
+            <showline>true</showline>
+            <showtitlebar>true</showtitlebar>
+            <linecolors>__RED</linecolors>
+            <barscolors>__RED</barscolors>
+            <dotsstyles>__style1</dotsstyles>
+            <logscaley>false</logscaley>
+            <logscalex>false</logscalex>
+            <dotsxscales>#1</dotsxscales>
+            <showbars>false</showbars>
+            <autolegendy>true</autolegendy>
+            <ysourcena>interpolation</ysourcena>
+            <autolegendx>true</autolegendx>
+            <typey>2</typey>
+            <typex>2</typex>
+            <linestyles>__style1</linestyles>
+            <dotstype>dot</dotstype>
+            <dotsyscales>#1</dotsyscales>
+            <dotsangles>#0</dotsangles>
+            <dotssizes>#1</dotssizes>
+            <autoaxisy>true</autoaxisy>
+            <autoaxisx>true</autoaxisx>
+            <barswidths>#1</barswidths>
+            <dotshilast>false</dotshilast>
+            <iconized>false</iconized>
+            <showdots>false</showdots>
+            <xsourcena>vTime</xsourcena>
+            <isometric>false</isometric>
+            <dotslastonly>false</dotslastonly>
         </widget>
     </widgets>
     <groups/>

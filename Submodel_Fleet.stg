@@ -1,7 +1,7 @@
 <stgraph class="STGraph.decoder" version="STGraph build 22.12">
     <head systemName="Fleet Submodel" description="" timeUnitDescription="day" timeFrame="0" time0="0.0" time1="1095.0" timeD="1.0" maxSteps="10" batchSteps="1" width="1440" height="789" scale="1.0" simulationDelay="100" stepsBeforePause="1" integrationMethod="0" exceptionHandling="1" withInterrupts="false" isDataSaved="false" forNet="false" serverAddress="" forWeb="false" webModelLanguages="" webModelDescription="" webTimeUnit="" webExplTitle="" webExplURL="" webModelGroups="" indexOrigin="0" isGraphVisible="true" areWidgetsVisible="true"/>
     <nodes>
-        <node name="CO2e_Kerosene" type="ValueNode" pos-x="380" pos-y="90" width="75" height="45">
+        <node name="CO2e_Kerosene" type="ValueNode" pos-x="400" pos-y="30" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <documentation>Carburante,CO&#x2082;e per 1 L
@@ -23,7 +23,7 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=CO2e_Kerosene</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="CO2e_SAF" type="ValueNode" pos-x="260" pos-y="90" width="75" height="45">
+        <node name="CO2e_SAF" type="ValueNode" pos-x="260" pos-y="30" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <documentation>Carburante,CO&#x2082;e per 1 L
@@ -46,14 +46,16 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=CO2e_SAF</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="CO2e_cum" type="ValueNode" pos-x="430" pos-y="360" width="75" height="45">
+        <node name="CO2e_cum" type="ValueNode" pos-x="210" pos-y="200" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>true</isOut>
-            <fStateInit>0</fStateInit>
+            <fStateInit>0
+</fStateInit>
             <format>0.0##</format>
             <fExpression/>
-            <fStateTrans>this+kg_CO2e</fStateTrans>
+            <fStateTrans>this+kg_CO2e
+</fStateTrans>
             <expression/>
             <isGlobal>false</isGlobal>
             <isIn>false</isIn>
@@ -65,13 +67,14 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=CO2e_cum</customprops>
             <valueType>1</valueType>
         </node>
-        <node name="CO2e_mix" type="ValueNode" pos-x="320" pos-y="170" width="75" height="45">
+        <node name="CO2e_mix" type="ValueNode" pos-x="320" pos-y="110" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>percentage_of_SAF*CO2e_SAF+(1-percentage_of_SAF)*CO2e_Kerosene</fExpression>
+            <fExpression>percentage_of_SAF*CO2e_SAF+(1-percentage_of_SAF)*CO2e_Kerosene
+</fExpression>
             <fStateTrans/>
             <expression>percentage_of_SAF*CO2e_SAF+(1-percentage_of_SAF)*CO2e_Kerosene</expression>
             <isGlobal>false</isGlobal>
@@ -84,32 +87,34 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=CO2e_mix</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="CO2e_per_capita" type="ValueNode" pos-x="580" pos-y="360" width="75" height="45">
+        <node name="CO2e_per_capita" type="ValueNode" pos-x="530" pos-y="200" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
+            <documentation/>
             <isOut>false</isOut>
-            <fStateInit/>
+            <fStateInit>0</fStateInit>
             <format>0.0##</format>
-            <fExpression>kg_CO2e/n_tickets</fExpression>
-            <fStateTrans/>
-            <expression>kg_CO2e/n_tickets</expression>
+            <fExpression>kg_CO2e/(+/n_tickets)</fExpression>
+            <fStateTrans>kg_CO2e/(+/n_tickets)</fStateTrans>
+            <expression>kg_CO2e/(+/n_tickets)</expression>
             <isGlobal>false</isGlobal>
             <isIn>false</isIn>
-            <stateInit/>
+            <stateInit>0</stateInit>
             <isVectorOut>false</isVectorOut>
             <fontcol>0,0,255</fontcol>
-            <stateTrans/>
+            <stateTrans>kg_CO2e/(+/n_tickets)</stateTrans>
             <backcol>255,255,255</backcol>
             <customprops>Name=CO2e_per_capita</customprops>
-            <valueType>0</valueType>
+            <valueType>1</valueType>
         </node>
-        <node name="aircraft_hourly_fuel_consumption" type="ValueNode" pos-x="30" pos-y="490" width="291" height="45">
+        <node name="aircraft_hourly_fuel_consumption" type="ValueNode" pos-x="210" pos-y="560" width="291" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>[2900,2600,2750,2400]</fExpression>
+            <fExpression>[2900,2600,2750,2400]
+</fExpression>
             <fStateTrans/>
             <expression>[2900,2600,2750,2400]</expression>
             <isGlobal>false</isGlobal>
@@ -122,7 +127,7 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=aircraft_consumption_data</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="airport_taxes" type="ValueNode" pos-x="790" pos-y="530" width="75" height="45">
+        <node name="airport_taxes" type="ValueNode" pos-x="840" pos-y="480" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>false</isOut>
@@ -141,13 +146,14 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=airport_taxes</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="delay_factor" type="ValueNode" pos-x="60" pos-y="260" width="75" height="45">
+        <node name="delay_factor" type="ValueNode" pos-x="140" pos-y="480" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>rand(1,1.1)</fExpression>
+            <fExpression>rand(1,1.1)
+</fExpression>
             <fStateTrans/>
             <expression>rand(1,1.1)</expression>
             <isGlobal>false</isGlobal>
@@ -160,7 +166,7 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=delay_factor</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="expense_for_fuel_purchase" type="ValueNode" pos-x="790" pos-y="410" width="75" height="45">
+        <node name="expense_for_fuel_purchase" type="ValueNode" pos-x="700" pos-y="370" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>false</isOut>
@@ -179,13 +185,14 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=fuel_expense</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="fuel_mix_price" type="ValueNode" pos-x="670" pos-y="170" width="131" height="45">
+        <node name="fuel_mix_price" type="ValueNode" pos-x="670" pos-y="110" width="131" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>percentage_of_SAF*price_SAF+(1-percentage_of_SAF)*price_kerosene</fExpression>
+            <fExpression>percentage_of_SAF*price_SAF+(1-percentage_of_SAF)*price_kerosene
+</fExpression>
             <fStateTrans/>
             <expression>percentage_of_SAF*price_SAF+(1-percentage_of_SAF)*price_kerosene</expression>
             <isGlobal>false</isGlobal>
@@ -198,13 +205,14 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=fuel_cost</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="kg_CO2e" type="ValueNode" pos-x="310" pos-y="260" width="75" height="45">
+        <node name="kg_CO2e" type="ValueNode" pos-x="320" pos-y="200" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>true</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>CO2e_mix*(liters_of_fuel_bought_today)</fExpression>
+            <fExpression>CO2e_mix*(liters_of_fuel_bought_today)
+</fExpression>
             <fStateTrans/>
             <expression>CO2e_mix*(liters_of_fuel_bought_today)</expression>
             <isGlobal>false</isGlobal>
@@ -217,13 +225,14 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=CO2e</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="liters_of_fuel_bought_today" type="ValueNode" pos-x="380" pos-y="420" width="75" height="45">
+        <node name="liters_of_fuel_bought_today" type="ValueNode" pos-x="320" pos-y="370" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>+/liters_of_fuel_burned_daily</fExpression>
+            <fExpression>+/liters_of_fuel_burned_daily
+</fExpression>
             <fStateTrans/>
             <expression>+/liters_of_fuel_burned_daily</expression>
             <isGlobal>false</isGlobal>
@@ -236,13 +245,14 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=amount_of_fuel_bought_today</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="liters_of_fuel_burned_daily" type="ValueNode" pos-x="130" pos-y="380" width="75" height="45">
+        <node name="liters_of_fuel_burned_daily" type="ValueNode" pos-x="320" pos-y="480" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>delay_factor*(aircraft_hourly_fuel_consumption*number_of_trips_per_aircraft*one_way_flytime)</fExpression>
+            <fExpression>delay_factor*(aircraft_hourly_fuel_consumption*number_of_trips_per_aircraft*one_way_flytime)
+</fExpression>
             <fStateTrans/>
             <expression>delay_factor*(aircraft_hourly_fuel_consumption*number_of_trips_per_aircraft*one_way_flytime)</expression>
             <isGlobal>false</isGlobal>
@@ -255,9 +265,10 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=liters_of_fuel_needed_daily</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="n_tickets" type="ValueNode" pos-x="550" pos-y="260" width="131" height="45">
+        <node name="n_tickets" type="ValueNode" pos-x="500" pos-y="280" width="131" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
+            <documentation/>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
@@ -274,13 +285,14 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=n_tickets</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="number_of_trips_per_aircraft" type="ValueNode" pos-x="420" pos-y="510" width="75" height="45">
+        <node name="number_of_trips_per_aircraft" type="ValueNode" pos-x="530" pos-y="480" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>10</fExpression>
+            <fExpression>10
+</fExpression>
             <fStateTrans/>
             <expression>10</expression>
             <isGlobal>false</isGlobal>
@@ -293,13 +305,14 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=number_of_trips_per_aircraft</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="one_way_flytime" type="ValueNode" pos-x="50" pos-y="150" width="131" height="45">
+        <node name="one_way_flytime" type="ValueNode" pos-x="130" pos-y="370" width="131" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>[1.75,1.4,1.25,1.15]</fExpression>
+            <fExpression>[1.75,1.4,1.25,1.15]
+</fExpression>
             <fStateTrans/>
             <expression>[1.75,1.4,1.25,1.15]</expression>
             <isGlobal>false</isGlobal>
@@ -312,7 +325,7 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=trip_lenghts</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="percentage_of_SAF" type="ValueNode" pos-x="520" pos-y="150" width="75" height="45">
+        <node name="percentage_of_SAF" type="ValueNode" pos-x="530" pos-y="110" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>false</isOut>
@@ -320,7 +333,7 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <format>0.0##</format>
             <fExpression>0.5</fExpression>
             <fStateTrans/>
-            <expression>0.0</expression>
+            <expression>0.51</expression>
             <isGlobal>false</isGlobal>
             <isIn>true</isIn>
             <stateInit/>
@@ -331,7 +344,7 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=fuel_mix</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="price_SAF" type="ValueNode" pos-x="720" pos-y="70" width="75" height="45">
+        <node name="price_SAF" type="ValueNode" pos-x="770" pos-y="30" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>false</isOut>
@@ -350,14 +363,15 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=ecofuel</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="price_kerosene" type="ValueNode" pos-x="620" pos-y="70" width="75" height="45">
+        <node name="price_kerosene" type="ValueNode" pos-x="620" pos-y="30" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <documentation>&#x20ac;/L</documentation>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>rand(0.5,0.55)</fExpression>
+            <fExpression>rand(0.5,0.55)
+</fExpression>
             <fStateTrans/>
             <expression>rand(0.5,0.55)</expression>
             <isGlobal>false</isGlobal>
@@ -370,7 +384,7 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
             <customprops>Name=kerosene</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="tot_var_exp" type="ValueNode" pos-x="910" pos-y="430" width="75" height="45">
+        <node name="tot_var_exp" type="ValueNode" pos-x="700" pos-y="480" width="75" height="45">
             <font>SansSerif,12</font>
             <forecol>0,0,0</forecol>
             <isOut>true</isOut>
@@ -392,27 +406,27 @@ Jet A-1 (kerosene fossile),&quot;3,88 kg CO&#x2082;e / L&quot;,EASA / ICAO CORSI
     </nodes>
     <texts/>
     <edges>
-        <edge source="liters_of_fuel_bought_today" target="kg_CO2e" label="(...)"/>
-        <edge source="airport_taxes" target="tot_var_exp" label="(...)"/>
-        <edge source="expense_for_fuel_purchase" target="tot_var_exp" label="(...)"/>
-        <edge source="kg_CO2e" target="CO2e_cum" label="(...)"/>
-        <edge source="CO2e_SAF" target="CO2e_mix" label="(...)"/>
-        <edge source="CO2e_Kerosene" target="CO2e_mix" label="(...)"/>
-        <edge source="delay_factor" target="liters_of_fuel_burned_daily" label="(...)"/>
-        <edge source="one_way_flytime" target="liters_of_fuel_burned_daily" label="(...)"/>
-        <edge source="aircraft_hourly_fuel_consumption" target="liters_of_fuel_burned_daily" label="(...)"/>
-        <edge source="percentage_of_SAF" target="fuel_mix_price" label="(...)"/>
-        <edge source="price_SAF" target="fuel_mix_price" label="(...)"/>
-        <edge source="price_kerosene" target="fuel_mix_price" label="(...)"/>
-        <edge source="number_of_trips_per_aircraft" target="liters_of_fuel_burned_daily" label="(...)"/>
-        <edge source="fuel_mix_price" target="expense_for_fuel_purchase" label="(...)"/>
-        <edge source="liters_of_fuel_bought_today" target="expense_for_fuel_purchase" label="(...)"/>
-        <edge source="liters_of_fuel_burned_daily" target="liters_of_fuel_bought_today" label="(...)"/>
-        <edge source="CO2e_mix" target="kg_CO2e" label="(...)"/>
-        <edge source="percentage_of_SAF" target="CO2e_mix" label="(...)"/>
-        <edge source="kg_CO2e" target="CO2e_per_capita" label="(...)"/>
-        <edge source="n_tickets" target="CO2e_per_capita" label="(...)"/>
         <edge source="number_of_trips_per_aircraft" target="tot_var_exp" label="(...)"/>
+        <edge source="n_tickets" target="CO2e_per_capita" label="(...)"/>
+        <edge source="kg_CO2e" target="CO2e_per_capita" label="(...)"/>
+        <edge source="percentage_of_SAF" target="CO2e_mix" label="(...)"/>
+        <edge source="CO2e_mix" target="kg_CO2e" label="(...)"/>
+        <edge source="liters_of_fuel_burned_daily" target="liters_of_fuel_bought_today" label="(...)"/>
+        <edge source="liters_of_fuel_bought_today" target="expense_for_fuel_purchase" label="(...)"/>
+        <edge source="fuel_mix_price" target="expense_for_fuel_purchase" label="(...)"/>
+        <edge source="number_of_trips_per_aircraft" target="liters_of_fuel_burned_daily" label="(...)"/>
+        <edge source="price_kerosene" target="fuel_mix_price" label="(...)"/>
+        <edge source="price_SAF" target="fuel_mix_price" label="(...)"/>
+        <edge source="percentage_of_SAF" target="fuel_mix_price" label="(...)"/>
+        <edge source="aircraft_hourly_fuel_consumption" target="liters_of_fuel_burned_daily" label="(...)"/>
+        <edge source="one_way_flytime" target="liters_of_fuel_burned_daily" label="(...)"/>
+        <edge source="delay_factor" target="liters_of_fuel_burned_daily" label="(...)"/>
+        <edge source="CO2e_Kerosene" target="CO2e_mix" label="(...)"/>
+        <edge source="CO2e_SAF" target="CO2e_mix" label="(...)"/>
+        <edge source="kg_CO2e" target="CO2e_cum" label="(...)"/>
+        <edge source="expense_for_fuel_purchase" target="tot_var_exp" label="(...)"/>
+        <edge source="airport_taxes" target="tot_var_exp" label="(...)"/>
+        <edge source="liters_of_fuel_bought_today" target="kg_CO2e" label="(...)"/>
     </edges>
     <widgets>
         <widget type="ChartWidget" pos-x="1000" pos-y="70" width="300" height="200">
