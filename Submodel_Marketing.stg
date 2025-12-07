@@ -1,7 +1,7 @@
 <stgraph class="STGraph.decoder" version="STGraph build 22.12">
     <head systemName="" description="" timeUnitDescription="" timeFrame="0" time0="0.0" time1="365.0" timeD="1.0" maxSteps="10" batchSteps="1" width="1440" height="789" scale="1.0" simulationDelay="100" stepsBeforePause="1" integrationMethod="0" exceptionHandling="1" withInterrupts="false" isDataSaved="false" forNet="false" serverAddress="" forWeb="false" webModelLanguages="" webModelDescription="" webTimeUnit="" webExplTitle="" webExplURL="" webModelGroups="" indexOrigin="0" isGraphVisible="true" areWidgetsVisible="true"/>
     <nodes>
-        <node name="C_i" type="ValueNode" pos-x="580" pos-y="160" width="81" height="61">
+        <node name="C_i" type="ValueNode" pos-x="590" pos-y="280" width="81" height="61">
             <font>Serif,12</font>
             <forecol>0,0,0</forecol>
             <documentation> Intensit&#xe0; istantanea della campagna di marketing
@@ -12,9 +12,9 @@ ricordando che naturalmente:
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>Campagna_attiva`*`C_i_default</fExpression>
+            <fExpression>if(unpaid_marketers==0,Campagna_attiva`*`C_i_default,0)</fExpression>
             <fStateTrans/>
-            <expression>Campagna_attiva*C_i_default</expression>
+            <expression>if(unpaid_marketers==0,Campagna_attiva*C_i_default,0)</expression>
             <isGlobal>false</isGlobal>
             <isIn>false</isIn>
             <stateInit/>
@@ -25,7 +25,7 @@ ricordando che naturalmente:
             <customprops>Name=C_i</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="C_i_default" type="ValueNode" pos-x="580" pos-y="40" width="91" height="45">
+        <node name="C_i_default" type="ValueNode" pos-x="580" pos-y="140" width="91" height="45">
             <font>Serif,12</font>
             <forecol>0,0,0</forecol>
             <documentation> Intensit&#xe0; standard della campagna quando &#xe8; attiva.
@@ -73,12 +73,10 @@ STOCK CREDIBILITA, pi&#xf9; precisamente &#xe8; &#xe8; lo stock la cui variazion
 0.7 = valore iniziale della credibilit&#xe0;/reputazione green dell&#x2019;azienda. (da approfondire come potrebbe essere settato, valutare pi&#xf9; scenari anche per eventuale presentazione)
   rappresenta quindi il valore iniziale dello stock C_r. </documentation>
             <isOut>true</isOut>
-            <fStateInit>0.3
-</fStateInit>
+            <fStateInit>0.3</fStateInit>
             <format>0.0##</format>
             <fExpression/>
-            <fStateTrans>this`+`C_r_gain`-`C_r_loss
-</fStateTrans>
+            <fStateTrans>this`+`C_r_gain`-`C_r_loss</fStateTrans>
             <expression/>
             <isGlobal>false</isGlobal>
             <isIn>false</isIn>
@@ -131,8 +129,7 @@ Indica quanto la credibilit&#xe0; aumenta grazie a campagne coerenti.
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>gamma_pos`*`C_i`*`G_W`*`(`C_r_max`-`C_r`)
-</fExpression>
+            <fExpression>gamma_pos`*`C_i`*`G_W`*`(`C_r_max`-`C_r`)</fExpression>
             <fStateTrans/>
             <expression>gamma_pos*C_i*G_W*(C_r_max-C_r)</expression>
             <isGlobal>false</isGlobal>
@@ -214,7 +211,7 @@ perdiamo reputazione, C_r scende verso C_r_min.</documentation>
             <customprops>Name=C_r_min</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="Campagna_attiva" type="ValueNode" pos-x="450" pos-y="60" width="161" height="45">
+        <node name="Campagna_attiva" type="ValueNode" pos-x="450" pos-y="180" width="161" height="45">
             <font>Serif,12</font>
             <forecol>0,0,0</forecol>
             <documentation>binaria (0 = no, 1 = s&#xec;).
@@ -253,8 +250,7 @@ Submodel_Management.net_CO2_target</documentation>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>1000
-</fExpression>
+            <fExpression>1000</fExpression>
             <fStateTrans/>
             <expression>1000</expression>
             <isGlobal>false</isGlobal>
@@ -306,12 +302,10 @@ quindi la logica &#xe8; che pi&#xf9; inquiniamo di meno rispetto al valore sogli
             <forecol>0,255,255</forecol>
             <documentation> Stock livello di sensibilit&#xe0; ambientale della societ&#xe0; (mercato) al tema delle emissioni</documentation>
             <isOut>true</isOut>
-            <fStateInit>0.3
-</fStateInit>
+            <fStateInit>0.3</fStateInit>
             <format>0.0##</format>
             <fExpression/>
-            <fStateTrans>this+campaign_effect`-`forgetting_effect
-</fStateTrans>
+            <fStateTrans>this+campaign_effect`-`forgetting_effect</fStateTrans>
             <expression/>
             <isGlobal>false</isGlobal>
             <isIn>false</isIn>
@@ -550,8 +544,7 @@ Quanto velocemente la societ&#xe0; si dimentica delle campagne se smettiamo di c
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>0.15
-</fExpression>
+            <fExpression>0.15</fExpression>
             <fStateTrans/>
             <expression>0.15</expression>
             <isGlobal>false</isGlobal>
@@ -577,8 +570,7 @@ G_a si avvicina a G_a_max -&gt; pi&#xf9; si avvicina pi&#xf9; possiamo crescere 
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>alpha_pos`*`C_i`*`G_W`*`C_r_eff`*`(`1`-`G_a`/`G_a_max`)
-</fExpression>
+            <fExpression>alpha_pos`*`C_i`*`G_W`*`C_r_eff`*`(`1`-`G_a`/`G_a_max`)</fExpression>
             <fStateTrans/>
             <expression>alpha_pos*C_i*G_W*C_r_eff*(1-G_a/G_a_max)</expression>
             <isGlobal>false</isGlobal>
@@ -634,8 +626,7 @@ parliamo</documentation>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>0.3
-</fExpression>
+            <fExpression>0.3</fExpression>
             <fStateTrans/>
             <expression>0.3</expression>
             <isGlobal>false</isGlobal>
@@ -655,8 +646,7 @@ parliamo</documentation>
             <isOut>false</isOut>
             <fStateInit/>
             <format>0.0##</format>
-            <fExpression>0.15
-</fExpression>
+            <fExpression>0.15</fExpression>
             <fStateTrans/>
             <expression>0.15</expression>
             <isGlobal>false</isGlobal>
@@ -669,7 +659,7 @@ parliamo</documentation>
             <customprops>Name=gamma_pos</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="marketing_cost" type="ValueNode" pos-x="840" pos-y="20" width="131" height="61">
+        <node name="marketing_cost" type="ValueNode" pos-x="770" pos-y="160" width="131" height="61">
             <font>Serif,12</font>
             <forecol>0,0,0</forecol>
             <documentation/>
@@ -740,7 +730,7 @@ target_distance &#xe8; tra 0 e 0.5*E_target_tot &#x2192; fino al 50% sopra il ta
             <customprops>Name=target_distance</customprops>
             <valueType>0</valueType>
         </node>
-        <node name="unit_cost_C_i" type="ValueNode" pos-x="700" pos-y="20" width="101" height="45">
+        <node name="unit_cost_C_i" type="ValueNode" pos-x="810" pos-y="90" width="101" height="45">
             <font>Serif,12</font>
             <forecol>0,0,0</forecol>
             <documentation/>
@@ -760,53 +750,74 @@ target_distance &#xe8; tra 0 e 0.5*E_target_tot &#x2192; fino al 50% sopra il ta
             <customprops>Name=unit_cost_C_i</customprops>
             <valueType>0</valueType>
         </node>
+        <node name="unpaid_marketers" type="ValueNode" pos-x="680" pos-y="80" width="75" height="45">
+            <font>Serif,12</font>
+            <forecol>0,0,0</forecol>
+            <documentation/>
+            <isOut>false</isOut>
+            <fStateInit/>
+            <format>0.0##</format>
+            <fExpression>0</fExpression>
+            <fStateTrans/>
+            <expression>0</expression>
+            <isGlobal>false</isGlobal>
+            <isIn>true</isIn>
+            <stateInit/>
+            <isVectorOut>false</isVectorOut>
+            <fontcol>0,0,255</fontcol>
+            <stateTrans/>
+            <backcol>255,255,255</backcol>
+            <customprops>Name=unpaid_marketers</customprops>
+            <valueType>0</valueType>
+        </node>
     </nodes>
     <texts>
         <text name="*text1" pos-x="250" pos-y="10" width="51" height="31" content="&lt;html&gt;&#xd;   &lt;head&gt;&#xd;     &#xd;   &lt;/head&gt;&#xd;   &lt;body&gt;&#xd;     &lt;p style=&quot;margin-top: 0&quot;&gt;&#xd;       Input&#xd;     &lt;/p&gt;&#xd;   &lt;/body&gt;&#xd; &lt;/html&gt;&#xd; "/>
         <text name="*text2" pos-x="50" pos-y="10" width="51" height="31" content="&lt;html&gt;&#xd;  &lt;head&gt;&#xd;    &#xd;  &lt;/head&gt;&#xd;  &lt;body&gt;&#xd;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xd;      Input&#xd;    &lt;/p&gt;&#xd;  &lt;/body&gt;&#xd;&lt;/html&gt;&#xd;"/>
     </texts>
     <edges>
-        <edge source="G_a_max" target="forgetting_effect" label="(...)"/>
-        <edge source="beta_neg" target="forgetting_effect" label="(...)" p0x="997.5" p0y="612.5" p1x="1000.5" p1y="525.5" numpoints="2"/>
-        <edge source="G_a" target="forgetting_effect" label="(...)" p0x="1000.5" p0y="375.5" p1x="1000.5" p1y="525.5" numpoints="2"/>
-        <edge source="forgetting_effect" target="G_a" label="(...)" p0x="1000.5" p0y="525.5" p1x="1000.5" p1y="375.5" numpoints="2"/>
-        <edge source="C_r_eff" target="campaign_effect" label="(...)"/>
-        <edge source="G_W" target="campaign_effect" label="(...)"/>
-        <edge source="C_i" target="campaign_effect" label="(...)"/>
-        <edge source="alpha_pos" target="campaign_effect" label="(...)" p0x="957.5" p0y="142.5" p1x="1000.5" p1y="235.5" numpoints="2"/>
-        <edge source="C_r_max" target="C_r_eff" label="(...)"/>
-        <edge source="E_target_tot_peppe" target="target_distance_peppe" label="(...)"/>
-        <edge source="TD_rel" target="TD_rel_max" label="(...)"/>
-        <edge source="C_r_loss" target="C_r" label="flusso in uscita"/>
-        <edge source="C_r_min" target="C_r_loss" label="(...)"/>
-        <edge source="G_W" target="C_r_loss" label="(...)"/>
-        <edge source="gamma_neg" target="C_r_loss" label="(...)"/>
-        <edge source="C_r_max" target="C_r_gain" label="(...)"/>
-        <edge source="G_W" target="C_r_gain" label="(...)"/>
-        <edge source="gamma_pos" target="C_r_gain" label="(...)"/>
-        <edge source="C_i" target="C_r_gain" label="(...)"/>
-        <edge source="C_i" target="C_r_loss" label="(...)"/>
-        <edge source="Campagna_attiva" target="C_i" label="(...)"/>
-        <edge source="C_i_default" target="C_i" label="(...)"/>
-        <edge source="TD_rel_max" target="G_W" label="(...)"/>
-        <edge source="TD_rel" target="G_W" label="(...)"/>
-        <edge source="TD_pos" target="TD_rel" label="(...)"/>
-        <edge source="E_target_tot_peppe" target="TD_rel" label="(...)"/>
-        <edge source="target_distance_peppe" target="TD_pos" label="(...)"/>
-        <edge source="C_r_gain" target="C_r" label="(...)"/>
-        <edge source="C_r" target="C_r_loss" label="(...)"/>
-        <edge source="C_r" target="C_r_gain" label="flusso in entrata"/>
-        <edge source="C_r" target="C_r_eff" label="(...)"/>
-        <edge source="C_r_min" target="C_r_eff" label="(...)"/>
-        <edge source="G_a" target="campaign_effect" label="(...)" p0x="1000.5" p0y="375.5" p1x="1000.5" p1y="235.5" numpoints="2"/>
-        <edge source="G_a_max" target="campaign_effect" label="(...)" p0x="1207.5" p0y="232.5" p1x="1000.5" p1y="235.5" numpoints="2"/>
-        <edge source="campaign_effect" target="G_a" label="(...)" p0x="1000.5" p0y="235.5" p1x="1000.5" p1y="375.5" numpoints="2"/>
-        <edge source="G_a_base" target="G_a" label="(...)" p0x="1217.5" p0y="522.5" p1x="1000.5" p1y="375.5" numpoints="2"/>
-        <edge source="G_a_base" target="forgetting_effect" label="(...)" p0x="1217.5" p0y="522.5" p1x="1000.5" p1y="525.5" numpoints="2"/>
-        <edge source="G_a" target="M_t" label="(...)" p0x="1000.5" p0y="375.5" p1x="1207.5" p1y="372.5" numpoints="2"/>
-        <edge source="G_a_max" target="M_t" label="(...)" p0x="1207.5" p0y="232.5" p1x="1207.5" p1y="372.5" numpoints="2"/>
-        <edge source="C_i" target="marketing_cost" label="(...)"/>
         <edge source="unit_cost_C_i" target="marketing_cost" label="(...)"/>
+        <edge source="C_i" target="marketing_cost" label="(...)"/>
+        <edge source="G_a_max" target="M_t" label="(...)" p0x="1207.5" p0y="232.5" p1x="1207.5" p1y="372.5" numpoints="2"/>
+        <edge source="G_a" target="M_t" label="(...)" p0x="1000.5" p0y="375.5" p1x="1207.5" p1y="372.5" numpoints="2"/>
+        <edge source="G_a_base" target="forgetting_effect" label="(...)" p0x="1217.5" p0y="522.5" p1x="1000.5" p1y="525.5" numpoints="2"/>
+        <edge source="G_a_base" target="G_a" label="(...)" p0x="1217.5" p0y="522.5" p1x="1000.5" p1y="375.5" numpoints="2"/>
+        <edge source="campaign_effect" target="G_a" label="(...)" p0x="1000.5" p0y="235.5" p1x="1000.5" p1y="375.5" numpoints="2"/>
+        <edge source="G_a_max" target="campaign_effect" label="(...)" p0x="1207.5" p0y="232.5" p1x="1000.5" p1y="235.5" numpoints="2"/>
+        <edge source="G_a" target="campaign_effect" label="(...)" p0x="1000.5" p0y="375.5" p1x="1000.5" p1y="235.5" numpoints="2"/>
+        <edge source="C_r_min" target="C_r_eff" label="(...)"/>
+        <edge source="C_r" target="C_r_eff" label="(...)"/>
+        <edge source="C_r" target="C_r_gain" label="flusso in entrata"/>
+        <edge source="C_r" target="C_r_loss" label="(...)"/>
+        <edge source="C_r_gain" target="C_r" label="(...)"/>
+        <edge source="target_distance_peppe" target="TD_pos" label="(...)"/>
+        <edge source="E_target_tot_peppe" target="TD_rel" label="(...)"/>
+        <edge source="TD_pos" target="TD_rel" label="(...)"/>
+        <edge source="TD_rel" target="G_W" label="(...)"/>
+        <edge source="TD_rel_max" target="G_W" label="(...)"/>
+        <edge source="C_i_default" target="C_i" label="(...)"/>
+        <edge source="Campagna_attiva" target="C_i" label="(...)"/>
+        <edge source="C_i" target="C_r_loss" label="(...)"/>
+        <edge source="C_i" target="C_r_gain" label="(...)"/>
+        <edge source="gamma_pos" target="C_r_gain" label="(...)"/>
+        <edge source="G_W" target="C_r_gain" label="(...)"/>
+        <edge source="C_r_max" target="C_r_gain" label="(...)"/>
+        <edge source="gamma_neg" target="C_r_loss" label="(...)"/>
+        <edge source="G_W" target="C_r_loss" label="(...)"/>
+        <edge source="C_r_min" target="C_r_loss" label="(...)"/>
+        <edge source="C_r_loss" target="C_r" label="flusso in uscita"/>
+        <edge source="TD_rel" target="TD_rel_max" label="(...)"/>
+        <edge source="E_target_tot_peppe" target="target_distance_peppe" label="(...)"/>
+        <edge source="C_r_max" target="C_r_eff" label="(...)"/>
+        <edge source="alpha_pos" target="campaign_effect" label="(...)" p0x="957.5" p0y="142.5" p1x="1000.5" p1y="235.5" numpoints="2"/>
+        <edge source="C_i" target="campaign_effect" label="(...)"/>
+        <edge source="G_W" target="campaign_effect" label="(...)"/>
+        <edge source="C_r_eff" target="campaign_effect" label="(...)"/>
+        <edge source="forgetting_effect" target="G_a" label="(...)" p0x="1000.5" p0y="525.5" p1x="1000.5" p1y="375.5" numpoints="2"/>
+        <edge source="G_a" target="forgetting_effect" label="(...)" p0x="1000.5" p0y="375.5" p1x="1000.5" p1y="525.5" numpoints="2"/>
+        <edge source="beta_neg" target="forgetting_effect" label="(...)" p0x="997.5" p0y="612.5" p1x="1000.5" p1y="525.5" numpoints="2"/>
+        <edge source="G_a_max" target="forgetting_effect" label="(...)"/>
+        <edge source="unpaid_marketers" target="C_i" label="(...)"/>
     </edges>
     <widgets/>
     <groups/>
